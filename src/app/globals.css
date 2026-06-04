@@ -1,0 +1,196 @@
+@import "tailwindcss";
+
+:root {
+  --background: #03032D;
+  --foreground: #ffffff;
+  --blue-bright: #0184D1;
+  --red-bright: #E30000;
+  --text-primary: #ffffff;
+  --text-secondary: #B0B0D0;
+  --card-radius: 16px;
+}
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-blue-bright: var(--blue-bright);
+  --color-red-bright: var(--red-bright);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+}
+
+/* Reset and Base Styles */
+html,
+body {
+  max-width: 100vw;
+  background-color: var(--background);
+  color: var(--foreground);
+  scroll-behavior: smooth;
+  position: relative;
+  overflow: visible !important;
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  isolation: isolate;
+}
+
+/* Global Wave Backdrop */
+body::before {
+  content: '';
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 0;
+  width: 100vw;
+  height: min(48vh, 520px);
+  background-image: url('/assets/background-wave-original.png');
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  filter: brightness(0) saturate(100%) invert(38%) sepia(98%) saturate(2800%) hue-rotate(255deg) brightness(106%) contrast(104%);
+  mix-blend-mode: screen;
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+body > *:not(header) {
+  position: relative;
+  z-index: 1;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(1, 132, 209, 0.3);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--blue-bright);
+}
+
+/* Button Component */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: var(--red-bright);
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 14px 28px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(227, 0, 0, 0.3);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.btn-primary:hover {
+  background-color: #ff1a1a;
+  box-shadow: 0 6px 25px rgba(227, 0, 0, 0.6);
+  transform: translateY(-2px);
+}
+
+.btn-primary svg,
+.btn-primary span.arrow {
+  transition: transform 0.3s ease;
+}
+
+.btn-primary:hover svg,
+.btn-primary:hover span.arrow {
+  transform: translateX(4px);
+}
+
+/* Premium bg-light Glow Card Effect (Matches About cards) */
+.bg-light,
+.glow-card {
+  background:
+    radial-gradient(circle at 12% 86%, rgba(0, 104, 255, 0.34) 0%, rgba(0, 104, 255, 0.16) 20%, rgba(0, 104, 255, 0) 48%),
+    radial-gradient(circle at 54% 84%, rgba(173, 55, 181, 0.22) 0%, rgba(173, 55, 181, 0.1) 24%, rgba(173, 55, 181, 0) 52%),
+    radial-gradient(circle at 58% 18%, rgba(37, 78, 235, 0.22) 0%, rgba(37, 78, 235, 0.09) 24%, rgba(37, 78, 235, 0) 50%),
+    linear-gradient(135deg, #070735 0%, #101064 52%, #07072f 100%);
+  border: 1.5px solid rgba(1, 151, 231, 0.6);
+  border-radius: var(--card-radius);
+  box-shadow:
+    0 18px 42px rgba(0, 0, 0, 0.36),
+    -14px 18px 34px rgba(0, 104, 255, 0.08),
+    14px 18px 34px rgba(160, 42, 181, 0.07),
+    inset 0 1px 1px rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.bg-light::before,
+.glow-card::before {
+  content: '';
+  position: absolute;
+  inset: -12% -8%;
+  background:
+    radial-gradient(circle at 18% 92%, rgba(0, 132, 255, 0.12) 0%, rgba(0, 132, 255, 0) 38%),
+    radial-gradient(circle at 64% 76%, rgba(187, 64, 200, 0.1) 0%, rgba(187, 64, 200, 0) 42%),
+    radial-gradient(circle at 58% 18%, rgba(65, 104, 255, 0.05) 0%, rgba(65, 104, 255, 0) 40%);
+  opacity: 0.62;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-light > *,
+.glow-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.bg-light:hover,
+.glow-card:hover {
+  border-color: #00d2ff;
+  background:
+    radial-gradient(circle at 12% 86%, rgba(0, 118, 255, 0.42) 0%, rgba(0, 118, 255, 0.2) 21%, rgba(0, 118, 255, 0) 50%),
+    radial-gradient(circle at 54% 84%, rgba(193, 64, 207, 0.26) 0%, rgba(193, 64, 207, 0.12) 25%, rgba(193, 64, 207, 0) 54%),
+    radial-gradient(circle at 58% 18%, rgba(45, 88, 245, 0.26) 0%, rgba(45, 88, 245, 0.11) 24%, rgba(45, 88, 245, 0) 50%),
+    linear-gradient(135deg, #070735 0%, #101064 52%, #07072f 100%);
+  box-shadow:
+    0 18px 44px rgba(0, 0, 0, 0.34),
+    -18px 22px 38px rgba(0, 119, 255, 0.11),
+    18px 22px 38px rgba(178, 52, 203, 0.1),
+    inset 0 1px 1px rgba(255, 255, 255, 0.12);
+  transform: translateY(-6px) scale(1.02);
+}
+
+.bg-light:hover::before,
+.glow-card:hover::before {
+  opacity: 0.62;
+}
+
+/* Infinite ticker animations */
+@keyframes ticker {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-ticker {
+  animation: ticker 40s linear infinite;
+}
+
+.animate-ticker-reverse {
+  animation: ticker 40s linear infinite reverse;
+}
