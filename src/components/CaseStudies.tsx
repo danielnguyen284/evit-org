@@ -19,7 +19,7 @@ const studies: Study[] = [
     id: 1,
     quote: (
       <>
-        EVIT gave us a <span className="text-blue-bright font-bold">clear sales roadmap</span> and <span className="text-blue-bright font-bold">practical guidance</span> on &quot;how to do&quot;. As a result, our sales team has improved week by week and is now much more confident working independently with clients.
+        EVIT gave us a <span className="text-blue-bright font-bold">clear sales roadmap</span> and <span className="text-blue-bright font-bold">practical guidance </span> on &quot;how to do&quot;. As a result, our sales team has improved week by week and is now much more confident working independently with clients.
       </>
     ),
     name: 'Mr. Ngô Văn Tấu',
@@ -35,63 +35,76 @@ const studies: Study[] = [
         Working with <span className="text-blue-bright font-bold">EVIT helped us achieve our first real results</span>. With the right sales method, strategy, and mindset from EVIT, we are confident we can continue to improve and achieve greater success in the future.
       </>
     ),
-    name: 'Faustina',
+    name: 'Ms. Faustina',
     role: 'Sales Representative',
-    avatar: '/assets/clients/client-2.jpg',
+    avatar: '/assets/clients/client-6.png',
     avatarAlt: 'Sales representative portrait',
-    companyLogo: '/assets/clients/company-2.png',
+    companyLogo: '/assets/clients/company-1.png',
   },
   {
     id: 3,
     quote: (
       <>
-        EVIT&apos;s service model helped us clearly understand the real expectations of international clients in Vietnam-insights that would have been very difficult to gain on our own. We see EVIT as a <span className="text-blue-bright font-bold">long-term strategic partner</span> for our growth.
+        EVIT&apos;s service model helped us clearly understand the real expectations of international clients in Vietnam insights that would have been very difficult to gain on our own. We see EVIT as a <span className="text-blue-bright font-bold">long-term strategic partner</span> for our growth.
       </>
     ),
-    name: 'Mrs. Nguyen Thi Bich Hien',
+    name: 'Ms. Nguyễn Thị Bích Huệ (Hannah Nguyen)',
     role: 'Chief Executive Officer (CEO)',
-    avatar: '/assets/clients/client-3.jpg',
+    avatar: '/assets/clients/client-3.png',
     avatarAlt: 'Founder portrait',
-    companyLogo: '/assets/clients/company-3.png',
+    companyLogo: '/assets/clients/company-3.jpg',
   },
   {
     id: 4,
     quote: (
       <>
-        Their team rebuilt our outbound process from the ground up. The weekly reviews made every number visible, and our pipeline became <span className="text-blue-bright font-bold">predictable instead of accidental</span>.
+        With EVIT&apos;s support, we successfully won a deal with a <span className="text-blue-bright font-bold">high-quality European client</span> - one of the largest companies in Iceland.
       </>
     ),
-    name: 'Mr. Daniel Park',
-    role: 'Growth Director',
-    avatar: '/assets/clients/client-4.png',
-    avatarAlt: 'Growth director portrait',
-    companyLogo: '/assets/clients/company-4.png',
+    name: 'Mr. Dave Phan',
+    role: 'Sales Manager',
+    avatar: '/assets/clients/client-2.png',
+    avatarAlt: 'Sales manager portrait',
+    companyLogo: '/assets/clients/company-3.jpg',
   },
   {
     id: 5,
     quote: (
       <>
-        Before EVIT, we had marketing activity but no clear conversion path. The new funnel and follow-up workflow helped us <span className="text-blue-bright font-bold">turn more leads into booked meetings</span>.
+        With EVIT&apos;s method, we achieved our goal of setting up client calls in just <span className="text-blue-bright font-bold">three weeks</span>. The approach is practical, effective, and straightforward to execute.
       </>
     ),
-    name: 'Ms. Linh Tran',
-    role: 'Marketing Lead',
-    avatar: '/assets/clients/client-5.png',
-    avatarAlt: 'Marketing lead portrait',
-    companyLogo: '/assets/clients/company-5.png',
+    name: 'Mr. David Toan',
+    role: 'Sales Manager',
+    avatar: '/assets/clients/client-4.jpg',
+    avatarAlt: 'Sales manager portrait',
+    companyLogo: '/assets/clients/company-4.jpg',
   },
   {
     id: 6,
     quote: (
       <>
-        The framework was simple enough for our small team to implement and strong enough to scale. EVIT helped us focus on the <span className="text-blue-bright font-bold">sales actions that actually move revenue</span>.
+        EVIT trained our sales team effectively and helped everything run smoothly. We now see the value of having an <span className="text-blue-bright font-bold">independent sales team</span> that can grow and operate with confidence.
       </>
     ),
-    name: 'Mr. Hoang Minh',
-    role: 'Managing Partner',
-    avatar: '/assets/clients/client-6.png',
-    avatarAlt: 'Managing partner portrait',
-    companyLogo: '/assets/clients/company-6.png',
+    name: 'Mr. Tony Nguyen',
+    role: 'Founder - CEO',
+    avatar: '/assets/clients/client-5.jpg',
+    avatarAlt: 'CEO portrait',
+    companyLogo: '/assets/clients/nkktech_logo.jpg',
+  },
+  {
+    id: 7,
+    quote: (
+      <>
+        We worked with EVIT and were impressed by their strong business development expertise and practical sales approach. They provided <span className="text-blue-bright font-bold">clear frameworks and actionable guidance</span>, making them a reliable partner for global expansion.
+      </>
+    ),
+    name: 'Ms. Kim Anh',
+    role: 'Community & Branding Executive',
+    avatar: '/assets/clients/client-7.jpg',
+    avatarAlt: 'Community and branding portrait',
+    companyLogo: '/assets/clients/company-2.jpg',
   },
 ];
 
@@ -242,19 +255,19 @@ export default function CaseStudies() {
 
 function CaseStudyCard({ study }: { study: Study }) {
   return (
-    <article className="relative flex h-[390px] w-[320px] flex-shrink-0 flex-col overflow-hidden rounded-[16px] border-[2px] border-blue-bright/80 bg-light px-7 pb-6 pt-7 shadow-[0_18px_34px_rgba(0,0,0,0.34),-16px_22px_36px_rgba(0,104,255,0.15)] sm:w-[450px] sm:px-9 md:h-[400px] md:w-[520px] md:px-11 md:pb-7">
+    <article className="relative flex h-[450px] w-[320px] flex-shrink-0 flex-col overflow-hidden rounded-[16px] border-[2px] border-blue-bright/80 bg-light px-7 pb-6 pt-7 shadow-[0_18px_34px_rgba(0,0,0,0.34),-16px_22px_36px_rgba(0,104,255,0.15)] sm:w-[450px] sm:px-9 md:h-[470px] md:w-[520px] md:px-11 md:pb-7">
       {/* Avatar Wrapper */}
-      <div className="relative mx-auto mb-6 h-14 w-14 overflow-hidden rounded-full border-2 border-white/80 bg-white/90 shadow-[30px_-4px_24px_rgba(210,32,198,0.46),44px_10px_30px_rgba(0,112,255,0.2)] md:h-16 md:w-16">
+      <div className="relative mx-auto mb-6 h-[72px] w-[72px] overflow-hidden rounded-full border-2 border-white/80 bg-white/90 shadow-[30px_-4px_24px_rgba(210,32,198,0.46),44px_10px_30px_rgba(0,112,255,0.2)] md:h-[84px] md:w-[84px]">
         <Image
           src={study.avatar}
           alt={study.avatarAlt}
-          width={64}
-          height={64}
+          width={96}
+          height={96}
           className="object-cover w-full h-full"
         />
       </div>
 
-      <blockquote className="relative mb-5 max-h-[126px] overflow-hidden border-l-4 border-red-bright pl-5 text-left font-sans text-[13px] leading-relaxed text-white/95 sm:pl-6 sm:text-sm md:text-[15px]">
+      <blockquote className="relative mb-5 max-h-[190px] overflow-hidden border-l-4 border-red-bright pl-5 text-left font-sans text-[13px] leading-relaxed text-white/95 sm:pl-6 sm:text-sm md:max-h-[210px] md:text-[15px]">
         &quot;{study.quote}&quot;
       </blockquote>
 
@@ -267,7 +280,7 @@ function CaseStudyCard({ study }: { study: Study }) {
             {study.role}
           </span>
         </div>
-        <div className="relative h-7 w-[92px] opacity-95">
+        <div className="relative h-[36px] w-[124px] opacity-95 md:h-[42px] md:w-[148px]">
           <Image
             src={study.companyLogo}
             alt="EVIT client logo"
