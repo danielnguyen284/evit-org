@@ -45,7 +45,7 @@ const servicesData: ServiceItem[] = [
     title: 'G.O.D. SALES SYSTEM',
     subtitle: 'Step-by-step sales system for IT services: lead generation, qualification, meetings, negotiation, proposals, closing, upsell, cross-sell.',
     desc: 'Our online course covers everything you need to win more deals. From lead qualification and meeting strategy to negotiation, proposal building, and practical worksheets. Step-by-step tested formula that just needs to be implemented to your selling activities.',
-    image: '/assets/74050129a4c3f273bea5483ea83833715a20991b.png',
+    image: '/assets/2e869bba8104d15adef7f148438a7cd633820ab4.jpg',
     imageAlt: 'Sales analytics dashboard with global data',
     icon: '/assets/service-icon (1).png',
     iconAlt: 'Sales system icon',

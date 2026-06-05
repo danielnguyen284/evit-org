@@ -1,8 +1,8 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion';
 
 interface FrameworkStep {
   id: number;
@@ -53,12 +53,12 @@ function FrameworkIcon({ type }: { type: FrameworkStep['icon'] }) {
   }
 
   return (
-    <div className="relative w-[106px] h-[106px] mb-8 sm:mb-10 transition-transform duration-300 group-hover:scale-110">
+    <div className="relative mb-8 h-[118px] w-[118px] transition-transform duration-300 group-hover:scale-105 sm:h-[138px] sm:w-[138px]">
       <Image
         src={src}
         alt={altText}
         fill
-        sizes="106px"
+        sizes="138px"
         className="object-contain"
         priority
       />
@@ -66,53 +66,135 @@ function FrameworkIcon({ type }: { type: FrameworkStep['icon'] }) {
   );
 }
 
-export default function Framework() {
+interface FrameworkCardProps {
+  step: FrameworkStep;
+  isDesktop: boolean;
+}
+
+function FrameworkCard({ step, isDesktop }: FrameworkCardProps) {
   return (
-    <section id="resources" className="relative bg-transparent pb-24 sm:pb-32 overflow-hidden">
-      <div className="max-w-[1200px] w-full mx-auto px-6 text-center">
-        <motion.span
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="font-sans text-sm font-bold uppercase text-blue-bright tracking-[0.18em] mb-4 block"
-        >
-          HOW IT WORKS
-        </motion.span>
+    <motion.article
+      initial={isDesktop ? { opacity: 0, y: 18, scale: 0.98 } : false}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={isDesktop ? { opacity: 0, y: -18, scale: 0.98 } : undefined}
+      transition={{ duration: 0.28, ease: 'easeOut' }}
+      className="group flex h-full w-full flex-col rounded-[14px] border border-blue-bright/85 bg-light px-9 py-9 text-left shadow-[0_18px_40px_rgba(0,0,0,0.28),-16px_22px_36px_rgba(0,104,255,0.16)] sm:px-12 sm:py-11"
+    >
+      <FrameworkIcon type={step.icon} />
+      <h3 className="mb-8 font-sans text-2xl font-extrabold uppercase leading-tight text-white sm:text-[30px]">
+        {step.title}
+      </h3>
+      <ul className="flex list-disc flex-col gap-5 pl-5 text-white/90">
+        {step.items.map((item, idx) => (
+          <li
+            key={idx}
+            className="font-sans text-sm leading-relaxed marker:text-blue-bright sm:text-base"
+          >
+            {item}
+          </li>
+        ))}
+      </ul>
+    </motion.article>
+  );
+}
 
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="font-sans text-3xl sm:text-[36px] font-extrabold uppercase text-white tracking-wide mb-14"
-        >
-          EVIT 3-STEP FRAMEWORK
-        </motion.h2>
+export default function Framework() {
+  const containerRef = useRef<HTMLElement>(null);
+  const [isDesktop, setIsDesktop] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {frameworkSteps.map((step, index) => (
-            <motion.article
-              key={step.id}
-              initial={{ opacity: 0, y: 50 }}
+  useEffect(() => {
+    const checkMediaQuery = () => {
+      setIsDesktop(window.innerWidth >= 768);
+    };
+
+    checkMediaQuery();
+    window.addEventListener('resize', checkMediaQuery);
+
+    return () => {
+      window.removeEventListener('resize', checkMediaQuery);
+    };
+  }, []);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start start', 'end end'],
+  });
+
+  useMotionValueEvent(scrollYProgress, 'change', (latest) => {
+    const nextIndex = Math.min(
+      frameworkSteps.length - 1,
+      Math.max(0, Math.floor(latest * frameworkSteps.length))
+    );
+    setActiveIndex(nextIndex);
+  });
+
+  return (
+    <section
+      id="resources"
+      ref={containerRef}
+      className="relative bg-transparent py-20 sm:py-24 md:h-[320vh] md:py-0"
+    >
+      <div className="mx-auto w-full max-w-[1200px] px-6 md:sticky md:top-0 md:flex md:min-h-screen md:items-center">
+        <div className="grid w-full grid-cols-1 gap-12 lg:grid-cols-[minmax(0,500px)_minmax(0,1fr)] lg:items-center lg:gap-16">
+          <div className="text-left">
+            <motion.span
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.6, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="glow-card group cursor-pointer text-left flex flex-col justify-start min-h-[390px]"
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="mb-3 block font-sans text-xs font-bold uppercase tracking-[0.18em] text-blue-bright"
             >
-              <FrameworkIcon type={step.icon} />
-              <h3 className="font-sans text-2xl sm:text-[27px] font-extrabold uppercase text-white leading-tight mb-6">
-                {step.title}
-              </h3>
-              <ul className="flex flex-col gap-4 list-disc pl-5 mt-auto text-white/90">
-                {step.items.map((item, idx) => (
-                  <li key={idx} className="font-sans text-xs sm:text-[13px] leading-relaxed pl-1 marker:text-blue-bright">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </motion.article>
-          ))}
+              HOW IT WORKS
+            </motion.span>
+
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="mb-9 font-sans text-2xl font-extrabold uppercase tracking-wide text-white sm:text-[30px] lg:mb-10"
+            >
+              EVIT 3- STEP FRAMEWORK
+            </motion.h2>
+
+            <div className="relative h-[420px] w-full sm:h-[460px] md:h-[460px]">
+              {isDesktop ? (
+                <AnimatePresence mode="wait">
+                  <FrameworkCard
+                    key={frameworkSteps[activeIndex].id}
+                    step={frameworkSteps[activeIndex]}
+                    isDesktop={isDesktop}
+                  />
+                </AnimatePresence>
+              ) : (
+                <FrameworkCard
+                  key={frameworkSteps[activeIndex].id}
+                  step={frameworkSteps[activeIndex]}
+                  isDesktop={isDesktop}
+                />
+              )}
+            </div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.94, y: 20 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            viewport={{ once: true, margin: '-120px' }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="relative mx-auto flex w-full max-w-[480px] items-center justify-center lg:max-w-[520px]"
+          >
+            <div className="pointer-events-none absolute left-1/2 top-1/2 h-[280px] w-[280px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(193,32,210,0.28)_0%,rgba(0,112,255,0.18)_34%,transparent_70%)] blur-xl" />
+            <Image
+              src="/assets/bd57a4ce07e80d25e9d190a5adf99ec8e3c675ec.png"
+              alt="EVIT framework system"
+              width={560}
+              height={560}
+              sizes="(max-width: 1024px) 80vw, 520px"
+              className="relative z-[1] h-auto w-full object-contain"
+              priority
+            />
+          </motion.div>
         </div>
       </div>
     </section>

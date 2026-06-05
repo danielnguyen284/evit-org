@@ -11,6 +11,7 @@ interface Study {
   role: string;
   avatar: string;
   avatarAlt: string;
+  companyLogo: string;
 }
 
 const studies: Study[] = [
@@ -18,25 +19,27 @@ const studies: Study[] = [
     id: 1,
     quote: (
       <>
-        EVIT gave us a <span className="text-blue-bright font-bold">clear sales roadmap</span> and practical guidance on how to do it. As a result, our sales team has improved week by week and is now much more confident working independently with clients.
+        EVIT gave us a <span className="text-blue-bright font-bold">clear sales roadmap</span> and <span className="text-blue-bright font-bold">practical guidance</span> on &quot;how to do&quot;. As a result, our sales team has improved week by week and is now much more confident working independently with clients.
       </>
     ),
-    name: 'Mr. Nguyen Van Tuan',
+    name: 'Mr. Ngô Văn Tấu',
     role: 'Chief Executive Officer (CEO)',
-    avatar: '/assets/540048d82298a1c0a80ba59038a0eef747a8965c.jpg',
+    avatar: '/assets/clients/client-1.jpg',
     avatarAlt: 'Client portrait',
+    companyLogo: '/assets/clients/company-1.png',
   },
   {
     id: 2,
     quote: (
       <>
-        Working with EVIT <span className="text-blue-bright font-bold">helped us achieve our first real results</span>. With the right sales method, strategy, and mindset from EVIT, we are confident we can continue to improve and achieve greater success in the future.
+        Working with <span className="text-blue-bright font-bold">EVIT helped us achieve our first real results</span>. With the right sales method, strategy, and mindset from EVIT, we are confident we can continue to improve and achieve greater success in the future.
       </>
     ),
-    name: 'Ms. Faustrina',
+    name: 'Faustina',
     role: 'Sales Representative',
-    avatar: '/assets/daa7591f467f07ac34cf81f8dd257db99985d118.jpg',
+    avatar: '/assets/clients/client-2.jpg',
     avatarAlt: 'Sales representative portrait',
+    companyLogo: '/assets/clients/company-2.png',
   },
   {
     id: 3,
@@ -47,8 +50,9 @@ const studies: Study[] = [
     ),
     name: 'Mrs. Nguyen Thi Bich Hien',
     role: 'Chief Executive Officer (CEO)',
-    avatar: '/assets/2e869bba8104d15adef7f148438a7cd633820ab4.jpg',
+    avatar: '/assets/clients/client-3.jpg',
     avatarAlt: 'Founder portrait',
+    companyLogo: '/assets/clients/company-3.png',
   },
   {
     id: 4,
@@ -59,8 +63,9 @@ const studies: Study[] = [
     ),
     name: 'Mr. Daniel Park',
     role: 'Growth Director',
-    avatar: '/assets/hero-bg.jpg',
+    avatar: '/assets/clients/client-4.png',
     avatarAlt: 'Growth director portrait',
+    companyLogo: '/assets/clients/company-4.png',
   },
   {
     id: 5,
@@ -71,8 +76,9 @@ const studies: Study[] = [
     ),
     name: 'Ms. Linh Tran',
     role: 'Marketing Lead',
-    avatar: '/assets/93399949fe72f74d48c8ac9828123999f81ce7b2.png',
+    avatar: '/assets/clients/client-5.png',
     avatarAlt: 'Marketing lead portrait',
+    companyLogo: '/assets/clients/company-5.png',
   },
   {
     id: 6,
@@ -83,8 +89,9 @@ const studies: Study[] = [
     ),
     name: 'Mr. Hoang Minh',
     role: 'Managing Partner',
-    avatar: '/assets/b111d46df729ec4085b067064109d2ae015e59ae.png',
+    avatar: '/assets/clients/client-6.png',
     avatarAlt: 'Managing partner portrait',
+    companyLogo: '/assets/clients/company-6.png',
   },
 ];
 
@@ -262,7 +269,7 @@ function CaseStudyCard({ study }: { study: Study }) {
         </div>
         <div className="relative h-7 w-[92px] opacity-95">
           <Image
-            src="/assets/logo.png"
+            src={study.companyLogo}
             alt="EVIT client logo"
             fill
             className="object-contain"

@@ -12,7 +12,17 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const lastScrollYRef = useRef(0);
   const pathname = usePathname();
-  const [activeLink, setActiveLink] = useState(pathname === '/services' ? 'services' : 'home');
+  const [activeLink, setActiveLink] = useState(
+    pathname === '/services' ? 'services' : pathname === '/contact' ? 'contact' : 'home'
+  );
+
+  useEffect(() => {
+    if (pathname === '/contact') {
+      setActiveLink('contact');
+    } else if (pathname === '/services') {
+      setActiveLink('services');
+    }
+  }, [pathname]);
 
   useEffect(() => {
     const scrollThreshold = 6;
@@ -57,6 +67,8 @@ export default function Header() {
   }, [pathname]);
 
   useEffect(() => {
+    if (pathname === '/contact' || pathname === '/services') return;
+
     const sections = document.querySelectorAll('section[id]');
     const observerOptions = {
       root: null,
@@ -85,7 +97,7 @@ export default function Header() {
       sections.forEach((section) => observer.unobserve(section));
       window.removeEventListener('scroll', handleScrollSpy);
     };
-  }, []);
+  }, [pathname]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -106,6 +118,7 @@ export default function Header() {
     { id: 'case-studies', label: 'Case Studies', href: '/#case-studies' },
     { id: 'resources', label: 'Resources', href: '/#resources' },
     { id: 'about', label: 'About Us', href: '/#about' },
+    { id: 'contact', label: 'Contact', href: '/contact' },
   ];
 
   const showHeader = isVisible || isMenuOpen;
