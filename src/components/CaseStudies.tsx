@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useLayoutEffect } from 'react';
 import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
@@ -91,31 +91,82 @@ const studies: Study[] = [
 export default function CaseStudies() {
   const targetRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+  const viewportRef = useRef<HTMLDivElement>(null);
   const [isDesktop, setIsDesktop] = useState(false);
-  const [trackWidth, setTrackWidth] = useState(0);
+  const [scrollDistance, setScrollDistance] = useState(0);
+  const [pinnedHeight, setPinnedHeight] = useState<number | null>(null);
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsDesktop(window.innerWidth > 768);
-      if (trackRef.current) {
-        setTrackWidth(trackRef.current.scrollWidth - window.innerWidth + 120);
-      }
+    const updateDesktopState = () => {
+      setIsDesktop(window.innerWidth >= 768);
     };
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+
+    updateDesktopState();
+    window.addEventListener('resize', updateDesktopState);
+
+    return () => {
+      window.removeEventListener('resize', updateDesktopState);
+    };
   }, []);
+
+  useLayoutEffect(() => {
+    if (!isDesktop) {
+      setScrollDistance(0);
+      setPinnedHeight(null);
+      return;
+    }
+
+    const updateMeasurements = () => {
+      if (!trackRef.current || !viewportRef.current) {
+        return;
+      }
+
+      const distance = Math.max(
+        0,
+        trackRef.current.scrollWidth - viewportRef.current.clientWidth
+      );
+
+      setScrollDistance(distance);
+      setPinnedHeight(window.innerHeight + distance);
+    };
+
+    updateMeasurements();
+    const frame = window.requestAnimationFrame(updateMeasurements);
+    const fallbackFrames = [
+      window.setTimeout(updateMeasurements, 100),
+      window.setTimeout(updateMeasurements, 500),
+    ];
+    const resizeObserver = new ResizeObserver(updateMeasurements);
+
+    if (trackRef.current) {
+      resizeObserver.observe(trackRef.current);
+    }
+    if (viewportRef.current) {
+      resizeObserver.observe(viewportRef.current);
+    }
+
+    window.addEventListener('resize', updateMeasurements);
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      fallbackFrames.forEach((timeoutId) => window.clearTimeout(timeoutId));
+      resizeObserver.disconnect();
+      window.removeEventListener('resize', updateMeasurements);
+    };
+  }, [isDesktop]);
 
   const { scrollYProgress } = useScroll({
     target: targetRef,
+    offset: ['start start', 'end end'],
   });
 
-  const x = useTransform(scrollYProgress, [0, 1], [0, -trackWidth]);
+  const x = useTransform(scrollYProgress, [0, 1], [0, -scrollDistance]);
 
   return (
     <div
       ref={targetRef}
-      className={`relative ${isDesktop ? 'h-[250vh]' : ''}`}
+      className="relative"
+      style={isDesktop && pinnedHeight ? { height: pinnedHeight } : undefined}
     >
       <section
         id="case-studies"
@@ -123,7 +174,7 @@ export default function CaseStudies() {
           isDesktop ? 'sticky top-0 h-screen flex flex-col justify-center' : 'py-20'
         }`}
       >
-        <div className="max-w-[1200px] w-full mx-auto px-6 mb-10 text-left">
+        <div className="max-w-[1200px] w-full mx-auto px-6 mb-6 text-left md:mb-7">
           <div className="max-w-[620px]">
             <motion.span
               initial={{ opacity: 0, y: 15 }}
@@ -139,7 +190,7 @@ export default function CaseStudies() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="font-sans text-3xl sm:text-[34px] font-extrabold text-white tracking-wide uppercase mb-6"
+              className="mb-4 font-sans text-2xl font-extrabold uppercase tracking-wide text-white sm:text-3xl md:text-[34px]"
             >
               REAL RESULTS, REAL GROWTH
             </motion.h2>
@@ -148,7 +199,7 @@ export default function CaseStudies() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="font-sans text-sm text-white/80 leading-relaxed"
+              className="hidden font-sans text-sm leading-relaxed text-white/80 sm:block"
             >
               A collection of success stories where EVIT&apos;s mindset and strategy transformed businesses performance. These case studies demonstrate our commitment to delivering practical value and long-term excellence for every client.
             </motion.p>
@@ -156,12 +207,12 @@ export default function CaseStudies() {
         </div>
 
         {/* Carousel Outer Frame */}
-        <div className="w-full overflow-hidden py-4">
+        <div ref={viewportRef} className="w-full overflow-hidden py-2 md:py-3">
           {isDesktop ? (
             <motion.div
               ref={trackRef}
               style={{ x }}
-              className="flex gap-9 px-[calc((100vw-1200px)/2+24px)] w-max will-change-transform"
+              className="flex w-max gap-9 px-[max(24px,calc((100vw-1200px)/2+24px))] will-change-transform"
             >
               {studies.map((study) => (
                 <CaseStudyCard key={study.id} study={study} />
@@ -184,32 +235,32 @@ export default function CaseStudies() {
 
 function CaseStudyCard({ study }: { study: Study }) {
   return (
-    <article className="relative w-[340px] sm:w-[360px] min-h-[290px] overflow-hidden border-[1.5px] border-blue-bright/60 rounded-2xl pt-[76px] pb-8 px-8 bg-light shadow-xl before:content-[''] before:absolute before:left-5 before:top-24 before:w-0.5 before:h-[76px] before:bg-red-bright before:rounded-sm">
+    <article className="relative flex h-[390px] w-[320px] flex-shrink-0 flex-col overflow-hidden rounded-[16px] border-[2px] border-blue-bright/80 bg-light px-7 pb-6 pt-7 shadow-[0_18px_34px_rgba(0,0,0,0.34),-16px_22px_36px_rgba(0,104,255,0.15)] sm:w-[450px] sm:px-9 md:h-[400px] md:w-[520px] md:px-11 md:pb-7">
       {/* Avatar Wrapper */}
-      <div className="absolute top-6 left-1/2 -translate-x-1/2 w-[58px] h-[58px] rounded-full bg-white/90 shadow-[18px_0_26px_rgba(232,0,164,0.3)] flex items-center justify-center border-2 border-red-bright overflow-hidden">
+      <div className="relative mx-auto mb-6 h-14 w-14 overflow-hidden rounded-full border-2 border-white/80 bg-white/90 shadow-[30px_-4px_24px_rgba(210,32,198,0.46),44px_10px_30px_rgba(0,112,255,0.2)] md:h-16 md:w-16">
         <Image
           src={study.avatar}
           alt={study.avatarAlt}
-          width={58}
-          height={58}
+          width={64}
+          height={64}
           className="object-cover w-full h-full"
         />
       </div>
 
-      <blockquote className="min-h-[100px] font-sans text-xs sm:text-[13px] text-white/90 leading-relaxed pl-5 mb-6 text-left">
+      <blockquote className="relative mb-5 max-h-[126px] overflow-hidden border-l-4 border-red-bright pl-5 text-left font-sans text-[13px] leading-relaxed text-white/95 sm:pl-6 sm:text-sm md:text-[15px]">
         &quot;{study.quote}&quot;
       </blockquote>
 
-      <div className="flex items-end justify-between gap-4 mb-6">
+      <div className="mb-6 mt-auto flex items-center justify-between gap-5 pl-5 sm:pl-6">
         <div className="text-left">
-          <strong className="block font-sans text-[11px] font-extrabold text-white mb-1 uppercase tracking-wider">
+          <strong className="mb-1 block font-sans text-xs font-extrabold text-white sm:text-sm">
             {study.name}
           </strong>
-          <span className="block font-sans text-[10px] text-white/70">
+          <span className="block font-sans text-[11px] text-white/85 sm:text-xs">
             {study.role}
           </span>
         </div>
-        <div className="relative w-[76px] h-6">
+        <div className="relative h-7 w-[92px] opacity-95">
           <Image
             src="/assets/logo.png"
             alt="EVIT client logo"
@@ -219,7 +270,7 @@ function CaseStudyCard({ study }: { study: Study }) {
         </div>
       </div>
 
-      <button className="flex items-center justify-center gap-2 px-5 py-2.5 mx-auto border-none rounded-full bg-red-bright text-white font-sans text-[10px] font-extrabold cursor-pointer shadow-[0_10px_20px_rgba(227,0,0,0.22)] hover:bg-[#ff1616] hover:-translate-y-0.5 transition-all duration-300" type="button">
+      <button className="mx-auto flex h-11 w-full max-w-[230px] cursor-pointer items-center justify-center gap-3 rounded-full border-none bg-red-bright px-7 font-sans text-xs font-extrabold text-white shadow-[0_12px_22px_rgba(227,0,0,0.28)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#ff1616]" type="button">
         SEE CASE STUDY
         <span aria-hidden="true">→</span>
       </button>

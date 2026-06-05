@@ -150,13 +150,12 @@ export default function Header() {
                   <li key={item.id} className="relative group py-2">
                     <Link
                       href={item.href}
-                      className={`font-sans text-[13px] font-bold uppercase tracking-wider flex items-center gap-1.5 transition-colors duration-300 py-2 ${
+                      className={`font-sans text-[13px] font-bold uppercase tracking-wider transition-colors duration-300 py-2 ${
                         activeLink === item.id ? 'text-red-bright opacity-100' : 'text-white/80 hover:text-white hover:opacity-100'
                       }`}
                       onClick={() => handleLinkClick(item.id)}
                     >
                       {item.label}
-                      <span className="text-[8px] transition-transform duration-300 group-hover:rotate-180">▼</span>
                     </Link>
 
                     {/* Desktop Dropdown */}
