@@ -1,11 +1,13 @@
 'use client';
 
-import React, { useRef, useState, useEffect, useLayoutEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import Link from 'next/link';
 
 interface Study {
   id: number;
+  slug: string;
   quote: React.ReactNode;
   name: string;
   role: string;
@@ -14,9 +16,19 @@ interface Study {
   companyLogo: string;
 }
 
+interface CaseStudiesLayout {
+  isDesktop: boolean;
+  scrollDistance: number;
+  pinnedHeight: number | null;
+}
+
+const MAX_PIN_SCROLL_MULTIPLIER = 1.55;
+const MIN_PIN_SCROLL_DISTANCE = 1000;
+
 const studies: Study[] = [
   {
     id: 1,
+    slug: 'gmo-runsystem',
     quote: (
       <>
         EVIT gave us a <span className="text-blue-bright font-bold">clear sales roadmap</span> and <span className="text-blue-bright font-bold">practical guidance </span> on &quot;how to do&quot;. As a result, our sales team has improved week by week and is now much more confident working independently with clients.
@@ -30,6 +42,7 @@ const studies: Study[] = [
   },
   {
     id: 2,
+    slug: 'gmo-runsystem',
     quote: (
       <>
         Working with <span className="text-blue-bright font-bold">EVIT helped us achieve our first real results</span>. With the right sales method, strategy, and mindset from EVIT, we are confident we can continue to improve and achieve greater success in the future.
@@ -43,6 +56,7 @@ const studies: Study[] = [
   },
   {
     id: 3,
+    slug: 'reco-manpower',
     quote: (
       <>
         EVIT&apos;s service model helped us clearly understand the real expectations of international clients in Vietnam insights that would have been very difficult to gain on our own. We see EVIT as a <span className="text-blue-bright font-bold">long-term strategic partner</span> for our growth.
@@ -56,6 +70,7 @@ const studies: Study[] = [
   },
   {
     id: 4,
+    slug: 'reco-manpower',
     quote: (
       <>
         With EVIT&apos;s support, we successfully won a deal with a <span className="text-blue-bright font-bold">high-quality European client</span> - one of the largest companies in Iceland.
@@ -69,6 +84,7 @@ const studies: Study[] = [
   },
   {
     id: 5,
+    slug: 'solazu',
     quote: (
       <>
         With EVIT&apos;s method, we achieved our goal of setting up client calls in just <span className="text-blue-bright font-bold">three weeks</span>. The approach is practical, effective, and straightforward to execute.
@@ -82,6 +98,7 @@ const studies: Study[] = [
   },
   {
     id: 6,
+    slug: 'nkk-tech',
     quote: (
       <>
         EVIT trained our sales team effectively and helped everything run smoothly. We now see the value of having an <span className="text-blue-bright font-bold">independent sales team</span> that can grow and operate with confidence.
@@ -95,6 +112,7 @@ const studies: Study[] = [
   },
   {
     id: 7,
+    slug: 'hive-tech',
     quote: (
       <>
         We worked with EVIT and were impressed by their strong business development expertise and practical sales approach. They provided <span className="text-blue-bright font-bold">clear frameworks and actionable guidance</span>, making them a reliable partner for global expansion.
@@ -112,46 +130,66 @@ export default function CaseStudies() {
   const targetRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
-  const [isDesktop, setIsDesktop] = useState(false);
-  const [scrollDistance, setScrollDistance] = useState(0);
-  const [pinnedHeight, setPinnedHeight] = useState<number | null>(null);
+  const [layout, setLayout] = useState<CaseStudiesLayout>({
+    isDesktop: false,
+    scrollDistance: 0,
+    pinnedHeight: null,
+  });
 
   useEffect(() => {
-    const updateDesktopState = () => {
-      setIsDesktop(window.innerWidth >= 768);
+    let frame: number | null = null;
+
+    const updateLayout = (nextLayout: CaseStudiesLayout) => {
+      setLayout((currentLayout) => {
+        if (
+          currentLayout.isDesktop === nextLayout.isDesktop &&
+          currentLayout.scrollDistance === nextLayout.scrollDistance &&
+          currentLayout.pinnedHeight === nextLayout.pinnedHeight
+        ) {
+          return currentLayout;
+        }
+
+        return nextLayout;
+      });
     };
-
-    updateDesktopState();
-    window.addEventListener('resize', updateDesktopState);
-
-    return () => {
-      window.removeEventListener('resize', updateDesktopState);
-    };
-  }, []);
-
-  useLayoutEffect(() => {
-    if (!isDesktop) {
-      setScrollDistance(0);
-      setPinnedHeight(null);
-      return;
-    }
 
     const updateMeasurements = () => {
-      if (!trackRef.current || !viewportRef.current) {
-        return;
+      if (frame !== null) {
+        window.cancelAnimationFrame(frame);
       }
 
-      const distance = Math.max(
-        0,
-        trackRef.current.scrollWidth - viewportRef.current.clientWidth
-      );
+      frame = window.requestAnimationFrame(() => {
+        frame = null;
 
-      setScrollDistance(distance);
-      setPinnedHeight(window.innerHeight + distance);
+        const nextIsDesktop = window.innerWidth >= 768;
+
+        if (!nextIsDesktop || !trackRef.current || !viewportRef.current) {
+          updateLayout({
+            isDesktop: nextIsDesktop,
+            scrollDistance: 0,
+            pinnedHeight: null,
+          });
+          return;
+        }
+
+        const distance = Math.max(
+          0,
+          trackRef.current.scrollWidth - viewportRef.current.clientWidth
+        );
+        const pinScrollDistance = Math.min(
+          distance,
+          Math.max(window.innerHeight * MAX_PIN_SCROLL_MULTIPLIER, MIN_PIN_SCROLL_DISTANCE)
+        );
+
+        updateLayout({
+          isDesktop: true,
+          scrollDistance: distance,
+          pinnedHeight: window.innerHeight + pinScrollDistance,
+        });
+      });
     };
 
     updateMeasurements();
-    const frame = window.requestAnimationFrame(updateMeasurements);
     const fallbackFrames = [
       window.setTimeout(updateMeasurements, 100),
       window.setTimeout(updateMeasurements, 500),
@@ -168,12 +206,16 @@ export default function CaseStudies() {
     window.addEventListener('resize', updateMeasurements);
 
     return () => {
-      window.cancelAnimationFrame(frame);
+      if (frame !== null) {
+        window.cancelAnimationFrame(frame);
+      }
       fallbackFrames.forEach((timeoutId) => window.clearTimeout(timeoutId));
       resizeObserver.disconnect();
       window.removeEventListener('resize', updateMeasurements);
     };
-  }, [isDesktop]);
+  }, []);
+
+  const { isDesktop, scrollDistance, pinnedHeight } = layout;
 
   const { scrollYProgress } = useScroll({
     target: targetRef,
@@ -186,10 +228,13 @@ export default function CaseStudies() {
     <div
       ref={targetRef}
       className="relative"
+      data-case-studies-root
+      data-pinned-height={pinnedHeight ?? undefined}
       style={isDesktop && pinnedHeight ? { height: pinnedHeight } : undefined}
     >
       <section
         id="case-studies"
+        data-case-studies-section
         className={`relative overflow-hidden w-full ${
           isDesktop ? 'sticky top-0 h-screen flex flex-col justify-center' : 'py-20'
         }`}
@@ -231,6 +276,7 @@ export default function CaseStudies() {
           {isDesktop ? (
             <motion.div
               ref={trackRef}
+              data-case-studies-track
               style={{ x }}
               className="flex w-max gap-9 px-[max(24px,calc((100vw-1200px)/2+24px))] will-change-transform"
             >
@@ -290,10 +336,13 @@ function CaseStudyCard({ study }: { study: Study }) {
         </div>
       </div>
 
-      <button className="mx-auto flex h-11 w-full max-w-[230px] cursor-pointer items-center justify-center gap-3 rounded-full border-none bg-red-bright px-7 font-sans text-xs font-extrabold text-white shadow-[0_12px_22px_rgba(227,0,0,0.28)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#ff1616]" type="button">
+      <Link 
+        href={`/case-studies/${study.slug}`}
+        className="mx-auto flex h-11 w-full max-w-[230px] cursor-pointer items-center justify-center gap-3 rounded-full border-none bg-red-bright px-7 font-sans text-xs font-extrabold text-white shadow-[0_12px_22px_rgba(227,0,0,0.28)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#ff1616]"
+      >
         SEE CASE STUDY
         <span aria-hidden="true">→</span>
-      </button>
+      </Link>
     </article>
   );
 }

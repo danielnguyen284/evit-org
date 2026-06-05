@@ -7,6 +7,7 @@ import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-
 
 interface CoreSolution {
   id: number;
+  slug: string;
   title: string;
   subtitle: string;
   desc: string;
@@ -19,6 +20,7 @@ interface CoreSolution {
 const solutions: CoreSolution[] = [
   {
     id: 1,
+    slug: 'global-expansion',
     title: 'GLOBAL EXPANSION SERVICE',
     subtitle: 'Market entry planning + execution support: target markets, channels, lead generation, USP, and risk control.',
     desc: 'Global expansion is more than just entering a new market—it\'s about developing a sustainable and scalable growth strategy that includes the right sales channels, compliance with international business laws, and effectively managing global teams. At EVIT Organization, our Custom Design Consulting Services are designed to guide businesses through every critical step of this process, ensuring a smooth, efficient, and successful market entry.',
@@ -29,6 +31,7 @@ const solutions: CoreSolution[] = [
   },
   {
     id: 2,
+    slug: 'god-sales-system',
     title: 'G.O.D. SALES SYSTEM',
     subtitle: 'Step-by-step sales system for IT services: lead generation, qualification, meetings, negotiation, proposals, closing, upsell, cross-sell.',
     desc: 'Our online course covers everything you need to win more deals. From lead qualification and meeting strategy to negotiation, proposal building, and practical worksheets. Step-by-step tested formula that just needs to be implemented to your selling activities.',
@@ -39,6 +42,7 @@ const solutions: CoreSolution[] = [
   },
   {
     id: 3,
+    slug: 'marketing-services',
     title: 'MARKETING SERVICES',
     subtitle: 'Marketing funnel, Website + conversion + automation workflows to improve lead flow and conversion.',
     desc: 'Many businesses struggle to scale their marketing due to a lack of a clear strategy, outdated tactics, ineffective online presence, unaligned activities, poor analytics and execution. Even if they have existing marketing efforts, they often need to optimize these processes to drive conversions. As a result, businesses waste their budget on ineffective strategies, fail to fully utilize their marketing potential, and lose money and potential clients.',
@@ -103,7 +107,7 @@ function Card({ solution, isDesktop }: CardProps) {
         {/* Read More button at the bottom right */}
         <div className="relative z-20 mt-2 flex w-full justify-center md:justify-end">
           <Link
-            href={`/services#${solution.id === 1 ? 'global-expansion' : solution.id === 2 ? 'god-sales-system' : 'marketing-services'}`}
+            href={`/services/${solution.slug}`}
             className="inline-flex h-10 items-center justify-center rounded-full bg-red-bright px-7 font-sans text-xs font-bold uppercase tracking-wider text-white shadow-[0_8px_20px_rgba(227,0,0,0.28)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#ff1a1a] hover:shadow-[0_10px_24px_rgba(227,0,0,0.38)]"
           >
             READ MORE &rarr;

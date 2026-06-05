@@ -34,6 +34,9 @@ const servicesData: ServiceItem[] = [
     iconAlt: 'Global expansion icon',
     detailHeading: 'UNLOCK YOUR GLOBAL POTENTIAL',
     detailSubtitle: 'Achieve Sustainable Cash Flow and Growth',
+    heroBg: '/assets/3fba5de9dc3c6d1da2c7409aac29a148fb465e44.png',
+    heroTitle: 'BUSINESS EXPANSION',
+    heroSubtitle: 'Your Guide to Global Market',
     bullets: [
       'Expanding into international markets can be challenging and risky. Many companies struggle with identifying the right markets, setting up effective sales channels, and finding a suitable Unique Selling Point (USP) that helps them stand out in the market. Additionally, understanding business ethics in foreign countries is often challenging. The lack of a strategic roadmap can lead to costly mistakes, slow market entry, failure to gain traction, wasted time, and financial losses.',
       'Collaborating with EVIT is like having a personal guide that leads you from the initial stages to successful business development in the international arena. With our extensive experience, we will show you how to navigate the complexities of global markets. We will inform you in advance about potential challenges and provide the most effective solutions to expand business and sell your services on the global market.'
@@ -71,6 +74,9 @@ const servicesData: ServiceItem[] = [
     iconAlt: 'Marketing services icon',
     detailHeading: 'MAXIMIZE YOUR MARKETING ROI',
     detailSubtitle: 'Build High-Performing Funnels and Automated Client Acquisition',
+    heroBg: '/assets/ca1bcf1b3b6f612520edaed83e8927ec556a5961.png',
+    heroTitle: 'B2B MARKETING & LEAD GENERATION',
+    heroSubtitle: 'Marketing Solutions Tailored to Your Business Needs',
     bullets: [
       "A beautiful website is useless if it doesn't convert visitors into leads. Many tech companies waste significant budget on ads or content marketing without having a defined funnel or automated lead nurturing. Incomplete tracking, unaligned messaging, and manual follow-ups lead to lost opportunities, high acquisition costs, and poor sales alignment.",
       'Our Marketing Services build high-converting landing pages, optimize your digital channels, and implement marketing automation workflows. We ensure every touchpoint is designed to guide prospects down the funnel, turning cold traffic into hot sales-ready leads. By aligning marketing with your sales goals, we help you save budget, improve efficiency, and accelerate growth.'

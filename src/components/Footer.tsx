@@ -7,7 +7,7 @@ import styles from './Footer.module.css';
 
 const navItems = [
   { label: 'OUR SERVICES', href: '/services' },
-  { label: 'CASE STUDIES', href: '/#case-studies' },
+  { label: 'CASE STUDIES', href: '/case-studies' },
   { label: 'RESOURCES', href: '/#resources' },
   { label: 'ABOUT US', href: '/#about' },
 ];

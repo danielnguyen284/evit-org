@@ -13,16 +13,16 @@ export default function Header() {
   const lastScrollYRef = useRef(0);
   const pathname = usePathname();
   const [activeLink, setActiveLink] = useState(
-    pathname === '/services' ? 'services' : pathname === '/contact' ? 'contact' : 'home'
+    pathname.startsWith('/services')
+      ? 'services'
+      : pathname === '/contact'
+        ? 'contact'
+        : pathname === '/case-studies'
+          ? 'case-studies'
+          : pathname === '/about'
+            ? 'about'
+            : 'home'
   );
-
-  useEffect(() => {
-    if (pathname === '/contact') {
-      setActiveLink('contact');
-    } else if (pathname === '/services') {
-      setActiveLink('services');
-    }
-  }, [pathname]);
 
   useEffect(() => {
     const scrollThreshold = 6;
@@ -67,7 +67,7 @@ export default function Header() {
   }, [pathname]);
 
   useEffect(() => {
-    if (pathname === '/contact' || pathname === '/services') return;
+    if (pathname === '/contact' || pathname === '/case-studies' || pathname === '/about' || pathname.startsWith('/services')) return;
 
     const sections = document.querySelectorAll('section[id]');
     const observerOptions = {
@@ -115,13 +115,22 @@ export default function Header() {
   const menuItems = [
     { id: 'home', label: 'Home', href: '/#home' },
     { id: 'services', label: 'Our Services', href: '/services' },
-    { id: 'case-studies', label: 'Case Studies', href: '/#case-studies' },
+    { id: 'case-studies', label: 'Case Studies', href: '/case-studies' },
     { id: 'resources', label: 'Resources', href: '/#resources' },
-    { id: 'about', label: 'About Us', href: '/#about' },
+    { id: 'about', label: 'About Us', href: '/about' },
     { id: 'contact', label: 'Contact', href: '/contact' },
   ];
 
   const showHeader = isVisible || isMenuOpen;
+  const currentActiveLink = pathname.startsWith('/services')
+    ? 'services'
+    : pathname === '/contact'
+      ? 'contact'
+      : pathname === '/case-studies'
+        ? 'case-studies'
+        : pathname === '/about'
+          ? 'about'
+          : activeLink;
 
   return (
     <header
@@ -164,7 +173,7 @@ export default function Header() {
                     <Link
                       href={item.href}
                       className={`font-sans text-[13px] font-bold uppercase tracking-wider transition-colors duration-300 py-2 ${
-                        activeLink === item.id ? 'text-red-bright opacity-100' : 'text-white/80 hover:text-white hover:opacity-100'
+                        currentActiveLink === item.id ? 'text-red-bright opacity-100' : 'text-white/80 hover:text-white hover:opacity-100'
                       }`}
                       onClick={() => handleLinkClick(item.id)}
                     >
@@ -176,7 +185,7 @@ export default function Header() {
                       <ul className="bg-[#080832]/98 border border-blue-bright/30 rounded-xl p-4 min-w-[280px] shadow-2xl flex flex-col gap-2 list-none backdrop-blur-md">
                         <li>
                           <Link
-                            href="/services#global-expansion"
+                            href="/services/global-expansion"
                             className="font-sans text-[13px] font-semibold text-white/85 transition-all duration-200 block p-2 rounded-md hover:text-blue-bright hover:bg-blue-bright/10"
                           >
                             Global Expansion Service
@@ -184,7 +193,7 @@ export default function Header() {
                         </li>
                         <li>
                           <Link
-                            href="/services#god-sales-system"
+                            href="/services/god-sales-system"
                             className="font-sans text-[13px] font-semibold text-white/85 transition-all duration-200 block p-2 rounded-md hover:text-blue-bright hover:bg-blue-bright/10"
                           >
                             G.O.D. Sales System
@@ -192,7 +201,7 @@ export default function Header() {
                         </li>
                         <li>
                           <Link
-                            href="/services#marketing-services"
+                            href="/services/marketing-services"
                             className="font-sans text-[13px] font-semibold text-white/85 transition-all duration-200 block p-2 rounded-md hover:text-blue-bright hover:bg-blue-bright/10"
                           >
                             Marketing Services
@@ -208,7 +217,7 @@ export default function Header() {
                   <Link
                     href={item.href}
                     className={`font-sans text-[13px] font-bold uppercase tracking-wider transition-colors duration-300 py-2 ${
-                      activeLink === item.id ? 'text-red-bright opacity-100' : 'text-white/80 hover:text-white hover:opacity-100'
+                      currentActiveLink === item.id ? 'text-red-bright opacity-100' : 'text-white/80 hover:text-white hover:opacity-100'
                     }`}
                     onClick={() => handleLinkClick(item.id)}
                   >
@@ -261,7 +270,7 @@ export default function Header() {
                       <ul className="flex flex-col gap-3 list-none m-0 p-0">
                         <li>
                           <Link
-                            href="/services#global-expansion"
+                            href="/services/global-expansion"
                             className="font-sans text-[13px] text-white/70 hover:text-blue-bright transition-colors"
                             onClick={closeMenu}
                           >
@@ -270,7 +279,7 @@ export default function Header() {
                         </li>
                         <li>
                           <Link
-                            href="/services#god-sales-system"
+                            href="/services/god-sales-system"
                             className="font-sans text-[13px] text-white/70 hover:text-blue-bright transition-colors"
                             onClick={closeMenu}
                           >
@@ -279,7 +288,7 @@ export default function Header() {
                         </li>
                         <li>
                           <Link
-                            href="/services#marketing-services"
+                            href="/services/marketing-services"
                             className="font-sans text-[13px] text-white/70 hover:text-blue-bright transition-colors"
                             onClick={closeMenu}
                           >
@@ -295,7 +304,7 @@ export default function Header() {
                     <Link
                       href={item.href}
                       className={`font-sans text-sm font-bold uppercase tracking-wider transition-colors duration-300 py-2 ${
-                        activeLink === item.id ? 'text-red-bright' : 'text-white/80 hover:text-white'
+                        currentActiveLink === item.id ? 'text-red-bright' : 'text-white/80 hover:text-white'
                       }`}
                       onClick={() => handleLinkClick(item.id)}
                     >

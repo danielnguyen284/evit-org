@@ -2,7 +2,7 @@
 
 import React, { useRef } from 'react';
 import Image from 'next/image';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, type MotionValue, useScroll, useTransform } from 'framer-motion';
 
 interface CardItem {
   id: number;
@@ -17,6 +17,28 @@ const cardsData: CardItem[] = [
   { id: 4, line1: 'RIGHT', line2: 'CLIENTS' },
 ];
 
+function ScrollRevealWord({
+  word,
+  index,
+  total,
+  scrollYProgress,
+}: {
+  word: string;
+  index: number;
+  total: number;
+  scrollYProgress: MotionValue<number>;
+}) {
+  const start = index / total;
+  const end = (index + 1.5) / total;
+  const opacity = useTransform(scrollYProgress, [start, Math.min(end, 1)], [0.35, 1]);
+
+  return (
+    <motion.span style={{ opacity }} className="inline-block">
+      {word}
+    </motion.span>
+  );
+}
+
 function ScrollWordReveal({ text, className = '' }: { text: string; className?: string }) {
   const containerRef = useRef<HTMLSpanElement>(null);
   const { scrollYProgress } = useScroll({
@@ -28,27 +50,20 @@ function ScrollWordReveal({ text, className = '' }: { text: string; className?: 
 
   return (
     <span ref={containerRef} className={`inline-flex flex-wrap justify-center gap-x-[6px] gap-y-[4px] ${className}`}>
-      {words.map((word, i) => {
-        const start = i / words.length;
-        const end = (i + 1.5) / words.length;
-        const opacity = useTransform(scrollYProgress, [start, Math.min(end, 1)], [0.35, 1]);
-        return (
-          <motion.span key={i} style={{ opacity }} className="inline-block">
-            {word}
-          </motion.span>
-        );
-      })}
+      {words.map((word, i) => (
+        <ScrollRevealWord
+          key={`${word}-${i}`}
+          word={word}
+          index={i}
+          total={words.length}
+          scrollYProgress={scrollYProgress}
+        />
+      ))}
     </span>
   );
 }
 
 export default function About() {
-  const gridRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress: gridScroll } = useScroll({
-    target: gridRef,
-    offset: ['start 90%', 'center 70%'],
-  });
-
   return (
     <section id="about" className="relative bg-transparent py-24 sm:py-32 text-center overflow-hidden">
       <div className="max-w-[1200px] w-full mx-auto px-6 relative z-10">
@@ -80,7 +95,7 @@ export default function About() {
         </div>
 
         {/* 4 Cards Grid with Staggered Scroll Animation */}
-        <div ref={gridRef} className="about-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12 mb-12">
+        <div className="about-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12 mb-12">
           {cardsData.map((card, index) => (
             <motion.div
               key={card.id}
