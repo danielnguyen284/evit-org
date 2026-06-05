@@ -29,7 +29,7 @@ export default function FloatingCalendar() {
           whileHover={{ y: -4, scale: 1.08 }}
           whileTap={{ scale: 0.95 }}
           transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-          className="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-blue-bright to-[#004b7a] border border-white/10 cursor-pointer shadow-[0_8px_24px_rgba(1,132,209,0.3)] hover:shadow-[0_12px_30px_rgba(1,132,209,0.6)] hover:from-[#019eff] hover:to-blue-bright flex items-center justify-center z-50 text-white transition-shadow duration-300"
+          className="!fixed bottom-6 right-6 sm:bottom-8 sm:right-8 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-blue-bright to-[#004b7a] border border-white/10 cursor-pointer shadow-[0_8px_24px_rgba(1,132,209,0.3)] hover:shadow-[0_12px_30px_rgba(1,132,209,0.6)] hover:from-[#019eff] hover:to-blue-bright flex items-center justify-center !z-50 text-white transition-shadow duration-300"
           onClick={handleClick}
           aria-label="Book a free consultation calendar"
         >
