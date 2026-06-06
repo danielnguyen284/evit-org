@@ -111,7 +111,7 @@ export default function About() {
                    alt="Checkmark Icon"
                    width={84}
                    height={84}
-                   className="object-contain w-[84px] h-[84px] transition-transform duration-300 group-hover:scale-110"
+                   className="h-[84px] w-[84px] object-contain transition-transform duration-300 group-hover:scale-110"
                 />
               </div>
               <h3 className="card-title font-sans text-xl font-extrabold uppercase text-white tracking-[0.1em] leading-snug">

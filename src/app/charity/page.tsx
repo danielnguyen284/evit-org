@@ -136,7 +136,7 @@ export default function CharityPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-8 max-w-[850px] font-sans text-sm font-bold leading-relaxed tracking-0 text-white/95 sm:text-base"
+              className="mt-8 max-w-[850px] font-sans text-sm font-medium leading-relaxed tracking-0 text-white/95 sm:text-base"
             >
               A new standard in purpose-driven business.
             </motion.p>
@@ -160,6 +160,7 @@ export default function CharityPage() {
                     src="/assets/96ef3dd67dd459d6795b77b8e110d6a1579d1a89.jpg"
                     alt="Founder - EVIT"
                     fill
+                    sizes="(max-width: 1024px) 90vw, 480px"
                     className="object-cover transition-transform duration-500 hover:scale-105"
                   />
                 </div>
@@ -281,7 +282,7 @@ export default function CharityPage() {
                         alt="Checkmark Icon"
                         width={48}
                         height={48}
-                        className="object-contain"
+                        className="h-12 w-12 object-contain"
                       />
                     </div>
                     <h3 className="font-sans text-[12px] font-extrabold uppercase leading-snug tracking-[0.16em] text-white">
@@ -308,7 +309,7 @@ export default function CharityPage() {
                         alt="Checkmark Icon"
                         width={48}
                         height={48}
-                        className="object-contain"
+                        className="h-12 w-12 object-contain"
                       />
                     </div>
                     <h3 className="font-sans text-[12px] font-extrabold uppercase leading-snug tracking-[0.16em] text-white">
@@ -589,6 +590,7 @@ export default function CharityPage() {
                     src="/assets/398b87993e53ef2ba25c373bda22ab9cab5441ac.png"
                     alt="A Quiet Invitation"
                     fill
+                    sizes="(max-width: 1024px) 90vw, 480px"
                     className="object-cover"
                   />
                 </div>

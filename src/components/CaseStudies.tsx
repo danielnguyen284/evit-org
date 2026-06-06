@@ -331,6 +331,7 @@ function CaseStudyCard({ study }: { study: Study }) {
             src={study.companyLogo}
             alt="EVIT client logo"
             fill
+            sizes="(max-width: 768px) 124px, 148px"
             className="object-contain"
           />
         </div>

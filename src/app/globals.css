@@ -58,6 +58,11 @@ body::before {
   pointer-events: none;
 }
 
+main[class~="bg-[#03032D]"],
+main [class~="bg-[#03032D]"] {
+  background-color: rgba(3, 3, 45, 0.78) !important;
+}
+
 body > *:not(header) {
   position: relative;
   z-index: 1;
