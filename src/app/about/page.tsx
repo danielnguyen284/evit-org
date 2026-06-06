@@ -15,6 +15,11 @@ const problemBullets = [
   'Do not know how to build a predictable sales system',
 ];
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 36 },
+  visible: { opacity: 1, y: 0 },
+};
+
 function Reveal({
   children,
   className = '',
@@ -26,10 +31,11 @@ function Reveal({
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-100px' }}
-      transition={{ duration: 0.65, delay, ease: [0.16, 1, 0.3, 1] }}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2, margin: '0px 0px -90px 0px' }}
+      variants={fadeUp}
+      transition={{ duration: 0.72, delay, ease: [0.16, 1, 0.3, 1] }}
       className={className}
     >
       {children}
@@ -44,7 +50,7 @@ export default function AboutPage() {
 
       <main className="min-h-screen bg-[#03032D] text-white">
         <section
-          className="relative flex min-h-[78vh] w-full items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat px-6 pt-[88px]"
+          className="relative flex h-screen min-h-screen w-full items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat px-6 pb-[40px] pt-[88px]"
           style={{
             backgroundImage:
               "linear-gradient(180deg, rgba(3, 3, 45, 0.35) 0%, rgba(3, 3, 45, 0.78) 72%, #03032D 100%), url('/assets/7c21ecf1796d40be0fbfd3cd297c2396db71629c.png')",
@@ -75,7 +81,13 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section className="relative overflow-hidden border-t border-blue-bright/20 py-20 sm:py-24">
+        <motion.section
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0.08 }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+          className="relative overflow-hidden border-t border-blue-bright/20 py-20 sm:py-24"
+        >
           <div className="pointer-events-none absolute inset-x-0 top-0 h-[280px] bg-[url('/assets/background-wave-original.png')] bg-[length:100%_auto] bg-top bg-no-repeat opacity-50 mix-blend-screen brightness-0 invert-[0.38] sepia saturate-[2.8] hue-rotate-[190deg]" />
 
           <div className="relative z-10 mx-auto w-full max-w-[1200px] px-6">
@@ -100,23 +112,45 @@ export default function AboutPage() {
                 </p>
 
                 <ul className="mb-8 flex max-w-[720px] list-disc flex-col gap-4 pl-5 marker:text-blue-bright">
-                  {problemBullets.map((bullet) => (
-                    <li key={bullet} className="font-sans text-xs font-medium leading-relaxed text-white/88 sm:text-sm">
+                  {problemBullets.map((bullet, index) => (
+                    <motion.li
+                      key={bullet}
+                      initial={{ opacity: 0, x: -18 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true, amount: 0.6 }}
+                      transition={{ duration: 0.48, delay: index * 0.08, ease: 'easeOut' }}
+                      className="font-sans text-xs font-medium leading-relaxed text-white/88 sm:text-sm"
+                    >
                       {bullet}
-                    </li>
+                    </motion.li>
                   ))}
                 </ul>
 
                 <div className="max-w-[760px] space-y-5 font-sans text-xs font-medium leading-relaxed text-white/88 sm:text-sm">
-                  <p>
+                  <motion.p
+                    initial={{ opacity: 0, y: 18 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.6 }}
+                    transition={{ duration: 0.5, delay: 0.08, ease: 'easeOut' }}
+                  >
                     They grow through referrals and personal networks. It works at the beginning, until they hit the limit.
-                  </p>
-                  <p>
+                  </motion.p>
+                  <motion.p
+                    initial={{ opacity: 0, y: 18 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.6 }}
+                    transition={{ duration: 0.5, delay: 0.16, ease: 'easeOut' }}
+                  >
                     Not because the company is bad, but because there is no structured sales system.
-                  </p>
-                  <p>
+                  </motion.p>
+                  <motion.p
+                    initial={{ opacity: 0, y: 18 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.6 }}
+                    transition={{ duration: 0.5, delay: 0.24, ease: 'easeOut' }}
+                  >
                     That is where we step in.
-                  </p>
+                  </motion.p>
                 </div>
               </Reveal>
 
@@ -154,17 +188,32 @@ export default function AboutPage() {
                   Our Mission
                 </h2>
                 <div className="space-y-6 font-sans text-xs font-medium leading-[2] text-white/88 sm:text-sm">
-                  <p>
+                  <motion.p
+                    initial={{ opacity: 0, y: 18 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.6 }}
+                    transition={{ duration: 0.5, delay: 0.08, ease: 'easeOut' }}
+                  >
                     We exist to help IT companies turn strong technical capability into structured, predictable growth.
-                  </p>
-                  <p>
+                  </motion.p>
+                  <motion.p
+                    initial={{ opacity: 0, y: 18 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.6 }}
+                    transition={{ duration: 0.5, delay: 0.16, ease: 'easeOut' }}
+                  >
                     Many founders build excellent products and delivery teams first. As they scale, they need a clear sales
                     system that connects technical expertise with real business outcomes and international markets.
-                  </p>
-                  <p>
+                  </motion.p>
+                  <motion.p
+                    initial={{ opacity: 0, y: 18 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.6 }}
+                    transition={{ duration: 0.5, delay: 0.24, ease: 'easeOut' }}
+                  >
                     For the last 7 years, we have been helping IT companies to sell their products and services in foreign
                     markets, and this is what we do best.
-                  </p>
+                  </motion.p>
                 </div>
               </Reveal>
             </div>
@@ -179,7 +228,7 @@ export default function AboutPage() {
               </p>
             </Reveal>
           </div>
-        </section>
+        </motion.section>
 
         <CaseStudies />
       </main>

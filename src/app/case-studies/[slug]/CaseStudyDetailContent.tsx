@@ -39,17 +39,14 @@ export default function CaseStudyDetailContent({ caseStudy }: CaseStudyDetailCon
     <>
       <Header />
 
-      <main className="bg-[#03032D] min-h-screen text-white relative overflow-hidden">
-        {/* Dynamic Client Hero Section */}
+      <main className="bg-[#03032D] min-h-screen text-white relative">
+        {/* Case Studies Hero Section */}
         <section
           className="relative h-screen w-full flex items-center justify-center pb-[40px] overflow-hidden bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: `linear-gradient(180deg, rgba(3, 3, 45, 0.4) 0%, rgba(3, 3, 45, 0.9) 100%), url('${caseStudy.heroBg || '/assets/services-bg.jpg'}')`,
+            backgroundImage: `linear-gradient(180deg, rgba(3, 3, 45, 0.4) 0%, rgba(3, 3, 45, 0.9) 100%), url('/assets/1508aab01b3a4fca97b3b1ccfa52ad0ca9d80acb.png')`,
           }}
         >
-          {/* Grid pattern overlay */}
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none opacity-40" />
-
           {/* Bottom overlay blend to blend smoothly with content */}
           <div className="absolute bottom-0 left-0 w-full h-[200px] bg-gradient-to-t from-[#03032D] to-transparent pointer-events-none z-[1]" />
 
@@ -247,9 +244,7 @@ export default function CaseStudyDetailContent({ caseStudy }: CaseStudyDetailCon
         </div>
 
         {/* Case Studies carousel at the bottom */}
-        <div className="border-t border-white/5 pt-12">
-          <CaseStudies />
-        </div>
+        <CaseStudies />
 
         {/* Contact Us Section */}
         <div className="relative z-10">

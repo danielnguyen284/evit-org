@@ -21,7 +21,11 @@ export default function Header() {
           ? 'case-studies'
           : pathname === '/about'
             ? 'about'
-            : 'home'
+            : pathname === '/resources'
+              ? 'resources'
+              : pathname === '/charity'
+                ? 'charity'
+                : 'home'
   );
 
   useEffect(() => {
@@ -67,7 +71,7 @@ export default function Header() {
   }, [pathname]);
 
   useEffect(() => {
-    if (pathname === '/contact' || pathname === '/case-studies' || pathname === '/about' || pathname.startsWith('/services')) return;
+    if (pathname === '/contact' || pathname === '/case-studies' || pathname === '/about' || pathname === '/resources' || pathname === '/charity' || pathname.startsWith('/services')) return;
 
     const sections = document.querySelectorAll('section[id]');
     const observerOptions = {
@@ -116,7 +120,8 @@ export default function Header() {
     { id: 'home', label: 'Home', href: '/#home' },
     { id: 'services', label: 'Our Services', href: '/services' },
     { id: 'case-studies', label: 'Case Studies', href: '/case-studies' },
-    { id: 'resources', label: 'Resources', href: '/#resources' },
+    { id: 'resources', label: 'Resources', href: '/resources' },
+    { id: 'charity', label: 'Charity', href: '/charity' },
     { id: 'about', label: 'About Us', href: '/about' },
     { id: 'contact', label: 'Contact', href: '/contact' },
   ];
@@ -130,7 +135,11 @@ export default function Header() {
         ? 'case-studies'
         : pathname === '/about'
           ? 'about'
-          : activeLink;
+          : pathname === '/resources'
+            ? 'resources'
+            : pathname === '/charity'
+              ? 'charity'
+              : activeLink;
 
   return (
     <header
