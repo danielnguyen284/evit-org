@@ -120,7 +120,7 @@ export default function ResourcesPage() {
             </Reveal>
 
             {/* Grid of 4 Cards (2x2 layout on desktop) */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[1000px] mx-auto mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[1200px] mx-auto mb-12">
               {cardsData.map((card, index) => (
                 <motion.div
                   key={card.id}
@@ -238,7 +238,7 @@ export default function ResourcesPage() {
           <div className="relative z-10 mx-auto w-full max-w-[1200px] px-6">
             
             {/* Top Circuit Board Image */}
-            <Reveal className="relative mx-auto flex w-full max-w-[1000px] items-center justify-center mb-14">
+            <Reveal className="relative mx-auto flex w-full max-w-[1200px] items-center justify-center mb-14">
               <div className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(0,132,209,0.15)_0%,transparent_60%)] blur-3xl" />
               <div className="relative w-full overflow-hidden rounded-2xl border border-blue-bright/40 shadow-[0_12px_40px_rgba(0,0,0,0.5)]">
                 <Image

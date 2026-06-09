@@ -58,7 +58,7 @@ export default function FAQ() {
       {/* Background Radial Glow */}
       <div className="absolute top-[14%] left-1/2 -translate-x-1/2 w-[760px] h-[520px] bg-gradient-to-tr from-blue-bright/10 to-purple-800/10 blur-[90px] rounded-full pointer-events-none -z-1" />
 
-      <div className="max-w-[1060px] w-full mx-auto px-6">
+      <div className="max-w-[1200px] w-full mx-auto px-6">
         <div className="text-center mb-12">
           <motion.span
             initial={{ opacity: 0, y: 15 }}

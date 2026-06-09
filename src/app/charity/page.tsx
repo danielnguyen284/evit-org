@@ -123,7 +123,7 @@ export default function CharityPage() {
               "linear-gradient(180deg, rgba(3, 3, 45, 0.42) 0%, rgba(3, 3, 45, 0.58) 68%, rgba(3, 3, 45, 0.74) 100%), url('/assets/15477946316ab69706f2750bd4e6a33415a0ed5b.png')",
           }}
         >
-          <div className="relative z-10 mx-auto flex w-full max-w-[1040px] flex-col items-center text-center">
+          <div className="relative z-10 mx-auto flex w-full max-w-[1200px] flex-col items-center text-center">
             <motion.h1
               initial={{ opacity: 0, y: 32 }}
               animate={{ opacity: 1, y: 0 }}
@@ -148,7 +148,7 @@ export default function CharityPage() {
 
         {/* Section 1: "WHAT IF BUILDING SOFTWARE..." */}
         <section className="relative flex min-h-[72vh] items-center overflow-hidden border-b border-blue-bright/10 bg-[#03032D]/40 py-20 sm:py-24">
-          <div className="relative z-10 mx-auto w-full max-w-[1120px] px-6">
+          <div className="relative z-10 mx-auto w-full max-w-[1200px] px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               
               {/* Left Column - Founder Image */}
@@ -192,7 +192,7 @@ export default function CharityPage() {
         {/* Section 2: "WHY WE CREATED IT" */}
         <section className="relative overflow-hidden border-b border-blue-bright/10 bg-[#03032D] py-16 sm:py-20">
           <div className="relative z-10 mx-auto w-full max-w-[1200px] px-6">
-            <Reveal className="relative mx-auto min-h-[380px] max-w-[1080px] overflow-hidden rounded-[10px] border border-blue-bright/80 bg-[#070735] px-7 py-10 shadow-[0_18px_42px_rgba(0,0,0,0.42),0_0_28px_rgba(0,132,209,0.18)] sm:px-10 sm:py-12 lg:px-14">
+            <Reveal className="relative mx-auto min-h-[380px] max-w-[1200px] overflow-hidden rounded-[10px] border border-blue-bright/80 bg-[#070735] px-7 py-10 shadow-[0_18px_42px_rgba(0,0,0,0.42),0_0_28px_rgba(0,132,209,0.18)] sm:px-10 sm:py-12 lg:px-14">
               <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_7%_95%,rgba(0,104,255,0.48)_0%,rgba(0,104,255,0.18)_24%,transparent_46%),radial-gradient(circle_at_88%_56%,rgba(193,32,210,0.42)_0%,rgba(193,32,210,0.16)_25%,transparent_48%)]" />
               <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(7,7,53,0.96)_0%,rgba(7,7,53,0.86)_48%,rgba(7,7,53,0.34)_72%,rgba(7,7,53,0.08)_100%)]" />
 
@@ -337,7 +337,7 @@ export default function CharityPage() {
             </Reveal>
 
             {/* 3 Columns Grid */}
-            <div className="mx-auto grid max-w-[1120px] grid-cols-1 gap-8 lg:grid-cols-3">
+            <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-8 lg:grid-cols-3">
               
               {/* Column 1 */}
               <motion.div
@@ -422,7 +422,7 @@ export default function CharityPage() {
 
         {/* Section 5: "HOW IT WORKS" */}
         <section className="relative flex min-h-[72vh] items-center overflow-hidden border-b border-blue-bright/10 bg-[#03032D]/40 py-20 sm:py-24">
-          <div className="relative z-10 mx-auto w-full max-w-[1120px] px-6">
+          <div className="relative z-10 mx-auto w-full max-w-[1200px] px-6">
             
             <Reveal className="mx-auto mb-12 max-w-[900px] text-center">
               <span className="hidden">
@@ -506,7 +506,7 @@ export default function CharityPage() {
         {/* Section 6: "THE BUSINESS CASE" */}
         <section className="relative overflow-hidden border-b border-blue-bright/10 bg-[#03032D] py-20 sm:py-24">
           <div className="relative z-10 mx-auto w-full max-w-[1200px] px-6">
-            <Reveal className="mx-auto max-w-[1120px]">
+            <Reveal className="mx-auto max-w-[1200px]">
               <div className="relative aspect-[1366/647] w-full overflow-hidden rounded-[10px] border border-blue-bright/80 shadow-[0_16px_34px_rgba(0,132,209,0.18)]">
                 <Image
                   src="/assets/fc96753d4e50d1a5a918994758ba91d5de42b045.png"
@@ -527,7 +527,7 @@ export default function CharityPage() {
               </p>
             </Reveal>
 
-            <div className="mx-auto mt-14 grid max-w-[1120px] grid-cols-1 gap-8 lg:grid-cols-3">
+            <div className="mx-auto mt-14 grid max-w-[1200px] grid-cols-1 gap-8 lg:grid-cols-3">
               {[
                 {
                   title: 'For The Children',
@@ -638,7 +638,7 @@ export default function CharityPage() {
           {/* Background Radial Glow */}
           <div className="absolute top-[14%] left-1/2 -translate-x-1/2 w-[760px] h-[520px] bg-gradient-to-tr from-blue-bright/10 to-purple-800/10 blur-[90px] rounded-full pointer-events-none -z-1" />
 
-          <div className="max-w-[1060px] w-full mx-auto px-6">
+          <div className="max-w-[1200px] w-full mx-auto px-6">
             <div className="text-center mb-16">
               <Reveal className="block">
                 <span className="font-sans text-sm font-bold uppercase text-blue-bright tracking-[0.22em] mb-4 block">

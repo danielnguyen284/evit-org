@@ -278,7 +278,7 @@ function GodSalesSystemOverview() {
           </h2>
         </motion.div>
 
-        <div className="relative mx-auto grid w-full max-w-[1100px] grid-cols-1 md:grid-cols-[1fr_auto_1fr_auto_1fr] gap-8 md:gap-4 items-start">
+        <div className="relative mx-auto grid w-full max-w-[1200px] grid-cols-1 md:grid-cols-[1fr_auto_1fr_auto_1fr] gap-8 md:gap-4 items-start">
           {/* Column 1 */}
           <motion.div
             initial={{ opacity: 0, y: 28 }}
@@ -394,7 +394,7 @@ function GodSalesSystemOverview() {
           </p>
         </motion.div>
 
-        <div className="mx-auto mb-20 grid w-full max-w-[1120px] grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-5 lg:gap-5">
+        <div className="mx-auto mb-20 grid w-full max-w-[1200px] grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-5 lg:gap-5">
           {[
             {
               number: '01',
@@ -488,7 +488,7 @@ function GodSalesSystemOverview() {
           </p>
         </motion.div>
 
-        <div className="mx-auto grid w-full max-w-[1060px] grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(280px,0.8fr)] lg:gap-14">
+        <div className="mx-auto grid w-full max-w-[1200px] grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(280px,0.8fr)] lg:gap-14">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -554,7 +554,7 @@ function GodSalesSystemOverview() {
           </p>
         </motion.div>
 
-        <div className="mx-auto grid w-full max-w-[1060px] grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-14">
+        <div className="mx-auto grid w-full max-w-[1200px] grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-14">
           <motion.article
             initial={{ opacity: 0, y: 26 }}
             whileInView={{ opacity: 1, y: 0 }}

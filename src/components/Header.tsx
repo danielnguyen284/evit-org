@@ -14,21 +14,15 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const lastScrollYRef = useRef(0);
   const pathname = usePathname();
-  const [activeLink, setActiveLink] = useState(
-    pathname.startsWith('/services')
-      ? 'services'
-      : pathname === '/contact'
-        ? 'contact'
-        : pathname === '/case-studies'
-          ? 'case-studies'
-          : pathname === '/about'
-            ? 'about'
-            : pathname === '/resources'
-              ? 'resources'
-              : pathname === '/charity'
-                ? 'charity'
-                : 'home'
-  );
+  const currentActiveLink = pathname.startsWith('/services')
+    ? 'services'
+    : pathname === '/case-studies'
+      ? 'case-studies'
+      : pathname === '/about' || pathname === '/charity'
+        ? 'about'
+        : pathname.startsWith('/resources') || pathname.startsWith('/blog') || pathname === '/it-vendor-introduction'
+          ? 'resources'
+          : 'home';
 
   useEffect(() => {
     const scrollThreshold = 6;
@@ -72,39 +66,6 @@ export default function Header() {
     };
   }, [pathname]);
 
-  useEffect(() => {
-    if (pathname === '/contact' || pathname === '/case-studies' || pathname === '/about' || pathname === '/resources' || pathname === '/charity' || pathname.startsWith('/services')) return;
-
-    const sections = document.querySelectorAll('section[id]');
-    const observerOptions = {
-      root: null,
-      rootMargin: '-30% 0px -50% 0px',
-      threshold: 0,
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveLink(entry.target.id);
-        }
-      });
-    }, observerOptions);
-
-    sections.forEach((section) => observer.observe(section));
-
-    const handleScrollSpy = () => {
-      if (window.scrollY < 100) {
-        setActiveLink('home');
-      }
-    };
-    window.addEventListener('scroll', handleScrollSpy);
-
-    return () => {
-      sections.forEach((section) => observer.unobserve(section));
-      window.removeEventListener('scroll', handleScrollSpy);
-    };
-  }, [pathname]);
-
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -113,13 +74,12 @@ export default function Header() {
     setIsMenuOpen(false);
   };
 
-  const handleLinkClick = (id: string) => {
-    setActiveLink(id);
+  const handleLinkClick = (id?: string) => {
     closeMenu();
   };
 
   const menuItems = [
-    { id: 'home', label: 'Home', href: '/#home' },
+    { id: 'home', label: 'Home', href: '/' },
     { 
       id: 'services', 
       label: 'Our Services', 
@@ -136,8 +96,8 @@ export default function Header() {
       label: 'Resources', 
       href: '/resources',
       dropdown: [
-        { label: 'Blog', href: '/resources#blog' },
-        { label: 'IT Vendor Introduction', href: '/resources#vendor-introduction' },
+        { label: 'Blog', href: '/blog' },
+        { label: 'IT Vendor Introduction', href: '/it-vendor-introduction' },
       ]
     },
     { 
@@ -151,15 +111,6 @@ export default function Header() {
   ];
 
   const showHeader = isVisible || isMenuOpen;
-  const currentActiveLink = pathname.startsWith('/services')
-    ? 'services'
-    : pathname === '/case-studies'
-      ? 'case-studies'
-      : pathname === '/about' || pathname === '/charity'
-        ? 'about'
-        : pathname.startsWith('/resources')
-          ? 'resources'
-          : activeLink;
 
   return (
     <header
@@ -174,7 +125,7 @@ export default function Header() {
     >
       <div className="max-w-[1200px] w-full mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/#home" className="flex items-center gap-3 cursor-pointer" onClick={() => handleLinkClick('home')}>
+        <Link href="/" className="flex items-center gap-3 cursor-pointer" onClick={() => handleLinkClick('home')}>
           <motion.div
             animate={{ height: isSticky ? 40 : 52 }}
             transition={{ duration: 0.3 }}
@@ -200,11 +151,17 @@ export default function Header() {
               return (
                 <li key={item.id} className={`relative ${hasDropdown ? 'group py-2' : ''}`}>
                   <Link
-                    href={item.href}
+                    href={item.id === 'resources' ? '#' : item.href}
                     className={`font-sans text-[13px] font-bold uppercase tracking-wider transition-colors duration-300 py-2 flex items-center gap-1 ${
                       currentActiveLink === item.id ? 'text-red-bright opacity-100' : 'text-white/80 hover:text-white hover:opacity-100'
                     }`}
-                    onClick={() => handleLinkClick(item.id)}
+                    onClick={(e) => {
+                      if (item.id === 'resources') {
+                        e.preventDefault();
+                      } else {
+                        handleLinkClick(item.id);
+                      }
+                    }}
                   >
                     {item.label}
                     {hasDropdown && (
@@ -270,11 +227,17 @@ export default function Header() {
                   return (
                     <li key={item.id} className="flex flex-col items-center gap-3">
                       <Link
-                        href={item.href}
+                        href={item.id === 'resources' ? '#' : item.href}
                         className={`font-sans text-sm font-bold uppercase tracking-wider transition-colors duration-300 ${
                           currentActiveLink === item.id ? 'text-red-bright opacity-100' : 'text-white/60'
                         }`}
-                        onClick={() => handleLinkClick(item.id)}
+                        onClick={(e) => {
+                          if (item.id === 'resources') {
+                            e.preventDefault();
+                          } else {
+                            handleLinkClick(item.id);
+                          }
+                        }}
                       >
                         {item.label}
                       </Link>
