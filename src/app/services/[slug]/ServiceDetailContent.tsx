@@ -11,6 +11,7 @@ import Contact from "@/components/Contact";
 import CaseStudies from "@/components/CaseStudies";
 import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
+import { useBooking } from "@/components/BookingModal";
 
 interface ServiceItem {
   id: string;
@@ -58,6 +59,7 @@ function HowItWorksDivider() {
 }
 
 function GodSalesSystemOverview() {
+  const { openBooking } = useBooking();
   const bullets = [
     'Built for IT service providers who want predictable sales',
     'Focused on real execution (daily actions, conversions, meetings, clients)',
@@ -128,13 +130,13 @@ function GodSalesSystemOverview() {
             ))}
           </ul>
 
-          <a
-            href="#consultation"
-            className="group inline-flex h-11 items-center justify-center rounded-full bg-red-bright px-8 font-sans text-xs font-bold uppercase tracking-wider text-white shadow-[0_8px_20px_rgba(227,0,0,0.28)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#ff1a1a] hover:shadow-[0_10px_24px_rgba(227,0,0,0.38)]"
+          <button
+            onClick={openBooking}
+            className="group inline-flex h-11 items-center justify-center rounded-full bg-red-bright px-8 font-sans text-xs font-bold uppercase tracking-wider text-white shadow-[0_8px_20px_rgba(227,0,0,0.28)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#ff1a1a] hover:shadow-[0_10px_24px_rgba(227,0,0,0.38)] cursor-pointer"
           >
             BOOK FREE CONSULTATION
             <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
-          </a>
+          </button>
         </motion.div>
       </div>
 
@@ -233,13 +235,13 @@ function GodSalesSystemOverview() {
             </div>
           </div>
 
-          <a
-            href="#consultation"
-            className="group inline-flex h-11 items-center justify-center rounded-full bg-red-bright px-8 font-sans text-xs font-bold uppercase tracking-wider text-white shadow-[0_8px_20px_rgba(227,0,0,0.28)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#ff1a1a] hover:shadow-[0_10px_24px_rgba(227,0,0,0.38)]"
+          <button
+            onClick={openBooking}
+            className="group inline-flex h-11 items-center justify-center rounded-full bg-red-bright px-8 font-sans text-xs font-bold uppercase tracking-wider text-white shadow-[0_8px_20px_rgba(227,0,0,0.28)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#ff1a1a] hover:shadow-[0_10px_24px_rgba(227,0,0,0.38)] cursor-pointer"
           >
             BOOK FREE CONSULTATION
             <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
-          </a>
+          </button>
         </motion.div>
 
         {/* Right Column - Illustration */}
@@ -573,13 +575,13 @@ function GodSalesSystemOverview() {
                 $1,200 monthly recurring investment (plus 3% commission)
               </li>
             </ul>
-            <a
-              href="#consultation"
-              className="relative z-[1] mt-auto inline-flex h-11 w-full items-center justify-center rounded-full bg-red-bright px-6 font-sans text-[11px] font-bold uppercase tracking-wide text-white shadow-[0_10px_24px_rgba(227,0,0,0.32)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#ff1a1a] sm:ml-auto sm:w-auto sm:px-8"
+            <button
+              onClick={openBooking}
+              className="relative z-[1] mt-auto inline-flex h-11 w-full items-center justify-center rounded-full bg-red-bright px-6 font-sans text-[11px] font-bold uppercase tracking-wide text-white shadow-[0_10px_24px_rgba(227,0,0,0.32)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#ff1a1a] sm:ml-auto sm:w-auto sm:px-8 cursor-pointer"
             >
               BOOK FREE CONSULTATION
               <span className="ml-3">→</span>
-            </a>
+            </button>
           </motion.article>
 
           <motion.article
@@ -599,13 +601,13 @@ function GodSalesSystemOverview() {
                 If you book a setup call, you get set up for free or a 15% lifetime discount. For more information about a discount or a free setup, please book a free consulting session
               </li>
             </ul>
-            <a
-              href="#consultation"
-              className="relative z-[1] mt-auto inline-flex h-11 w-full items-center justify-center rounded-full bg-red-bright px-6 font-sans text-[11px] font-bold uppercase tracking-wide text-white shadow-[0_10px_24px_rgba(227,0,0,0.32)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#ff1a1a] sm:ml-auto sm:w-auto sm:px-8"
+            <button
+              onClick={openBooking}
+              className="relative z-[1] mt-auto inline-flex h-11 w-full items-center justify-center rounded-full bg-red-bright px-6 font-sans text-[11px] font-bold uppercase tracking-wide text-white shadow-[0_10px_24px_rgba(227,0,0,0.32)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#ff1a1a] sm:ml-auto sm:w-auto sm:px-8 cursor-pointer"
             >
               BOOK FREE CONSULTATION
               <span className="ml-3">→</span>
-            </a>
+            </button>
           </motion.article>
         </div>
       </div>
@@ -614,6 +616,7 @@ function GodSalesSystemOverview() {
 }
 
 function MarketingServicesOverview() {
+  const { openBooking } = useBooking();
   return (
     <section className="relative w-full overflow-hidden py-4 sm:py-6">
       {/* Struggle Header Section */}
@@ -759,13 +762,13 @@ function MarketingServicesOverview() {
               </div>
             </div>
 
-            <a
-              href="#consultation"
-              className="group inline-flex h-11 items-center justify-center rounded-full bg-red-bright px-8 font-sans text-xs font-bold uppercase tracking-wider text-white shadow-[0_8px_20px_rgba(227,0,0,0.28)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#ff1a1a] hover:shadow-[0_10px_24px_rgba(227,0,0,0.38)]"
+            <button
+              onClick={openBooking}
+              className="group inline-flex h-11 items-center justify-center rounded-full bg-red-bright px-8 font-sans text-xs font-bold uppercase tracking-wider text-white shadow-[0_8px_20px_rgba(227,0,0,0.28)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#ff1a1a] hover:shadow-[0_10px_24px_rgba(227,0,0,0.38)] cursor-pointer"
             >
               BOOK FREE CONSULTATION
               <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
-            </a>
+            </button>
           </motion.div>
         </div>
 
@@ -810,13 +813,13 @@ function MarketingServicesOverview() {
               </div>
             </div>
 
-            <a
-              href="#consultation"
-              className="group inline-flex h-11 items-center justify-center rounded-full bg-red-bright px-8 font-sans text-xs font-bold uppercase tracking-wider text-white shadow-[0_8px_20px_rgba(227,0,0,0.28)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#ff1a1a] hover:shadow-[0_10px_24px_rgba(227,0,0,0.38)]"
+            <button
+              onClick={openBooking}
+              className="group inline-flex h-11 items-center justify-center rounded-full bg-red-bright px-8 font-sans text-xs font-bold uppercase tracking-wider text-white shadow-[0_8px_20px_rgba(227,0,0,0.28)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#ff1a1a] hover:shadow-[0_10px_24px_rgba(227,0,0,0.38)] cursor-pointer"
             >
               BOOK FREE CONSULTATION
               <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
-            </a>
+            </button>
           </motion.div>
 
           {/* Right Column - Illustration */}
@@ -922,13 +925,13 @@ function MarketingServicesOverview() {
               </div>
             </div>
 
-            <a
-              href="#consultation"
-              className="group inline-flex h-11 items-center justify-center rounded-full bg-red-bright px-8 font-sans text-xs font-bold uppercase tracking-wider text-white shadow-[0_8px_20px_rgba(227,0,0,0.28)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#ff1a1a] hover:shadow-[0_10px_24px_rgba(227,0,0,0.38)]"
+            <button
+              onClick={openBooking}
+              className="group inline-flex h-11 items-center justify-center rounded-full bg-red-bright px-8 font-sans text-xs font-bold uppercase tracking-wider text-white shadow-[0_8px_20px_rgba(227,0,0,0.28)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#ff1a1a] hover:shadow-[0_10px_24px_rgba(227,0,0,0.38)] cursor-pointer"
             >
               BOOK FREE CONSULTATION
               <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
-            </a>
+            </button>
           </motion.div>
         </div>
       </div>
@@ -964,6 +967,7 @@ function MarketingServicesOverview() {
 }
 
 function GlobalExpansionOverview() {
+  const { openBooking } = useBooking();
   const introBullets = [
     "Expanding into international markets is complex and high-risk. Many companies struggle to identify the right markets, build effective sales channels, and define a clear, globally effective Unique Selling Point (USP). Differences in business ethics and local practices often add further complexity.",
     "Without a clear strategic roadmap, these challenges lead to slow market entry, weak traction, wasted resources, and avoidable financial losses.",
@@ -1203,13 +1207,13 @@ function GlobalExpansionOverview() {
             </div>
           </div>
 
-          <a
-            href="#consultation"
-            className="group inline-flex h-11 items-center justify-center rounded-full bg-red-bright px-8 font-sans text-xs font-bold uppercase tracking-wider text-white shadow-[0_8px_20px_rgba(227,0,0,0.28)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#ff1a1a] hover:shadow-[0_10px_24px_rgba(227,0,0,0.38)]"
+          <button
+            onClick={openBooking}
+            className="group inline-flex h-11 items-center justify-center rounded-full bg-red-bright px-8 font-sans text-xs font-bold uppercase tracking-wider text-white shadow-[0_8px_20px_rgba(227,0,0,0.28)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#ff1a1a] hover:shadow-[0_10px_24px_rgba(227,0,0,0.38)] cursor-pointer"
           >
             BOOK FREE CONSULTATION
             <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
-          </a>
+          </button>
         </motion.div>
       </div>
 

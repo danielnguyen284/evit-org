@@ -2,8 +2,11 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useBooking } from './BookingModal';
 
 export default function Hero() {
+  const { openBooking } = useBooking();
+
   return (
     <section
       id="home"
@@ -42,7 +45,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="flex justify-center"
         >
-          <button className="btn-primary">
+          <button onClick={openBooking} className="btn-primary">
             Book Free Consultation
             <span className="arrow">→</span>
           </button>

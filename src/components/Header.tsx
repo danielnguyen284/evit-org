@@ -5,8 +5,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useBooking } from './BookingModal';
 
 export default function Header() {
+  const { openBooking } = useBooking();
   const [isSticky, setIsSticky] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -118,28 +120,46 @@ export default function Header() {
 
   const menuItems = [
     { id: 'home', label: 'Home', href: '/#home' },
-    { id: 'services', label: 'Our Services', href: '/services' },
+    { 
+      id: 'services', 
+      label: 'Our Services', 
+      href: '/services',
+      dropdown: [
+        { label: 'Growth & Market Entry Consulting', href: '/services/global-expansion' },
+        { label: 'G.O.D. Sales System', href: '/services/god-sales-system' },
+        { label: 'B2B Marketing & Lead Generation', href: '/services/marketing-services' },
+      ]
+    },
     { id: 'case-studies', label: 'Case Studies', href: '/case-studies' },
-    { id: 'resources', label: 'Resources', href: '/resources' },
-    { id: 'charity', label: 'Charity', href: '/charity' },
-    { id: 'about', label: 'About Us', href: '/about' },
-    { id: 'contact', label: 'Contact', href: '/contact' },
+    { 
+      id: 'resources', 
+      label: 'Resources', 
+      href: '/resources',
+      dropdown: [
+        { label: 'Blog', href: '/resources#blog' },
+        { label: 'IT Vendor Introduction', href: '/resources#vendor-introduction' },
+      ]
+    },
+    { 
+      id: 'about', 
+      label: 'About Us', 
+      href: '/about',
+      dropdown: [
+        { label: 'Charity', href: '/charity' },
+      ]
+    },
   ];
 
   const showHeader = isVisible || isMenuOpen;
   const currentActiveLink = pathname.startsWith('/services')
     ? 'services'
-    : pathname === '/contact'
-      ? 'contact'
-      : pathname === '/case-studies'
-        ? 'case-studies'
-        : pathname === '/about'
-          ? 'about'
-          : pathname === '/resources'
-            ? 'resources'
-            : pathname === '/charity'
-              ? 'charity'
-              : activeLink;
+    : pathname === '/case-studies'
+      ? 'case-studies'
+      : pathname === '/about' || pathname === '/charity'
+        ? 'about'
+        : pathname.startsWith('/resources')
+          ? 'resources'
+          : activeLink;
 
   return (
     <header
@@ -176,62 +196,38 @@ export default function Header() {
         <nav className="hidden lg:flex items-center gap-10">
           <ul className="flex items-center gap-10 list-none m-0 p-0">
             {menuItems.map((item) => {
-              if (item.id === 'services') {
-                return (
-                  <li key={item.id} className="relative group py-2">
-                    <Link
-                      href={item.href}
-                      className={`font-sans text-[13px] font-bold uppercase tracking-wider transition-colors duration-300 py-2 ${
-                        currentActiveLink === item.id ? 'text-red-bright opacity-100' : 'text-white/80 hover:text-white hover:opacity-100'
-                      }`}
-                      onClick={() => handleLinkClick(item.id)}
-                    >
-                      {item.label}
-                    </Link>
-
-                    {/* Desktop Dropdown */}
-                    <div className="absolute top-full left-[-20px] pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all duration-300 ease-out z-[1000]">
-                      <ul className="bg-[#080832]/98 border border-blue-bright/30 rounded-xl p-4 min-w-[280px] shadow-2xl flex flex-col gap-2 list-none backdrop-blur-md">
-                        <li>
-                          <Link
-                            href="/services/global-expansion"
-                            className="font-sans text-[13px] font-semibold text-white/85 transition-all duration-200 block p-2 rounded-md hover:text-blue-bright hover:bg-blue-bright/10"
-                          >
-                            Global Expansion Service
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            href="/services/god-sales-system"
-                            className="font-sans text-[13px] font-semibold text-white/85 transition-all duration-200 block p-2 rounded-md hover:text-blue-bright hover:bg-blue-bright/10"
-                          >
-                            G.O.D. Sales System
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            href="/services/marketing-services"
-                            className="font-sans text-[13px] font-semibold text-white/85 transition-all duration-200 block p-2 rounded-md hover:text-blue-bright hover:bg-blue-bright/10"
-                          >
-                            Marketing Services
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-                );
-              }
+              const hasDropdown = !!item.dropdown;
               return (
-                <li key={item.id}>
+                <li key={item.id} className={`relative ${hasDropdown ? 'group py-2' : ''}`}>
                   <Link
                     href={item.href}
-                    className={`font-sans text-[13px] font-bold uppercase tracking-wider transition-colors duration-300 py-2 ${
+                    className={`font-sans text-[13px] font-bold uppercase tracking-wider transition-colors duration-300 py-2 flex items-center gap-1 ${
                       currentActiveLink === item.id ? 'text-red-bright opacity-100' : 'text-white/80 hover:text-white hover:opacity-100'
                     }`}
                     onClick={() => handleLinkClick(item.id)}
                   >
                     {item.label}
+                    {hasDropdown && (
+                      <span className="text-[8px] opacity-70 transition-transform duration-300 group-hover:rotate-180 ml-0.5">▼</span>
+                    )}
                   </Link>
+
+                  {hasDropdown && item.dropdown && (
+                    <div className="absolute top-full left-[-20px] pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all duration-300 ease-out z-[1000]">
+                      <ul className="bg-[#080832]/98 border border-blue-bright/30 rounded-xl p-4 min-w-[320px] shadow-2xl flex flex-col gap-1.5 list-none backdrop-blur-md">
+                        {item.dropdown.map((subItem, idx) => (
+                          <li key={idx}>
+                            <Link
+                              href={subItem.href}
+                              className="font-sans text-[13px] font-semibold text-white/85 transition-all duration-200 block p-2 rounded-md hover:text-blue-bright hover:bg-blue-bright/10"
+                            >
+                              {subItem.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </li>
               );
             })}
@@ -240,7 +236,7 @@ export default function Header() {
 
         {/* Desktop CTA */}
         <div className="hidden sm:flex items-center gap-4">
-          <button className="btn-primary">
+          <button onClick={openBooking} className="btn-primary">
             Book Free Consultation
             <span className="arrow">→</span>
           </button>
@@ -266,44 +262,34 @@ export default function Header() {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed top-0 right-0 w-full sm:w-[280px] h-screen bg-[#03032D]/98 border-l border-blue-bright/15 backdrop-blur-lg flex flex-col justify-center items-center gap-10 p-6 z-[100] shadow-2xl lg:hidden"
+            className="fixed top-0 right-0 w-full sm:w-[320px] h-screen bg-[#03032D]/98 border-l border-blue-bright/15 backdrop-blur-lg flex flex-col justify-center items-center gap-8 p-6 z-[100] shadow-2xl lg:hidden overflow-y-auto"
           >
-            <ul className="flex flex-col items-center gap-8 list-none m-0 p-0 text-center">
+            <ul className="flex flex-col items-center gap-6 list-none m-0 p-0 text-center w-full max-h-[85vh] overflow-y-auto">
               {menuItems.map((item) => {
-                if (item.id === 'services') {
+                if (item.dropdown) {
                   return (
-                    <li key={item.id} className="flex flex-col items-center gap-4">
-                      <span className="font-sans text-sm font-bold uppercase tracking-wider text-white/50">
+                    <li key={item.id} className="flex flex-col items-center gap-3">
+                      <Link
+                        href={item.href}
+                        className={`font-sans text-sm font-bold uppercase tracking-wider transition-colors duration-300 ${
+                          currentActiveLink === item.id ? 'text-red-bright opacity-100' : 'text-white/60'
+                        }`}
+                        onClick={() => handleLinkClick(item.id)}
+                      >
                         {item.label}
-                      </span>
-                      <ul className="flex flex-col gap-3 list-none m-0 p-0">
-                        <li>
-                          <Link
-                            href="/services/global-expansion"
-                            className="font-sans text-[13px] text-white/70 hover:text-blue-bright transition-colors"
-                            onClick={closeMenu}
-                          >
-                            Global Expansion
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            href="/services/god-sales-system"
-                            className="font-sans text-[13px] text-white/70 hover:text-blue-bright transition-colors"
-                            onClick={closeMenu}
-                          >
-                            G.O.D. Sales System
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            href="/services/marketing-services"
-                            className="font-sans text-[13px] text-white/70 hover:text-blue-bright transition-colors"
-                            onClick={closeMenu}
-                          >
-                            Marketing Services
-                          </Link>
-                        </li>
+                      </Link>
+                      <ul className="flex flex-col gap-2 list-none m-0 p-0">
+                        {item.dropdown.map((subItem, idx) => (
+                          <li key={idx}>
+                            <Link
+                              href={subItem.href}
+                              className="font-sans text-[13px] font-semibold text-white/90 hover:text-blue-bright transition-colors"
+                              onClick={closeMenu}
+                            >
+                              {subItem.label}
+                            </Link>
+                          </li>
+                        ))}
                       </ul>
                     </li>
                   );
@@ -324,7 +310,13 @@ export default function Header() {
               })}
               {/* Mobile CTA */}
               <li className="mt-4">
-                <button className="btn-primary" onClick={closeMenu}>
+                <button
+                  onClick={() => {
+                    closeMenu();
+                    openBooking();
+                  }}
+                  className="btn-primary w-full justify-center"
+                >
                   Book Free Consultation
                   <span className="arrow">→</span>
                 </button>

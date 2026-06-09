@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useBooking } from './BookingModal';
 
 function LocationIcon() {
   return (
@@ -29,6 +30,7 @@ function PhoneIcon() {
 }
 
 export default function Contact() {
+  const { openBooking } = useBooking();
   const [formState, setFormState] = useState({
     name: '',
     email: '',
@@ -44,7 +46,8 @@ export default function Contact() {
     setTimeout(() => {
       setIsSubmitted(false);
       setFormState({ name: '', email: '', phone: '', message: '' });
-    }, 4000);
+      openBooking();
+    }, 1500);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

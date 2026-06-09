@@ -3,6 +3,7 @@
 import React, { useRef } from 'react';
 import Image from 'next/image';
 import { motion, type MotionValue, useScroll, useTransform } from 'framer-motion';
+import Link from 'next/link';
 
 interface CardItem {
   id: number;
@@ -136,10 +137,10 @@ export default function About() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="flex justify-center"
         >
-          <button className="btn-primary">
+          <Link href="/services" className="btn-primary">
             Our Services
             <span className="arrow">→</span>
-          </button>
+          </Link>
         </motion.div>
       </div>
     </section>

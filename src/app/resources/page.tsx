@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingCalendar from "@/components/FloatingCalendar";
+import { useBooking } from "@/components/BookingModal";
 
 // Fade up animation variants for scroll reveal
 const fadeUp = {
@@ -38,6 +39,7 @@ function Reveal({
 }
 
 export default function ResourcesPage() {
+  const { openBooking } = useBooking();
   const cardsData = [
     {
       id: 1,
@@ -98,7 +100,7 @@ export default function ResourcesPage() {
         </section>
 
         {/* Corporate Service - EVIT Organization Section */}
-        <section className="relative py-24 sm:py-32 overflow-hidden border-b border-blue-bright/10">
+        <section id="vendor-introduction" className="relative py-24 sm:py-32 overflow-hidden border-b border-blue-bright/10">
           {/* Subtle background wave element */}
           <div className="pointer-events-none absolute inset-x-0 top-0 h-[280px] bg-[url('/assets/background-wave-original.png')] bg-[length:100%_auto] bg-top bg-no-repeat opacity-30 mix-blend-screen brightness-0 invert-[0.38] sepia saturate-[2.8] hue-rotate-[190deg]" />
 
@@ -156,7 +158,7 @@ export default function ResourcesPage() {
         </section>
 
         {/* Creative Approach - WHY VIETNAM? Section */}
-        <section className="relative py-24 sm:py-32 overflow-hidden border-b border-blue-bright/10 bg-[#03032D]/40">
+        <section id="why-vietnam" className="relative py-24 sm:py-32 overflow-hidden border-b border-blue-bright/10 bg-[#03032D]/40">
           <div className="relative z-10 mx-auto w-full max-w-[1200px] px-6">
             <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_480px] gap-12 lg:gap-16 items-center">
               
@@ -221,10 +223,10 @@ export default function ResourcesPage() {
                   </motion.li>
                 </ul>
 
-                <Link href="/contact" className="btn-primary inline-flex">
+                <button onClick={openBooking} className="btn-primary inline-flex cursor-pointer border-0 outline-none">
                   Book Free Consultation
                   <span className="arrow">→</span>
-                </Link>
+                </button>
               </Reveal>
 
             </div>
@@ -232,7 +234,7 @@ export default function ResourcesPage() {
         </section>
 
         {/* OUR PRACTICE - WHY CHOOSE EVIT Section */}
-        <section className="relative py-24 sm:py-32 overflow-hidden bg-[#03032D]">
+        <section id="why-choose-evit" className="relative py-24 sm:py-32 overflow-hidden bg-[#03032D]">
           <div className="relative z-10 mx-auto w-full max-w-[1200px] px-6">
             
             {/* Top Circuit Board Image */}
