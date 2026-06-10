@@ -43,42 +43,40 @@ body {
 body::before {
   content: '';
   position: fixed;
-  left: 0;
-  bottom: 0;
+  inset: 0;
   z-index: 0;
   width: 100vw;
-  height: min(48vh, 520px);
-  background-image: url('/assets/background-wave-original.png');
-  background-position: center bottom;
+  height: 100vh;
+  background-image: url('/assets/background-wave-global.png');
+  background-position: center center;
   background-repeat: no-repeat;
-  background-size: 100% auto;
+  background-size: cover;
   filter: brightness(0) saturate(100%) invert(38%) sepia(98%) saturate(2800%) hue-rotate(255deg) brightness(106%) contrast(104%);
   mix-blend-mode: screen;
-  opacity: 0.72;
+  opacity: 0.42;
   pointer-events: none;
 }
 
 body::after {
   content: '';
   position: fixed;
-  left: 0;
-  bottom: 0;
+  inset: 0;
   z-index: 2;
   width: 100vw;
-  height: min(46vh, 520px);
-  background-image: url('/assets/background-wave-original.png');
-  background-position: center bottom;
+  height: 100vh;
+  background-image: url('/assets/background-wave-global.png');
+  background-position: center center;
   background-repeat: no-repeat;
-  background-size: 100% auto;
+  background-size: cover;
   filter: brightness(0) saturate(100%) invert(38%) sepia(98%) saturate(2800%) hue-rotate(255deg) brightness(106%) contrast(104%);
   mix-blend-mode: screen;
-  opacity: 0.34;
+  opacity: 0.22;
   pointer-events: none;
 }
 
 main[class~="bg-[#03032D]"],
 main [class~="bg-[#03032D]"] {
-  background-color: rgba(3, 3, 45, 0.78) !important;
+  background-color: rgba(3, 3, 45, 0.94) !important;
 }
 
 body > *:not(header) {

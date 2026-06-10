@@ -142,12 +142,11 @@ export default function CharityPage() {
             </motion.p>
           </div>
 
-          {/* Bottom Glowing Divider */}
-          <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-bright/35 to-transparent" />
+
         </section>
 
         {/* Section 1: "WHAT IF BUILDING SOFTWARE..." */}
-        <section className="relative flex min-h-[72vh] items-center overflow-hidden border-b border-blue-bright/10 bg-[#03032D]/40 py-20 sm:py-24">
+        <section className="relative flex min-h-[72vh] items-center overflow-hidden py-20 sm:py-24">
           <div className="relative z-10 mx-auto w-full max-w-[1200px] px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               
@@ -190,7 +189,7 @@ export default function CharityPage() {
         </section>
 
         {/* Section 2: "WHY WE CREATED IT" */}
-        <section className="relative overflow-hidden border-b border-blue-bright/10 bg-[#03032D] py-16 sm:py-20">
+        <section className="relative overflow-hidden py-16 sm:py-20">
           <div className="relative z-10 mx-auto w-full max-w-[1200px] px-6">
             <Reveal className="relative mx-auto min-h-[380px] max-w-[1200px] overflow-hidden rounded-[10px] border border-blue-bright/80 bg-[#070735] px-7 py-10 shadow-[0_18px_42px_rgba(0,0,0,0.42),0_0_28px_rgba(0,132,209,0.18)] sm:px-10 sm:py-12 lg:px-14">
               <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_7%_95%,rgba(0,104,255,0.48)_0%,rgba(0,104,255,0.18)_24%,transparent_46%),radial-gradient(circle_at_88%_56%,rgba(193,32,210,0.42)_0%,rgba(193,32,210,0.16)_25%,transparent_48%)]" />
@@ -248,7 +247,7 @@ export default function CharityPage() {
         </section>
 
         {/* Section 3: "WHY THIS MATTERS" */}
-        <section className="relative flex min-h-screen items-center overflow-hidden border-b border-blue-bright/10 bg-[#03032D]/40 py-20 sm:py-24">
+        <section className="relative flex min-h-screen items-center overflow-hidden py-20 sm:py-24">
           <div className="relative z-10 mx-auto w-full max-w-[1200px] px-6">
             
             <Reveal className="mx-auto mb-12 max-w-[920px] text-center">
@@ -324,7 +323,7 @@ export default function CharityPage() {
         </section>
 
         {/* Section 4: "RADICAL TRANSPARENCY: SEE EVERY IMPACT" */}
-        <section className="relative flex min-h-[78vh] items-center overflow-hidden border-b border-blue-bright/10 bg-[#03032D] py-20 sm:py-24">
+        <section className="relative flex min-h-[78vh] items-center overflow-hidden py-20 sm:py-24">
           <div className="relative z-10 mx-auto w-full max-w-[1200px] px-6">
             
             <Reveal className="mx-auto mb-12 max-w-[900px] text-center">
@@ -421,7 +420,7 @@ export default function CharityPage() {
         </section>
 
         {/* Section 5: "HOW IT WORKS" */}
-        <section className="relative flex min-h-[72vh] items-center overflow-hidden border-b border-blue-bright/10 bg-[#03032D]/40 py-20 sm:py-24">
+        <section className="relative flex min-h-[72vh] items-center overflow-hidden py-20 sm:py-24">
           <div className="relative z-10 mx-auto w-full max-w-[1200px] px-6">
             
             <Reveal className="mx-auto mb-12 max-w-[900px] text-center">
@@ -504,7 +503,7 @@ export default function CharityPage() {
         </section>
 
         {/* Section 6: "THE BUSINESS CASE" */}
-        <section className="relative overflow-hidden border-b border-blue-bright/10 bg-[#03032D] py-20 sm:py-24">
+        <section className="relative overflow-hidden py-20 sm:py-24">
           <div className="relative z-10 mx-auto w-full max-w-[1200px] px-6">
             <Reveal className="mx-auto max-w-[1200px]">
               <div className="relative aspect-[1366/647] w-full overflow-hidden rounded-[10px] border border-blue-bright/80 shadow-[0_16px_34px_rgba(0,132,209,0.18)]">
@@ -577,7 +576,7 @@ export default function CharityPage() {
         </section>
 
         {/* Section 6: "A QUIET INVITATION" */}
-        <section className="relative py-24 sm:py-32 overflow-hidden border-b border-blue-bright/10 bg-[#03032D]">
+        <section className="relative py-24 sm:py-32 overflow-hidden">
           <div className="relative z-10 mx-auto w-full max-w-[1200px] px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               
