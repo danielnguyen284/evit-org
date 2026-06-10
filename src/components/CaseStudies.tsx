@@ -17,7 +17,7 @@ interface Study {
 }
 
 interface CaseStudiesLayout {
-  isDesktop: boolean;
+  isPinnedDesktop: boolean;
   scrollDistance: number;
   pinnedHeight: number | null;
 }
@@ -131,7 +131,7 @@ export default function CaseStudies() {
   const trackRef = useRef<HTMLDivElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
   const [layout, setLayout] = useState<CaseStudiesLayout>({
-    isDesktop: false,
+    isPinnedDesktop: false,
     scrollDistance: 0,
     pinnedHeight: null,
   });
@@ -142,7 +142,7 @@ export default function CaseStudies() {
     const updateLayout = (nextLayout: CaseStudiesLayout) => {
       setLayout((currentLayout) => {
         if (
-          currentLayout.isDesktop === nextLayout.isDesktop &&
+          currentLayout.isPinnedDesktop === nextLayout.isPinnedDesktop &&
           currentLayout.scrollDistance === nextLayout.scrollDistance &&
           currentLayout.pinnedHeight === nextLayout.pinnedHeight
         ) {
@@ -161,11 +161,11 @@ export default function CaseStudies() {
       frame = window.requestAnimationFrame(() => {
         frame = null;
 
-        const nextIsDesktop = window.innerWidth >= 768;
+        const nextIsPinnedDesktop = window.innerWidth >= 768;
 
-        if (!nextIsDesktop || !trackRef.current || !viewportRef.current) {
+        if (!nextIsPinnedDesktop || !trackRef.current || !viewportRef.current) {
           updateLayout({
-            isDesktop: nextIsDesktop,
+            isPinnedDesktop: nextIsPinnedDesktop,
             scrollDistance: 0,
             pinnedHeight: null,
           });
@@ -182,7 +182,7 @@ export default function CaseStudies() {
         );
 
         updateLayout({
-          isDesktop: true,
+          isPinnedDesktop: true,
           scrollDistance: distance,
           pinnedHeight: window.innerHeight + pinScrollDistance,
         });
@@ -215,7 +215,7 @@ export default function CaseStudies() {
     };
   }, []);
 
-  const { isDesktop, scrollDistance, pinnedHeight } = layout;
+  const { isPinnedDesktop, scrollDistance, pinnedHeight } = layout;
 
   const { scrollYProgress } = useScroll({
     target: targetRef,
@@ -226,27 +226,27 @@ export default function CaseStudies() {
 
   return (
     <div
+      id="case-studies"
       ref={targetRef}
       className="relative"
       data-case-studies-root
       data-pinned-height={pinnedHeight ?? undefined}
-      style={isDesktop && pinnedHeight ? { height: pinnedHeight } : undefined}
+      style={isPinnedDesktop && pinnedHeight ? { height: pinnedHeight } : undefined}
     >
       <section
-        id="case-studies"
         data-case-studies-section
         className={`relative overflow-hidden w-full ${
-          isDesktop ? 'sticky top-0 h-screen flex flex-col justify-center' : 'py-20'
+          isPinnedDesktop ? 'sticky top-0 h-screen flex flex-col justify-center' : 'py-20'
         }`}
       >
-        <div className="max-w-[1200px] w-full mx-auto px-6 mb-6 text-left md:mb-7">
+        <div className="max-w-[1200px] w-full mx-auto px-6 mb-6 text-left md:mb-7 [@media(max-height:760px)]:mb-4">
           <div className="max-w-[620px]">
             <motion.span
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="font-sans text-sm font-bold uppercase text-blue-bright tracking-[0.22em] mb-4 block"
+              className="mb-4 block font-sans text-sm font-bold uppercase tracking-[0.22em] text-blue-bright [@media(max-height:760px)]:mb-2 [@media(max-height:760px)]:text-xs"
             >
               CASE STUDIES
             </motion.span>
@@ -255,7 +255,7 @@ export default function CaseStudies() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="mb-4 font-sans text-2xl font-extrabold uppercase tracking-wide text-white sm:text-3xl md:text-[34px]"
+              className="mb-4 font-sans text-2xl font-extrabold uppercase tracking-wide text-white sm:text-3xl md:text-[34px] [@media(max-height:760px)]:mb-2 [@media(max-height:760px)]:md:text-[30px]"
             >
               REAL RESULTS, REAL GROWTH
             </motion.h2>
@@ -264,7 +264,7 @@ export default function CaseStudies() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="hidden font-sans text-sm leading-relaxed text-white/80 sm:block"
+              className="hidden font-sans text-sm leading-relaxed text-white/80 sm:block [@media(max-height:760px)]:hidden"
             >
               A collection of success stories where EVIT&apos;s mindset and strategy transformed businesses performance. These case studies demonstrate our commitment to delivering practical value and long-term excellence for every client.
             </motion.p>
@@ -273,7 +273,7 @@ export default function CaseStudies() {
 
         {/* Carousel Outer Frame */}
         <div ref={viewportRef} className="w-full overflow-hidden py-2 md:py-3">
-          {isDesktop ? (
+          {isPinnedDesktop ? (
             <motion.div
               ref={trackRef}
               data-case-studies-track
@@ -301,9 +301,9 @@ export default function CaseStudies() {
 
 function CaseStudyCard({ study }: { study: Study }) {
   return (
-    <article className="relative flex h-[450px] w-[320px] flex-shrink-0 flex-col overflow-hidden rounded-[16px] border-[2px] border-blue-bright/80 bg-light px-7 pb-6 pt-7 shadow-[0_18px_34px_rgba(0,0,0,0.34),-16px_22px_36px_rgba(0,104,255,0.15)] sm:w-[450px] sm:px-9 md:h-[470px] md:w-[520px] md:px-11 md:pb-7">
+    <article className="relative flex min-h-[450px] w-[320px] flex-shrink-0 flex-col overflow-hidden rounded-[16px] border-[2px] border-blue-bright/80 bg-light px-7 pb-6 pt-7 shadow-[0_18px_34px_rgba(0,0,0,0.34),-16px_22px_36px_rgba(0,104,255,0.15)] sm:w-[450px] sm:px-9 md:min-h-[470px] md:w-[520px] md:px-11 md:pb-7 [@media(max-height:760px)]:min-h-[390px] [@media(max-height:760px)]:w-[460px] [@media(max-height:760px)]:px-8 [@media(max-height:760px)]:pb-5 [@media(max-height:760px)]:pt-5">
       {/* Avatar Wrapper */}
-      <div className="relative mx-auto mb-6 h-[72px] w-[72px] overflow-hidden rounded-full border-2 border-white/80 bg-white/90 shadow-[30px_-4px_24px_rgba(210,32,198,0.46),44px_10px_30px_rgba(0,112,255,0.2)] md:h-[84px] md:w-[84px]">
+      <div className="relative mx-auto mb-6 h-[72px] w-[72px] overflow-hidden rounded-full border-2 border-white/80 bg-white/90 shadow-[30px_-4px_24px_rgba(210,32,198,0.46),44px_10px_30px_rgba(0,112,255,0.2)] md:h-[84px] md:w-[84px] [@media(max-height:760px)]:mb-4 [@media(max-height:760px)]:h-[64px] [@media(max-height:760px)]:w-[64px]">
         <Image
           src={study.avatar}
           alt={study.avatarAlt}
@@ -313,12 +313,12 @@ function CaseStudyCard({ study }: { study: Study }) {
         />
       </div>
 
-      <blockquote className="relative mb-5 max-h-[190px] overflow-hidden border-l-4 border-red-bright pl-5 text-left font-sans text-[13px] leading-relaxed text-white/95 sm:pl-6 sm:text-sm md:max-h-[210px] md:text-[15px]">
+      <blockquote className="relative mb-5 border-l-4 border-red-bright pl-5 text-left font-sans text-[13px] leading-relaxed text-white/95 sm:pl-6 sm:text-sm md:text-[15px] [@media(max-height:760px)]:mb-4 [@media(max-height:760px)]:text-[13px] [@media(max-height:760px)]:leading-[1.45]">
         &quot;{study.quote}&quot;
       </blockquote>
 
-      <div className="mb-6 mt-auto flex items-center justify-between gap-5 pl-5 sm:pl-6">
-        <div className="text-left">
+      <div className="mb-6 mt-auto flex items-center justify-between gap-5 pl-5 sm:pl-6 [@media(max-height:760px)]:mb-4">
+        <div className="min-w-0 text-left">
           <strong className="mb-1 block font-sans text-xs font-extrabold text-white sm:text-sm">
             {study.name}
           </strong>
@@ -326,7 +326,7 @@ function CaseStudyCard({ study }: { study: Study }) {
             {study.role}
           </span>
         </div>
-        <div className="relative h-[36px] w-[124px] opacity-95 md:h-[42px] md:w-[148px]">
+        <div className="relative h-[36px] w-[124px] shrink-0 opacity-95 md:h-[42px] md:w-[148px] [@media(max-height:760px)]:h-[34px] [@media(max-height:760px)]:w-[120px]">
           <Image
             src={study.companyLogo}
             alt="EVIT client logo"
@@ -339,7 +339,7 @@ function CaseStudyCard({ study }: { study: Study }) {
 
       <Link 
         href={`/case-studies/${study.slug}`}
-        className="mx-auto flex h-11 w-full max-w-[230px] cursor-pointer items-center justify-center gap-3 rounded-full border-none bg-red-bright px-7 font-sans text-xs font-extrabold text-white shadow-[0_12px_22px_rgba(227,0,0,0.28)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#ff1616]"
+        className="mx-auto flex h-11 w-full max-w-[230px] cursor-pointer items-center justify-center gap-3 rounded-full border-none bg-red-bright px-7 font-sans text-xs font-extrabold text-white shadow-[0_12px_22px_rgba(227,0,0,0.28)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#ff1616] [@media(max-height:760px)]:h-10"
       >
         SEE CASE STUDY
         <span aria-hidden="true">→</span>

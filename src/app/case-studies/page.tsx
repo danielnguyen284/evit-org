@@ -193,12 +193,12 @@ export default function CaseStudiesPage() {
                   />
                 </div>
 
-                <blockquote className="relative mb-5 max-h-[190px] overflow-hidden border-l-4 border-red-bright pl-4 text-left font-sans text-xs leading-relaxed text-white/95 sm:pl-5 sm:text-[13px] md:text-sm">
+                <blockquote className="relative mb-5 border-l-4 border-red-bright pl-4 text-left font-sans text-xs leading-relaxed text-white/95 sm:pl-5 sm:text-[13px] md:text-sm">
                   &quot;{study.quote}&quot;
                 </blockquote>
 
                 <div className="mb-6 mt-auto flex items-center justify-between gap-5 pl-4 sm:pl-5">
-                  <div className="text-left">
+                  <div className="min-w-0 text-left">
                     <strong className="mb-1 block font-sans text-[11px] font-extrabold text-white sm:text-xs md:text-sm">
                       {study.name}
                     </strong>
@@ -206,7 +206,7 @@ export default function CaseStudiesPage() {
                       {study.role}
                     </span>
                   </div>
-                  <div className="relative h-[32px] w-[110px] opacity-95 sm:h-[36px] sm:w-[124px] md:h-[42px] md:w-[148px]">
+                  <div className="relative h-[32px] w-[110px] shrink-0 opacity-95 sm:h-[36px] sm:w-[124px] md:h-[42px] md:w-[148px]">
                     <Image
                       src={study.companyLogo}
                       alt="EVIT client logo"

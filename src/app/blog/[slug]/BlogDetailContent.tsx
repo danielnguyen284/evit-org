@@ -95,9 +95,9 @@ export default function BlogDetailContent({ post }: BlogDetailContentProps) {
     <>
       <Header />
 
-      <main className="min-h-screen bg-[#03032D] text-white overflow-x-hidden pt-[70px]">
+      <main className="min-h-screen bg-[#03032D] text-white overflow-x-hidden pt-[88px]">
         {/* Banner Section - styled exactly like the footer */}
-        <section className="relative w-full h-[160px] flex items-center justify-center overflow-hidden border-t-[1.5px] border-b-[1.5px] border-blue-bright">
+        <section className="relative w-full h-[176px] sm:h-[180px] flex items-center justify-center overflow-hidden border-t-[1.5px] border-b-[1.5px] border-blue-bright">
           <div className="absolute inset-0 bg-[#03032D]" />
           {/* Footer background styling recreation */}
           <div 
