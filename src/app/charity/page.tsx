@@ -56,27 +56,27 @@ function Reveal({
 const charityFaqs = [
   {
     question: 'How much of the profit goes to the children?',
-    answer: '10% of our revenue goes directly to supporting children. Revenue is transparent and simple compared to profit, ensuring a clear and direct impact.',
+    answer: 'Minimum 10% of our profit from your engagement. We may contribute more depending on the quarter and specific needs.',
   },
   {
     question: 'Can I visit the SOS Village?',
-    answer: 'Yes, you are welcome to visit the SOS Village to see the impact firsthand. We can assist in organizing your visit to meet the family you support.',
+    answer: 'Absolutely. We can arrange visits when you\'re in Vietnam. Meeting "your" family in person is incredibly meaningful.',
   },
   {
     question: 'What if I want to contribute more?',
-    answer: 'You can choose to sponsor more families or collaborate with us on larger initiatives such as technology labs or educational facilities.',
+    answer: 'We welcome additional contributions, and we\'ll ensure they go directly to your assigned family or to critical needs at the village.',
   },
   {
     question: 'Is this tax-deductible?',
-    answer: 'Yes, because we work directly with SOS Children\'s Villages (a globally recognized NGO), official donation receipts can be provided for corporate tax benefits.',
+    answer: 'SOS Village Vietnam is a registered charity. We can provide documentation for tax purposes. (Consult your tax advisor for specific guidance.)',
   },
   {
     question: 'What happens if our engagement ends?',
-    answer: 'We commit to supporting the children continuously. If a partnership ends, EVIT uses its reserve funds to maintain stable and uninterrupted care.',
+    answer: 'The family doesn\'t lose support. We\'ll work to assign more sponsors, and we\'ll keep you updated if you\'d like to continue supporting them independently.',
   },
   {
     question: 'Do the children know who we are?',
-    answer: 'Yes, they know which partner sponsor supports their home, and they share personalized letters, drawings, and quarterly video updates with you.',
+    answer: 'Yes. They know your company name, they see your logo (if you approve), and they send personal thank-you messages. The connection is real.',
   },
 ];
 

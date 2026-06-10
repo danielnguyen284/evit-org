@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -8,6 +8,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingCalendar from "@/components/FloatingCalendar";
 import { useBooking } from "@/components/BookingModal";
+import { WPPostRaw, fetchWordPressPosts } from "@/data/blogData";
 
 // Fade up animation variants for scroll reveal
 const fadeUp = {
@@ -40,6 +41,32 @@ function Reveal({
 
 export default function ResourcesPage() {
   const { openBooking } = useBooking();
+  const [posts, setPosts] = useState<WPPostRaw[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadPosts() {
+      setLoading(true);
+      try {
+        const data = await fetchWordPressPosts();
+        setPosts(data.slice(0, 3));
+      } catch (err) {
+        console.error("Failed to load blog posts:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadPosts();
+  }, []);
+
+  const getFeaturedImageUrl = (post: WPPostRaw): string => {
+    const featuredMedia = post._embedded?.["wp:featuredmedia"]?.[0];
+    if (featuredMedia?.source_url) {
+      return featuredMedia.source_url;
+    }
+    return "/assets/daa7591f467f07ac34cf81f8dd257db99985d118.jpg";
+  };
+
   const cardsData = [
     {
       id: 1,
@@ -95,12 +122,11 @@ export default function ResourcesPage() {
             </motion.h1>
           </div>
 
-          {/* Bottom Glowing Divider */}
-          <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-bright/35 to-transparent" />
+
         </section>
 
         {/* Corporate Service - EVIT Organization Section */}
-        <section id="vendor-introduction" className="relative py-24 sm:py-32 overflow-hidden border-b border-blue-bright/10">
+        <section id="vendor-introduction" className="relative py-24 sm:py-32 overflow-hidden">
           {/* Subtle background wave element */}
           <div className="pointer-events-none absolute inset-x-0 top-0 h-[280px] bg-[url('/assets/background-wave-original.png')] bg-[length:100%_auto] bg-top bg-no-repeat opacity-30 mix-blend-screen brightness-0 invert-[0.38] sepia saturate-[2.8] hue-rotate-[190deg]" />
 
@@ -158,7 +184,7 @@ export default function ResourcesPage() {
         </section>
 
         {/* Creative Approach - WHY VIETNAM? Section */}
-        <section id="why-vietnam" className="relative py-24 sm:py-32 overflow-hidden border-b border-blue-bright/10 bg-[#03032D]/40">
+        <section id="why-vietnam" className="relative py-24 sm:py-32 overflow-hidden">
           <div className="relative z-10 mx-auto w-full max-w-[1200px] px-6">
             <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_480px] gap-12 lg:gap-16 items-center">
               
@@ -234,7 +260,7 @@ export default function ResourcesPage() {
         </section>
 
         {/* OUR PRACTICE - WHY CHOOSE EVIT Section */}
-        <section id="why-choose-evit" className="relative py-24 sm:py-32 overflow-hidden bg-[#03032D]">
+        <section id="why-choose-evit" className="relative py-24 sm:py-32 overflow-hidden">
           <div className="relative z-10 mx-auto w-full max-w-[1200px] px-6">
             
             {/* Top Circuit Board Image */}
@@ -274,6 +300,93 @@ export default function ResourcesPage() {
               </div>
             </Reveal>
 
+          </div>
+        </section>
+
+        {/* Blog Section */}
+        <section id="latest-blog" className="relative py-24 sm:py-32 overflow-hidden">
+          {/* Subtle background wave element */}
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-[280px] bg-[url('/assets/background-wave-original.png')] bg-[length:100%_auto] bg-top bg-no-repeat opacity-20 mix-blend-screen brightness-0 invert-[0.38] sepia saturate-[2.8] hue-rotate-[190deg]" />
+
+          <div className="relative z-10 mx-auto w-full max-w-[1200px] px-6">
+            <Reveal className="mx-auto mb-16 max-w-[900px] text-center">
+              <span className="font-sans text-sm font-bold uppercase text-blue-bright tracking-[0.15em] mb-3 block">
+                Our Blog
+              </span>
+              <h2 className="font-sans text-3xl sm:text-4xl font-extrabold uppercase tracking-wide text-white mb-6">
+                NEWS & ARTICLES
+              </h2>
+            </Reveal>
+
+            {loading ? (
+              <div className="flex justify-center items-center py-20">
+                <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-blue-bright" />
+              </div>
+            ) : posts.length === 0 ? (
+              <div className="text-center py-20 text-white/50 font-semibold">
+                No posts found.
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {posts.map((post, index) => {
+                  const imageUrl = getFeaturedImageUrl(post);
+
+                  return (
+                    <Reveal key={post.id} delay={index * 0.1}>
+                      <Link 
+                        href={`/blog/${post.slug}`}
+                        className="group flex flex-col h-full bg-[#080832]/60 border border-blue-bright/35 hover:border-blue-bright/80 rounded-2xl overflow-hidden backdrop-blur-md transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,104,255,0.25)] hover:-translate-y-1"
+                      >
+                        {/* Featured Image */}
+                        <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-900">
+                          <Image
+                            src={imageUrl}
+                            alt={post.title.rendered}
+                            fill
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            className="object-cover transition-transform duration-500 group-hover:scale-105"
+                          />
+                        </div>
+
+                        {/* Title & Body Block */}
+                        <div className="flex flex-col flex-grow p-6 border-t border-white/5">
+                          {/* Date */}
+                          <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-2">
+                            {new Date(post.date).toLocaleDateString('en-GB', {
+                              day: '2-digit',
+                              month: '2-digit',
+                              year: 'numeric'
+                            })}
+                          </span>
+
+                          {/* Title with Red vertical accent line */}
+                          <div className="flex items-start gap-3 mb-3">
+                            <div className="w-[3px] bg-[#E92228] rounded-full self-stretch flex-shrink-0 transition-all duration-300 group-hover:bg-blue-bright" />
+                            <h3 className="font-sans text-base sm:text-lg font-bold text-white leading-snug group-hover:text-blue-bright transition-colors line-clamp-2">
+                              {post.title.rendered}
+                            </h3>
+                          </div>
+
+                          {/* Excerpt */}
+                          <p 
+                            className="font-sans text-xs sm:text-[13px] text-white/65 leading-relaxed line-clamp-3"
+                            dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
+                          />
+                        </div>
+                      </Link>
+                    </Reveal>
+                  );
+                })}
+              </div>
+            )}
+
+            {/* Read More Button */}
+            <Reveal className="flex justify-center mt-12">
+              <Link href="/blog" className="btn-primary">
+                READ MORE
+                <span className="arrow">→</span>
+              </Link>
+            </Reveal>
           </div>
         </section>
       </main>

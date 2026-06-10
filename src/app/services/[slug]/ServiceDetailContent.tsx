@@ -1348,6 +1348,52 @@ function ScrollReveal({
   );
 }
 
+const marketingFaqs = [
+  {
+    question: 'Can you help if we already have a marketing team?',
+    answer: 'Yes! We collaborate with existing teams to optimize your current strategies and fill in any gaps to ensure your marketing is fully aligned with your business goals.',
+  },
+  {
+    question: 'What results can I expect from your services?',
+    answer: 'Our goal is always the same: to get you more leads. Except for the more leads, our clients see improvements in website traffic, lead generation, brand visibility, and conversion rates, thanks to our comprehensive and data-driven approach.',
+  },
+  {
+    question: 'Do you work with businesses in specific industries?',
+    answer: 'We specialize in working with IT service providers in B2B industry.',
+  },
+];
+
+const godSalesFaqs = [
+  {
+    question: 'How is this different from normal sales consulting?',
+    answer: "It’s productized: you get a full setup, execution routines, SOPs, KPIs, and weekly support focused on real conversions—not theory. You follow your own speed, and connect with a consultant once a week to analyze progress.",
+  },
+  {
+    question: 'Do you run the outreach for us or train our team?',
+    answer: 'The system includes setup + training + weekly support so your team can execute consistently independently',
+  },
+  {
+    question: 'Which outbound channels do you use?',
+    answer: 'Channels are selected based on your ICP and business model. We will provide a minimum of 10 channels to choose from',
+  },
+  {
+    question: 'What if we already tried outbound and got zero results?',
+    answer: 'In this case G.O.D sales system is the best thing you can do. If you tried before and failed, it means there was something wrong; our program will help you fix it.',
+  },
+  {
+    question: 'Is this for founders only?',
+    answer: "No. It’s designed to remove the Founder Trap by building a team-run system with routines, KPIs, and processes.",
+  },
+  {
+    question: 'Who is not a good fit?',
+    answer: 'Teams looking for shortcuts, one-off fixes, or avoiding KPIs and tracking.',
+  },
+  {
+    question: 'How do we start?',
+    answer: 'Confirm fit → choose kick of time→ start',
+  },
+];
+
 export default function ServiceDetailContent({ service }: ServiceDetailContentProps) {
   return (
     <>
@@ -1474,9 +1520,15 @@ export default function ServiceDetailContent({ service }: ServiceDetailContentPr
             <Testimonials />
           </ScrollReveal>
         )}
-        {(service.id === 'god-sales-system' || service.id === 'marketing-services') && (
+        {(service.id === 'god-sales-system' || service.id === 'marketing-services' || service.id === 'global-expansion') && (
           <ScrollReveal>
-            <FAQ />
+            <FAQ items={
+              service.id === 'marketing-services'
+                ? marketingFaqs
+                : service.id === 'god-sales-system'
+                  ? godSalesFaqs
+                  : undefined
+            } />
           </ScrollReveal>
         )}
 
