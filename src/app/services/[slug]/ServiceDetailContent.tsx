@@ -1466,7 +1466,7 @@ export default function ServiceDetailContent({ service }: ServiceDetailContentPr
                   {service.title}
                 </h3>
 
-                <p className="mb-4 font-sans text-xs font-semibold leading-relaxed text-blue-bright lg:text-sm">
+            <p className="mb-4 font-sans text-xs font-semibold leading-relaxed text-blue-bright lg:text-sm">
                   {service.subtitle}
                 </p>
 
@@ -1479,11 +1479,11 @@ export default function ServiceDetailContent({ service }: ServiceDetailContentPr
 
           {/* Detailed Content Bullets */}
           <div className="w-full px-4">
-            {service.id === 'god-sales-system' ? (
+            {service.id === 'sales-growth-system' ? (
               <GodSalesSystemOverview />
-            ) : service.id === 'global-expansion' ? (
+            ) : service.id === 'global-expansion-services' ? (
               <GlobalExpansionOverview />
-            ) : service.id === 'marketing-services' ? (
+            ) : service.id === 'marketing-service' ? (
               <MarketingServicesOverview />
             ) : (
               <motion.div
@@ -1515,24 +1515,24 @@ export default function ServiceDetailContent({ service }: ServiceDetailContentPr
           </div>
         </div>
 
-        {(service.id === 'god-sales-system' || service.id === 'marketing-services') && (
+        {(service.id === 'sales-growth-system' || service.id === 'marketing-service') && (
           <ScrollReveal>
             <Testimonials />
           </ScrollReveal>
         )}
-        {(service.id === 'god-sales-system' || service.id === 'marketing-services' || service.id === 'global-expansion') && (
+        {(service.id === 'sales-growth-system' || service.id === 'marketing-service' || service.id === 'global-expansion-services') && (
           <ScrollReveal>
             <FAQ items={
-              service.id === 'marketing-services'
+              service.id === 'marketing-service'
                 ? marketingFaqs
-                : service.id === 'god-sales-system'
+                : service.id === 'sales-growth-system'
                   ? godSalesFaqs
                   : undefined
             } />
           </ScrollReveal>
         )}
 
-        {(service.id === 'global-expansion' || service.id === 'god-sales-system') && <CaseStudies />}
+        {(service.id === 'global-expansion-services' || service.id === 'sales-growth-system') && <CaseStudies />}
 
         {/* Contact Us Section */}
         <ScrollReveal>

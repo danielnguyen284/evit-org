@@ -20,7 +20,7 @@ interface CoreSolution {
 const solutions: CoreSolution[] = [
   {
     id: 1,
-    slug: 'global-expansion',
+    slug: 'global-expansion-services',
     title: 'GLOBAL EXPANSION SERVICE',
     subtitle: 'Market entry planning + execution support: target markets, channels, lead generation, USP, and risk control.',
     desc: 'Global expansion is more than just entering a new market—it\'s about developing a sustainable and scalable growth strategy that includes the right sales channels, compliance with international business laws, and effectively managing global teams. At EVIT Organization, our Custom Design Consulting Services are designed to guide businesses through every critical step of this process, ensuring a smooth, efficient, and successful market entry.',
@@ -31,7 +31,7 @@ const solutions: CoreSolution[] = [
   },
   {
     id: 2,
-    slug: 'god-sales-system',
+    slug: 'sales-growth-system',
     title: 'G.O.D. SALES SYSTEM',
     subtitle: 'Step-by-step sales system for IT services: lead generation, qualification, meetings, negotiation, proposals, closing, upsell, cross-sell.',
     desc: 'Our online course covers everything you need to win more deals. From lead qualification and meeting strategy to negotiation, proposal building, and practical worksheets. Step-by-step tested formula that just needs to be implemented to your selling activities.',
@@ -42,7 +42,7 @@ const solutions: CoreSolution[] = [
   },
   {
     id: 3,
-    slug: 'marketing-services',
+    slug: 'marketing-service',
     title: 'MARKETING SERVICES',
     subtitle: 'Marketing funnel, Website + conversion + automation workflows to improve lead flow and conversion.',
     desc: 'Many businesses struggle to scale their marketing due to a lack of a clear strategy, outdated tactics, ineffective online presence, unaligned activities, poor analytics and execution. Even if they have existing marketing efforts, they often need to optimize these processes to drive conversions. As a result, businesses waste their budget on ineffective strategies, fail to fully utilize their marketing potential, and lose money and potential clients.',

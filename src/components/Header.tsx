@@ -85,9 +85,9 @@ export default function Header() {
       label: 'Our Services', 
       href: '/services',
       dropdown: [
-        { label: 'Growth & Market Entry Consulting', href: '/services/global-expansion' },
-        { label: 'G.O.D. Sales System', href: '/services/god-sales-system' },
-        { label: 'B2B Marketing & Lead Generation', href: '/services/marketing-services' },
+        { label: 'Growth & Market Entry Consulting', href: '/services/global-expansion-services' },
+        { label: 'G.O.D. Sales System', href: '/services/sales-growth-system' },
+        { label: 'B2B Marketing & Lead Generation', href: '/services/marketing-service' },
       ]
     },
     { id: 'case-studies', label: 'Case Studies', href: '/case-studies' },

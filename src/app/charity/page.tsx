@@ -622,7 +622,7 @@ export default function CharityPage() {
                   </p>
                 </div>
 
-                <Link href="/contact" className="btn-primary inline-flex">
+                <Link href="/contact-us" className="btn-primary inline-flex">
                   Contact Us
                   <span className="arrow">→</span>
                 </Link>
