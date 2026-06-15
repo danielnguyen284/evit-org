@@ -10,17 +10,9 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  try {
-    const posts = await fetchWordPressPosts();
-    return posts.map((post) => ({
-      slug: post.slug,
-    }));
-  } catch (error) {
-    console.warn("Failed to fetch posts for static paths, generating with fallbacks:", error);
-    return FALLBACK_POSTS.map((post) => ({
-      slug: post.slug,
-    }));
-  }
+  // Return empty array to avoid fetching 85+ posts from WordPress during build time.
+  // Next.js will build this page dynamically on-demand and cache it via ISR.
+  return [];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
