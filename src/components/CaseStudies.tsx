@@ -84,7 +84,7 @@ const studies: Study[] = [
   },
   {
     id: 5,
-    slug: 'solazu',
+    slug: 'hive-tech',
     quote: (
       <>
         With EVIT&apos;s method, we achieved our goal of setting up client calls in just <span className="text-blue-bright font-bold">three weeks</span>. The approach is practical, effective, and straightforward to execute.
@@ -112,7 +112,7 @@ const studies: Study[] = [
   },
   {
     id: 7,
-    slug: 'hive-tech',
+    slug: 'nfq',
     quote: (
       <>
         We worked with EVIT and were impressed by their strong business development expertise and practical sales approach. They provided <span className="text-blue-bright font-bold">clear frameworks and actionable guidance</span>, making them a reliable partner for global expansion.
@@ -326,12 +326,12 @@ function CaseStudyCard({ study }: { study: Study }) {
             {study.role}
           </span>
         </div>
-        <div className="relative h-[36px] w-[124px] shrink-0 opacity-95 md:h-[42px] md:w-[148px] [@media(max-height:760px)]:h-[34px] [@media(max-height:760px)]:w-[120px]">
+        <div className="relative h-[44px] w-[150px] shrink-0 opacity-95 md:h-[56px] md:w-[190px] [@media(max-height:760px)]:h-[40px] [@media(max-height:760px)]:w-[140px]">
           <Image
             src={study.companyLogo}
             alt="EVIT client logo"
             fill
-            sizes="(max-width: 768px) 124px, 148px"
+            sizes="(max-width: 768px) 150px, 190px"
             className="object-contain"
           />
         </div>

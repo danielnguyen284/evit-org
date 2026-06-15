@@ -207,7 +207,7 @@ export const caseStudiesData: CaseStudyData[] = [
     title: "Sales Team Enablement & Western Market Entry Preparation",
     subheading: "Expanded into Western markets by training a young sales team, designing a global sales strategy, and supporting real client deal execution.",
     client: {
-      logo: "/assets/clients/company-2.jpg", // Representing HiveTech on Card 7
+      logo: "/assets/clients/company-4.jpg",
       name: "HiveTech Solution",
       country: "Viet Nam",
       industry: "Information technology",

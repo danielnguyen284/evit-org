@@ -62,12 +62,12 @@ export default function Footer() {
           <ul className={styles.contactList}>
             <li>
               <LocationIcon />
-              <span>145 Trần Sâm, Sơn Trà, Đà Nẵng, Vietnam</span>
+              <span>145 Tran Sam, Son Tra, Da Nang, Vietnam</span>
             </li>
-            <li>
+            {/* <li>
               <MailIcon />
               <span>info@evitconsulting.com</span>
-            </li>
+            </li> */}
             <li>
               <PhoneIcon />
               <span>+84705737170</span>
@@ -112,7 +112,7 @@ export default function Footer() {
           <div className={styles.mapPreview}>
             <iframe
               title="EVIT location on Google Maps"
-              src="https://www.google.com/maps?q=EVIT%20Organization%2C%20145%20Tr%E1%BA%A7n%20S%C3%A2m%2C%20S%C6%B1n%20Tr%C3%A0%2C%20%C4%90%C3%A0%20N%E1%BA%B5ng%2C%20Vietnam&z=17&output=embed"
+              src="https://maps.google.com/maps?q=145%20Tran%20Sam,%20Son%20Tra,%20Da%20Nang,%20Vietnam&t=&z=15&ie=UTF8&iwloc=&output=embed"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               allowFullScreen

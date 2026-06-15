@@ -57,7 +57,6 @@ export interface BlogTag {
 export const FALLBACK_CATEGORIES: BlogCategory[] = [
   { id: 1, name: "All News", slug: "all" },
   { id: 2, name: "Business", slug: "business" },
-  { id: 3, name: "Kinh doanh", slug: "kinh-doanh" },
   { id: 4, name: "Featured", slug: "featured" },
   { id: 5, name: "Business Expansion", slug: "business-expansion" },
   { id: 6, name: "Business Growth", slug: "business-growth" },
@@ -202,7 +201,7 @@ export const FALLBACK_POSTS: WPPostRaw[] = [
     <p>US clients tend to move fast, appreciate direct sales pitches, and have higher budget ceilings. European clients demand deeper relationships, data compliance (GDPR), and long-term stability.</p>` },
     author: 1,
     featured_media: 205,
-    categories: [3, 5], // Kinh doanh, Business Expansion
+    categories: [5], // Business Expansion
     tags: [10, 13], // Business Expansion, IT outsourcing
     _embedded: {
       author: [{ id: 1, name: "EVIT Team" }],
@@ -290,7 +289,7 @@ export const FALLBACK_POSTS: WPPostRaw[] = [
     <p>This allows businesses to enjoy the cost-efficiency of global software engineering pools (like Vietnam) while providing high-touch project management and account growth directly in client markets.</p>` },
     author: 1,
     featured_media: 209,
-    categories: [3], // Kinh doanh
+    categories: [2], // Business
     tags: [12, 13], // IT service providers, IT outsourcing
     _embedded: {
       author: [{ id: 1, name: "EVIT Team" }],

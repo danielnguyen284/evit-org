@@ -12,6 +12,14 @@ export default function Header() {
   const [isSticky, setIsSticky] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [expandedItems, setExpandedItems] = useState<Record<string, boolean>>({});
+
+  const toggleExpanded = (id: string) => {
+    setExpandedItems((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
   const lastScrollYRef = useRef(0);
   const pathname = usePathname();
   const currentActiveLink = pathname.startsWith('/services')
@@ -220,45 +228,90 @@ export default function Header() {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed top-0 right-0 w-full sm:w-[320px] h-screen bg-[#03032D]/98 border-l border-blue-bright/15 backdrop-blur-lg flex flex-col justify-center items-center gap-8 p-6 z-[100] shadow-2xl lg:hidden overflow-y-auto"
+            className="fixed top-0 right-0 w-full sm:w-[320px] h-screen bg-[#03032D]/98 border-l border-blue-bright/15 backdrop-blur-lg flex flex-col justify-start items-start gap-8 pt-[100px] px-8 pb-12 z-[100] shadow-2xl lg:hidden overflow-y-auto"
           >
-            <ul className="flex flex-col items-center gap-6 list-none m-0 p-0 text-center w-full max-h-[85vh] overflow-y-auto">
+            <ul className="flex flex-col items-start gap-5 list-none m-0 p-0 text-left w-full max-h-[85vh] overflow-y-auto">
               {menuItems.map((item) => {
+                const isExpanded = expandedItems[item.id];
                 if (item.dropdown) {
                   return (
-                    <li key={item.id} className="flex flex-col items-center gap-3">
-                      <Link
-                        href="#"
-                        className={`font-sans text-sm font-bold uppercase tracking-wider transition-colors duration-300 ${
-                          currentActiveLink === item.id ? 'text-red-bright opacity-100' : 'text-white/60'
-                        }`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                        }}
-                      >
-                        {item.label}
-                      </Link>
-                      <ul className="flex flex-col gap-2 list-none m-0 p-0">
-                        {item.dropdown.map((subItem, idx) => (
-                          <li key={idx}>
-                            <Link
-                              href={subItem.href}
-                              className="font-sans text-[13px] font-semibold text-white/90 hover:text-blue-bright transition-colors"
-                              onClick={closeMenu}
-                            >
-                              {subItem.label}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
+                    <li key={item.id} className="w-full flex flex-col gap-3">
+                      <div className="flex items-center justify-between w-full">
+                        {item.id === 'services' ? (
+                          <Link
+                            href={item.href}
+                            className={`font-sans text-sm font-bold uppercase tracking-wider transition-colors duration-300 py-2 ${
+                              currentActiveLink === item.id ? 'text-red-bright' : 'text-white/80 hover:text-white'
+                            }`}
+                            onClick={() => handleLinkClick(item.id)}
+                          >
+                            {item.label}
+                          </Link>
+                        ) : (
+                          <button
+                            onClick={() => toggleExpanded(item.id)}
+                            className={`font-sans text-sm font-bold uppercase tracking-wider transition-colors duration-300 py-2 text-left bg-transparent border-none outline-none ${
+                              currentActiveLink === item.id ? 'text-red-bright opacity-100' : 'text-white/80 hover:text-white hover:opacity-100'
+                            }`}
+                          >
+                            {item.label}
+                          </button>
+                        )}
+                        <button
+                          onClick={() => toggleExpanded(item.id)}
+                          className="w-8 h-8 rounded-full border border-blue-bright/30 flex items-center justify-center text-blue-bright hover:border-blue-bright transition-colors shrink-0"
+                          aria-label={`Toggle ${item.label} sub-items`}
+                        >
+                          <svg
+                            className={`w-4 h-4 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth="2.5"
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                          </svg>
+                        </button>
+                      </div>
+                      
+                      <AnimatePresence initial={false}>
+                        {isExpanded && (
+                          <motion.ul
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="flex flex-col gap-2 list-none m-0 pl-3 border-l border-blue-bright/20 w-full overflow-hidden"
+                          >
+                            {item.dropdown.map((subItem, idx) => {
+                              const isSubActive = pathname === subItem.href;
+                              return (
+                                <li key={idx} className="w-full">
+                                  <Link
+                                    href={subItem.href}
+                                    className={`font-sans text-[13px] font-semibold transition-all duration-200 block py-1.5 px-3 rounded-lg border ${
+                                      isSubActive
+                                        ? 'border-blue-bright text-blue-bright bg-blue-bright/5 shadow-[0_0_12px_rgba(0,240,255,0.1)]'
+                                        : 'border-transparent text-white/80 hover:text-white hover:bg-white/5'
+                                    }`}
+                                    onClick={closeMenu}
+                                  >
+                                    {subItem.label}
+                                  </Link>
+                                </li>
+                              );
+                            })}
+                          </motion.ul>
+                        )}
+                      </AnimatePresence>
                     </li>
                   );
                 }
                 return (
-                  <li key={item.id}>
+                  <li key={item.id} className="w-full">
                     <Link
                       href={item.href}
-                      className={`font-sans text-sm font-bold uppercase tracking-wider transition-colors duration-300 py-2 ${
+                      className={`font-sans text-sm font-bold uppercase tracking-wider transition-colors duration-300 py-2 block w-full ${
                         currentActiveLink === item.id ? 'text-red-bright' : 'text-white/80 hover:text-white'
                       }`}
                       onClick={() => handleLinkClick(item.id)}
@@ -269,7 +322,7 @@ export default function Header() {
                 );
               })}
               {/* Mobile CTA */}
-              <li className="mt-4">
+              <li className="mt-4 w-full">
                 <button
                   onClick={() => {
                     closeMenu();

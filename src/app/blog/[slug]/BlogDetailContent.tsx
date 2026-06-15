@@ -50,10 +50,16 @@ export default function BlogDetailContent({ post, allPosts }: BlogDetailContentP
     const terms = p._embedded?.["wp:term"]?.[0];
     if (terms && terms.length > 0) {
       const categoryTerm = terms.find(t => t.taxonomy === 'category');
-      if (categoryTerm) return categoryTerm.name;
+      if (categoryTerm) {
+        if (categoryTerm.name === 'Kinh doanh' || categoryTerm.slug === 'kinh-doanh') {
+          return 'Business';
+        }
+        return categoryTerm.name;
+      }
     }
     if (p.categories && p.categories.length > 0) {
       const catId = p.categories[0];
+      if (catId === 3) return "Business";
       const cat = FALLBACK_CATEGORIES.find(c => c.id === catId);
       if (cat) return cat.name;
     }

@@ -82,13 +82,13 @@ export default function CaseStudyDetailContent({ caseStudy }: CaseStudyDetailCon
               <div className="glow-card bg-light p-8 flex flex-col items-center justify-between text-center min-h-[320px]">
                 <div className="w-full flex flex-col items-center h-full justify-center">
                   {/* Logo Container */}
-                  <div className="relative w-44 h-20 mb-8 flex items-center justify-center">
+                  <div className="relative w-64 h-32 mb-8 flex items-center justify-center">
                     <Image
                       src={caseStudy.client.logo}
                       alt={`${caseStudy.client.name} logo`}
                       fill
                       className="object-contain"
-                      sizes="176px"
+                      sizes="256px"
                       priority
                     />
                   </div>
