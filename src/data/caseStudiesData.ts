@@ -261,7 +261,7 @@ export const caseStudiesData: CaseStudyData[] = [
     title: "Sales & Marketing Team Build-up and Deal Execution for Global Growth",
     subheading: "Built a structured sales and marketing organization with clear roles, defined processes, and execution support to win global client contracts.",
     client: {
-      logo: "/assets/clients/company-4.jpg",
+      logo: "/assets/clients/solazu_logo.jpg",
       name: "Solazu",
       country: "Viet Nam",
       industry: "Information technology",
