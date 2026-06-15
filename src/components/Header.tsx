@@ -94,7 +94,7 @@ export default function Header() {
     { 
       id: 'resources', 
       label: 'Resources', 
-      href: '/resources',
+      href: '/it-vendor-introduction',
       dropdown: [
         { label: 'Blog', href: '/blog' },
         { label: 'IT Vendor Introduction', href: '/it-vendor-introduction' },
@@ -105,7 +105,8 @@ export default function Header() {
       label: 'About Us', 
       href: '/about',
       dropdown: [
-        { label: 'Charity', href: '/charity' },
+        { label: 'Who We Are', href: '/about' },
+        { label: 'EVIT Impact', href: '/charity' },
       ]
     },
   ];
@@ -151,12 +152,12 @@ export default function Header() {
               return (
                 <li key={item.id} className={`relative ${hasDropdown ? 'group py-2' : ''}`}>
                   <Link
-                    href={item.id === 'resources' ? '#' : item.href}
+                    href={hasDropdown ? '#' : item.href}
                     className={`font-sans text-[13px] font-bold uppercase tracking-wider transition-colors duration-300 py-2 flex items-center gap-1 ${
                       currentActiveLink === item.id ? 'text-red-bright opacity-100' : 'text-white/80 hover:text-white hover:opacity-100'
                     }`}
                     onClick={(e) => {
-                      if (item.id === 'resources') {
+                      if (hasDropdown) {
                         e.preventDefault();
                       } else {
                         handleLinkClick(item.id);
@@ -227,16 +228,12 @@ export default function Header() {
                   return (
                     <li key={item.id} className="flex flex-col items-center gap-3">
                       <Link
-                        href={item.id === 'resources' ? '#' : item.href}
+                        href="#"
                         className={`font-sans text-sm font-bold uppercase tracking-wider transition-colors duration-300 ${
                           currentActiveLink === item.id ? 'text-red-bright opacity-100' : 'text-white/60'
                         }`}
                         onClick={(e) => {
-                          if (item.id === 'resources') {
-                            e.preventDefault();
-                          } else {
-                            handleLinkClick(item.id);
-                          }
+                          e.preventDefault();
                         }}
                       >
                         {item.label}

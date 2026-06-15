@@ -10,6 +10,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://evitconsulting.com"),
   title: "EVIT Organization | Get More Clients With A Proven Sales System",
   description: "EVIT helps IT service providers scale revenue and expand globally. We install a proven IT sales & lead generation system so founders and small sales teams build a predictable pipeline.",
   icons: {

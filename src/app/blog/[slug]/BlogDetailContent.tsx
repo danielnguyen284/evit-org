@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingCalendar from "@/components/FloatingCalendar";
-import { WPPostRaw, FALLBACK_POSTS, FALLBACK_CATEGORIES, fetchWordPressPosts } from "@/data/blogData";
+import { WPPostRaw, FALLBACK_POSTS, FALLBACK_CATEGORIES, decodeHtmlEntities } from "@/data/blogData";
 
 function preprocessHtml(html: string): string {
   if (!html) return '';
@@ -41,24 +41,10 @@ function preprocessHtml(html: string): string {
 
 interface BlogDetailContentProps {
   post: WPPostRaw;
+  allPosts: WPPostRaw[];
 }
 
-export default function BlogDetailContent({ post }: BlogDetailContentProps) {
-  const [posts, setPosts] = useState<WPPostRaw[]>([]);
-
-  // Fetch posts to compute related news from the same category
-  useEffect(() => {
-    async function loadPosts() {
-      try {
-        const data = await fetchWordPressPosts();
-        setPosts(data);
-      } catch (err) {
-        console.error("Failed to load blog posts:", err);
-      }
-    }
-    loadPosts();
-  }, []);
-
+export default function BlogDetailContent({ post, allPosts }: BlogDetailContentProps) {
   // Helper to extract category name
   const getCategoryName = (p: WPPostRaw): string => {
     const terms = p._embedded?.["wp:term"]?.[0];
@@ -81,7 +67,7 @@ export default function BlogDetailContent({ post }: BlogDetailContentProps) {
   };
 
   const currentCategoryName = getCategoryName(post);
-  const activePosts = posts.length > 0 ? posts : FALLBACK_POSTS;
+  const activePosts = allPosts && allPosts.length > 0 ? allPosts : FALLBACK_POSTS;
 
   // Filter 3 related posts belonging to the SAME category
   let related = activePosts.filter(p => p.slug !== post.slug && getCategoryName(p) === currentCategoryName);
@@ -134,7 +120,7 @@ export default function BlogDetailContent({ post }: BlogDetailContentProps) {
             <div className="relative w-full aspect-[16/9] md:h-[480px] rounded-2xl overflow-hidden border border-blue-bright/35 shadow-[0_0_30px_rgba(0,104,255,0.15)] mb-12 bg-slate-900">
               <Image
                 src={getImageUrl(post)}
-                alt={post.title.rendered}
+                alt={decodeHtmlEntities(post.title.rendered)}
                 fill
                 priority
                 className="object-cover"
@@ -146,7 +132,7 @@ export default function BlogDetailContent({ post }: BlogDetailContentProps) {
               <div className="w-[6px] bg-[#E92228] rounded-full mr-4 shrink-0" />
               <div>
                 <h1 className="font-sans text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-extrabold uppercase leading-tight text-white">
-                  {post.title.rendered}
+                  {decodeHtmlEntities(post.title.rendered)}
                 </h1>
               </div>
             </div>
@@ -202,7 +188,7 @@ export default function BlogDetailContent({ post }: BlogDetailContentProps) {
                     <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-900">
                       <Image
                         src={rpImageUrl}
-                        alt={rp.title.rendered}
+                        alt={decodeHtmlEntities(rp.title.rendered)}
                         fill
                         sizes="(max-width: 768px) 100vw, 33vw"
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -224,14 +210,14 @@ export default function BlogDetailContent({ post }: BlogDetailContentProps) {
                       <div className="flex items-start gap-3 mb-3">
                         <div className="w-[3px] bg-[#E92228] rounded-full self-stretch flex-shrink-0 transition-all duration-300 group-hover:bg-blue-bright" />
                         <h3 className="font-sans text-sm sm:text-base font-bold text-white leading-snug group-hover:text-blue-bright transition-colors line-clamp-2">
-                          {rp.title.rendered}
+                          {decodeHtmlEntities(rp.title.rendered)}
                         </h3>
                       </div>
 
                       {/* Excerpt */}
                       <p 
                         className="font-sans text-xs text-white/65 leading-relaxed line-clamp-3"
-                        dangerouslySetInnerHTML={{ __html: rp.excerpt.rendered }}
+                        dangerouslySetInnerHTML={{ __html: decodeHtmlEntities(rp.excerpt.rendered) }}
                       />
                     </div>
                   </Link>

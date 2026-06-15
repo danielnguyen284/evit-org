@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -8,7 +8,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingCalendar from "@/components/FloatingCalendar";
 import { useBooking } from "@/components/BookingModal";
-import { WPPostRaw, fetchWordPressPosts } from "@/data/blogData";
+import { WPPostRaw, decodeHtmlEntities } from "@/data/blogData";
 
 // Fade up animation variants for scroll reveal
 const fadeUp = {
@@ -39,25 +39,12 @@ function Reveal({
   );
 }
 
-export default function ResourcesPage() {
-  const { openBooking } = useBooking();
-  const [posts, setPosts] = useState<WPPostRaw[]>([]);
-  const [loading, setLoading] = useState(true);
+interface ResourcesClientProps {
+  initialPosts: WPPostRaw[];
+}
 
-  useEffect(() => {
-    async function loadPosts() {
-      setLoading(true);
-      try {
-        const data = await fetchWordPressPosts();
-        setPosts(data.slice(0, 3));
-      } catch (err) {
-        console.error("Failed to load blog posts:", err);
-      } finally {
-        setLoading(false);
-      }
-    }
-    loadPosts();
-  }, []);
+export default function ResourcesClient({ initialPosts }: ResourcesClientProps) {
+  const { openBooking } = useBooking();
 
   const getFeaturedImageUrl = (post: WPPostRaw): string => {
     const featuredMedia = post._embedded?.["wp:featuredmedia"]?.[0];
@@ -121,8 +108,6 @@ export default function ResourcesPage() {
               IT teams in Vietnam. Fast, safe, effective
             </motion.h1>
           </div>
-
-
         </section>
 
         {/* Corporate Service - EVIT Organization Section */}
@@ -318,17 +303,13 @@ export default function ResourcesPage() {
               </h2>
             </Reveal>
 
-            {loading ? (
-              <div className="flex justify-center items-center py-20">
-                <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-blue-bright" />
-              </div>
-            ) : posts.length === 0 ? (
+            {initialPosts.length === 0 ? (
               <div className="text-center py-20 text-white/50 font-semibold">
                 No posts found.
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {posts.map((post, index) => {
+                {initialPosts.map((post, index) => {
                   const imageUrl = getFeaturedImageUrl(post);
 
                   return (
@@ -341,7 +322,7 @@ export default function ResourcesPage() {
                         <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-900">
                           <Image
                             src={imageUrl}
-                            alt={post.title.rendered}
+                            alt={decodeHtmlEntities(post.title.rendered)}
                             fill
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                             className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -363,14 +344,14 @@ export default function ResourcesPage() {
                           <div className="flex items-start gap-3 mb-3">
                             <div className="w-[3px] bg-[#E92228] rounded-full self-stretch flex-shrink-0 transition-all duration-300 group-hover:bg-blue-bright" />
                             <h3 className="font-sans text-base sm:text-lg font-bold text-white leading-snug group-hover:text-blue-bright transition-colors line-clamp-2">
-                              {post.title.rendered}
+                              {decodeHtmlEntities(post.title.rendered)}
                             </h3>
                           </div>
 
                           {/* Excerpt */}
                           <p 
                             className="font-sans text-xs sm:text-[13px] text-white/65 leading-relaxed line-clamp-3"
-                            dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
+                            dangerouslySetInnerHTML={{ __html: decodeHtmlEntities(post.excerpt.rendered) }}
                           />
                         </div>
                       </Link>

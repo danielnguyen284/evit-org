@@ -2,7 +2,8 @@ import React from 'react';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import BlogDetailContent from './BlogDetailContent';
-import { WPPostRaw, FALLBACK_POSTS, fetchWordPressPosts } from "@/data/blogData";
+import { WPPostRaw, FALLBACK_POSTS, decodeHtmlEntities } from "@/data/blogData";
+import { fetchWordPressPosts } from "@/data/blogFetch";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -44,8 +45,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const cleanTitle = post.title.rendered;
-  const cleanDesc = post.excerpt.rendered
+  const cleanTitle = decodeHtmlEntities(post.title.rendered);
+  const cleanDesc = decodeHtmlEntities(post.excerpt.rendered)
     .replace(/<[^>]*>/g, '') // remove HTML tags
     .substring(0, 160);
 
@@ -82,5 +83,12 @@ export default async function BlogDetailPage({ params }: PageProps) {
     notFound();
   }
 
-  return <BlogDetailContent post={post} />;
+  let allPosts: WPPostRaw[] = [];
+  try {
+    allPosts = await fetchWordPressPosts();
+  } catch (error) {
+    console.warn("Failed to fetch all posts for detail page:", error);
+  }
+
+  return <BlogDetailContent post={post} allPosts={allPosts} />;
 }

@@ -158,8 +158,8 @@ export default function Framework() {
               EVIT 3- STEP FRAMEWORK
             </motion.h2>
 
-            <div className="relative h-[420px] w-full sm:h-[460px] md:h-[460px]">
-              {isDesktop ? (
+            {isDesktop ? (
+              <div className="relative h-[420px] w-full sm:h-[460px] md:h-[460px]">
                 <AnimatePresence mode="wait">
                   <FrameworkCard
                     key={frameworkSteps[activeIndex].id}
@@ -167,14 +167,18 @@ export default function Framework() {
                     isDesktop={isDesktop}
                   />
                 </AnimatePresence>
-              ) : (
-                <FrameworkCard
-                  key={frameworkSteps[activeIndex].id}
-                  step={frameworkSteps[activeIndex]}
-                  isDesktop={isDesktop}
-                />
-              )}
-            </div>
+              </div>
+            ) : (
+              <div className="flex flex-col gap-6">
+                {frameworkSteps.map((step) => (
+                  <FrameworkCard
+                    key={step.id}
+                    step={step}
+                    isDesktop={isDesktop}
+                  />
+                ))}
+              </div>
+            )}
           </div>
 
           <motion.div

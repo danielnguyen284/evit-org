@@ -1,10 +1,19 @@
-'use client';
-
 import React from 'react';
+import type { Metadata } from 'next';
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingCalendar from "@/components/FloatingCalendar";
 import Contact from "@/components/Contact";
+
+export const metadata: Metadata = {
+  title: "Contact Us | B2B IT Sales & Growth | EVIT Organization",
+  description: "Get in touch with EVIT Organization. Let's discuss how to scale your technology company, implement our sales system, and expand your outreach globally.",
+  openGraph: {
+    title: "Contact Us | B2B IT Sales & Growth | EVIT Organization",
+    description: "Get in touch with EVIT Organization. Let's discuss how to scale your technology company, implement our sales system, and expand your outreach globally.",
+    url: "https://evitconsulting.com/contact-us",
+  }
+};
 
 export default function ContactPage() {
   return (
