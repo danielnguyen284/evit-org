@@ -2,9 +2,10 @@ import { MetadataRoute } from 'next';
 import { servicesData } from '@/data/servicesData';
 import { caseStudiesData } from '@/data/caseStudiesData';
 import { fetchWordPressPosts } from '@/data/blogFetch';
+import { SITE_URL } from '@/lib/seo';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://evitconsulting.com';
+  const baseUrl = SITE_URL;
 
   // 1. Static pages
   const staticPaths = [

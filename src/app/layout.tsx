@@ -2,6 +2,13 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { BookingProvider } from "@/components/BookingModal";
+import {
+  absoluteUrl,
+  createPageMetadata,
+  jsonLdScript,
+  SITE_NAME,
+  SITE_URL,
+} from "@/lib/seo";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -10,12 +17,51 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://evitconsulting.com"),
-  title: "EVIT Organization | Get More Clients With A Proven Sales System",
-  description: "EVIT helps IT service providers scale revenue and expand globally. We install a proven IT sales & lead generation system so founders and small sales teams build a predictable pipeline.",
+  ...createPageMetadata({
+    title: "EVIT Organization | Get More Clients With A Proven Sales System",
+    description:
+      "EVIT helps IT service providers scale revenue and expand globally. We install a proven IT sales & lead generation system so founders and small sales teams build a predictable pipeline.",
+    path: "/",
+  }),
   icons: {
     icon: "/assets/logo.png",
   },
+};
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: absoluteUrl("/assets/logo.png"),
+      email: "info@evitconsulting.com",
+      telephone: "+84705737170",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "145 Tran Sam, Son Tra",
+        addressLocality: "Da Nang",
+        addressCountry: "VN",
+      },
+      sameAs: [
+        "https://www.facebook.com/goglobalasia1/",
+        "https://www.youtube.com/@goglobalasia",
+        "https://creators.spotify.com/pod/profile/evit-organization/",
+        "https://www.linkedin.com/company/evit-org/",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      name: SITE_NAME,
+      url: SITE_URL,
+      publisher: {
+        "@id": `${SITE_URL}/#organization`,
+      },
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -26,6 +72,10 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth" className={`${inter.variable} antialiased`} suppressHydrationWarning>
       <body className="font-sans" suppressHydrationWarning>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={jsonLdScript(organizationJsonLd)}
+        />
         <BookingProvider>
           {children}
         </BookingProvider>

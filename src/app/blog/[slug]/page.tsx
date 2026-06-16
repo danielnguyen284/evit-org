@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import BlogDetailContent from './BlogDetailContent';
 import { WPPostRaw, FALLBACK_POSTS, decodeHtmlEntities } from "@/data/blogData";
 import { fetchWordPressPosts } from "@/data/blogFetch";
+import { absoluteUrl, createPageMetadata, jsonLdScript, SITE_NAME, SITE_URL } from '@/lib/seo';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -45,14 +46,22 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const featuredMedia = post._embedded?.["wp:featuredmedia"]?.[0];
   const ogImage = featuredMedia?.source_url || "/assets/daa7591f467f07ac34cf81f8dd257db99985d118.webp";
 
-  return {
+  const metadata = createPageMetadata({
     title: `${cleanTitle} | EVIT Organization Blog`,
     description: cleanDesc,
+    path: `/blog/${post.slug}`,
+    image: ogImage,
+    type: "article",
+  });
+
+  return {
+    ...metadata,
     openGraph: {
-      title: `${cleanTitle} | EVIT Organization Blog`,
-      description: cleanDesc,
-      images: [{ url: ogImage }]
-    }
+      ...metadata.openGraph,
+      type: "article",
+      publishedTime: post.date,
+      authors: [SITE_NAME],
+    },
   };
 }
 
@@ -82,5 +91,44 @@ export default async function BlogDetailPage({ params }: PageProps) {
     console.warn("Failed to fetch all posts for detail page:", error);
   }
 
-  return <BlogDetailContent post={post} allPosts={allPosts} />;
+  const cleanTitle = decodeHtmlEntities(post.title.rendered);
+  const cleanDesc = decodeHtmlEntities(post.excerpt.rendered)
+    .replace(/<[^>]*>/g, '')
+    .substring(0, 160);
+  const featuredMedia = post._embedded?.["wp:featuredmedia"]?.[0];
+  const image = featuredMedia?.source_url || "/assets/daa7591f467f07ac34cf81f8dd257db99985d118.webp";
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": `${SITE_URL}/blog/${post.slug}#article`,
+    headline: cleanTitle,
+    description: cleanDesc,
+    image: absoluteUrl(image),
+    datePublished: post.date,
+    dateModified: post.date,
+    author: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      logo: {
+        "@type": "ImageObject",
+        url: absoluteUrl("/assets/logo.png"),
+      },
+    },
+    mainEntityOfPage: absoluteUrl(`/blog/${post.slug}`),
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLdScript(articleJsonLd)}
+      />
+      <BlogDetailContent post={post} allPosts={allPosts} />
+    </>
+  );
 }

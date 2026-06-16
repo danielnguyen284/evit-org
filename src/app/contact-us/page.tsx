@@ -4,16 +4,13 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingCalendar from "@/components/FloatingCalendar";
 import Contact from "@/components/Contact";
+import { createPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Contact Us | B2B IT Sales & Growth | EVIT Organization",
   description: "Get in touch with EVIT Organization. Let's discuss how to scale your technology company, implement our sales system, and expand your outreach globally.",
-  openGraph: {
-    title: "Contact Us | B2B IT Sales & Growth | EVIT Organization",
-    description: "Get in touch with EVIT Organization. Let's discuss how to scale your technology company, implement our sales system, and expand your outreach globally.",
-    url: "https://evitconsulting.com/contact-us",
-  }
-};
+  path: "/contact-us",
+});
 
 export default function ContactPage() {
   return (

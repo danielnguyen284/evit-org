@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import ServiceDetailContent from './ServiceDetailContent';
 
 import { servicesData } from '@/data/servicesData';
+import { absoluteUrl, createPageMetadata, jsonLdScript, SITE_NAME, SITE_URL } from '@/lib/seo';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -27,15 +28,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  return {
+  return createPageMetadata({
     title: `${service.title} | EVIT Organization`,
     description: service.subtitle,
-    openGraph: {
-      title: `${service.title} | EVIT Organization`,
-      description: service.subtitle,
-      images: [{ url: service.image }]
-    }
-  };
+    path: `/services/${service.slug}`,
+    image: service.image,
+  });
 }
 
 export default async function ServiceDetailPage({ params }: PageProps) {
@@ -46,5 +44,29 @@ export default async function ServiceDetailPage({ params }: PageProps) {
     notFound();
   }
 
-  return <ServiceDetailContent service={service} />;
+  const serviceJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${SITE_URL}/services/${service.slug}#service`,
+    name: service.title,
+    description: service.subtitle,
+    image: absoluteUrl(service.image),
+    provider: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+    areaServed: "Global",
+    url: absoluteUrl(`/services/${service.slug}`),
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLdScript(serviceJsonLd)}
+      />
+      <ServiceDetailContent service={service} />
+    </>
+  );
 }
