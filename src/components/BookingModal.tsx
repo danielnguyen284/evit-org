@@ -106,6 +106,7 @@ function BookingModal() {
                 key={bookingSession}
                 src="https://meetings-na2.hubspot.com/lan-nguyen"
                 className="block h-full w-full border-0"
+                scrolling="no"
                 onLoad={() => setLoadedSession(bookingSession)}
                 title="HubSpot Meetings Scheduler"
               />
