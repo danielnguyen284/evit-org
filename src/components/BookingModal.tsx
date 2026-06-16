@@ -105,8 +105,7 @@ function BookingModal() {
               <iframe
                 key={bookingSession}
                 src="https://meetings-na2.hubspot.com/lan-nguyen"
-                className="block h-full w-full border-0 lg:absolute lg:left-1/2 lg:top-0 lg:h-[1120px] lg:w-full lg:origin-top lg:-translate-x-1/2 lg:scale-[1.04]"
-                scrolling="no"
+                className="block h-full w-full border-0"
                 onLoad={() => setLoadedSession(bookingSession)}
                 title="HubSpot Meetings Scheduler"
               />
