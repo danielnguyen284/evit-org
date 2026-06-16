@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -105,6 +105,31 @@ const mattersCards = [
 
 export default function CharityContent() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  useEffect(() => {
+    const iframe = iframeRef.current;
+    if (!iframe) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            iframe.contentWindow?.postMessage('{"method":"play"}', '*');
+          } else {
+            iframe.contentWindow?.postMessage('{"method":"pause"}', '*');
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    observer.observe(iframe);
+
+    return () => {
+      observer.unobserve(iframe);
+    };
+  }, []);
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -514,7 +539,8 @@ export default function CharityContent() {
             <Reveal className="mx-auto max-w-[1360px]">
               <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[10px] border border-blue-bright/80 shadow-[0_16px_34px_rgba(0,132,209,0.18)]">
                 <iframe
-                  src="https://player.vimeo.com/video/1201859307?byline=0&title=0&portrait=0&badge=0&dnt=1"
+                  ref={iframeRef}
+                  src="https://player.vimeo.com/video/1201859307?api=1&autoplay=1&muted=1&byline=0&title=0&portrait=0&badge=0&dnt=1"
                   className="h-full w-full border-0"
                   allow="autoplay; fullscreen; picture-in-picture"
                   allowFullScreen
