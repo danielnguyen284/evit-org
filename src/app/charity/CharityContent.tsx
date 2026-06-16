@@ -513,16 +513,12 @@ export default function CharityContent() {
           <div className="relative z-10 mx-auto w-full max-w-[1440px] px-6">
             <Reveal className="mx-auto max-w-[1360px]">
               <div className="relative aspect-[1366/647] w-full overflow-hidden rounded-[10px] border border-blue-bright/80 shadow-[0_16px_34px_rgba(0,132,209,0.18)]">
-                <video
-                  src="/assets/final.mp4"
-                  className="h-full w-full object-cover"
-                  aria-label="One Developer, One Child impact video"
-                  autoPlay
-                  controls
-                  loop
-                  muted
-                  playsInline
-                  preload="metadata"
+                <iframe
+                  src="https://player.vimeo.com/video/1201859307?autoplay=1&muted=1&loop=1&autopause=0"
+                  className="h-full w-full border-0"
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  allowFullScreen
+                  title="One Developer, One Child impact video"
                 />
               </div>
             </Reveal>
