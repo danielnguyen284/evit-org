@@ -44,3 +44,6 @@ next-env.d.ts
 /public/assets-backup
 /scratch
 
+# large media assets
+/public/assets/final.mp4
+

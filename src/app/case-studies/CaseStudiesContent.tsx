@@ -216,12 +216,12 @@ export default function CaseStudiesContent() {
                       {study.role}
                     </span>
                   </div>
-                  <div className="relative h-[40px] w-[130px] shrink-0 opacity-95 sm:h-[48px] sm:w-[160px] md:h-[56px] md:w-[190px]">
+                  <div className="relative h-[56px] w-[160px] shrink-0 opacity-95 sm:h-[68px] sm:w-[200px] md:h-[76px] md:w-[220px]">
                     <Image
                       src={study.companyLogo}
                       alt="EVIT client logo"
                       fill
-                      sizes="(max-width: 640px) 130px, (max-width: 768px) 160px, 190px"
+                      sizes="(max-width: 640px) 160px, (max-width: 768px) 200px, 220px"
                       className="object-contain"
                     />
                   </div>

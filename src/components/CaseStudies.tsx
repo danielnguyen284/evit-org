@@ -326,12 +326,12 @@ function CaseStudyCard({ study }: { study: Study }) {
             {study.role}
           </span>
         </div>
-        <div className="relative h-[44px] w-[150px] shrink-0 opacity-95 md:h-[56px] md:w-[190px] [@media(max-height:760px)]:h-[40px] [@media(max-height:760px)]:w-[140px]">
+        <div className="relative h-[58px] w-[160px] shrink-0 opacity-95 sm:h-[68px] sm:w-[190px] md:h-[76px] md:w-[220px] [@media(max-height:760px)]:h-[58px] [@media(max-height:760px)]:w-[170px]">
           <Image
             src={study.companyLogo}
             alt="EVIT client logo"
             fill
-            sizes="(max-width: 768px) 150px, 190px"
+            sizes="(max-width: 640px) 160px, (max-width: 768px) 190px, 220px"
             className="object-contain"
           />
         </div>

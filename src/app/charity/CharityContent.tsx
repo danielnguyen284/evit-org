@@ -510,20 +510,24 @@ export default function CharityContent() {
 
         {/* Section 6: "THE BUSINESS CASE" */}
         <section className="relative overflow-hidden py-20 sm:py-24">
-          <div className="relative z-10 mx-auto w-full max-w-[1200px] px-6">
-            <Reveal className="mx-auto max-w-[1200px]">
+          <div className="relative z-10 mx-auto w-full max-w-[1440px] px-6">
+            <Reveal className="mx-auto max-w-[1360px]">
               <div className="relative aspect-[1366/647] w-full overflow-hidden rounded-[10px] border border-blue-bright/80 shadow-[0_16px_34px_rgba(0,132,209,0.18)]">
-                <Image
-                  src="/assets/fc96753d4e50d1a5a918994758ba91d5de42b045.webp"
-                  alt="Adult holding a child's hand"
-                  fill
-                  sizes="(max-width: 1200px) 92vw, 1120px"
-                  className="object-cover"
+                <video
+                  src="/assets/final.mp4"
+                  className="h-full w-full object-cover"
+                  aria-label="One Developer, One Child impact video"
+                  autoPlay
+                  controls
+                  loop
+                  muted
+                  playsInline
+                  preload="metadata"
                 />
               </div>
             </Reveal>
 
-            <Reveal delay={0.08} className="mx-auto mt-12 max-w-[900px] text-center">
+            <Reveal delay={0.08} className="mx-auto mt-20 max-w-[900px] text-center sm:mt-24">
               <h2 className="font-sans text-3xl font-extrabold uppercase tracking-wide text-white sm:text-[36px]">
                 The Business Case
               </h2>

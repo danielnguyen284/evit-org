@@ -68,8 +68,8 @@
   align-items: center;
   gap: 16px;
   font-family: var(--font-inter), sans-serif;
-  font-size: 16px;
-  color: rgba(255, 255, 255, 0.9);
+  font-size: 18px;
+  color: #ffffff;
 }
 
 .contactList svg {
@@ -92,9 +92,9 @@
 
 .navColumn a {
   font-family: var(--font-inter), sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.9);
+  color: #ffffff;
   text-transform: uppercase;
   transition: color 0.25s ease;
 }
@@ -171,8 +171,8 @@
 
 .copyright span {
   font-family: var(--font-inter), sans-serif;
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.72);
+  font-size: 14px;
+  color: #ffffff;
 }
 
 @media (max-width: 900px) {
@@ -200,7 +200,7 @@
 @media (max-width: 520px) {
   .contactList li {
     align-items: flex-start;
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .mapPreview {

@@ -81,19 +81,20 @@ function Card({ solution, isDesktop }: CardProps) {
       {/* Content Column */}
       <div className="relative z-[1] flex min-h-[230px] min-w-0 flex-1 flex-col justify-between py-1 text-left md:min-h-[250px] lg:min-h-[260px]">
         <div className="flex flex-col items-start w-full">
-          <div className="relative mb-3 h-11 w-11">
-            <Image
-              src={solution.icon}
-              alt={solution.iconAlt}
-              fill
-              sizes="44px"
-              className="object-contain"
-            />
+          <div className="flex items-center gap-3.5 mb-3 w-full">
+            <div className="relative h-11 w-11 shrink-0">
+              <Image
+                src={solution.icon}
+                alt={solution.iconAlt}
+                fill
+                sizes="44px"
+                className="object-contain"
+              />
+            </div>
+            <h3 className="font-sans text-xl font-extrabold uppercase leading-tight tracking-tight text-white lg:text-2xl">
+              {solution.title}
+            </h3>
           </div>
-
-          <h3 className="mb-3 font-sans text-xl font-extrabold uppercase leading-tight tracking-tight text-white lg:text-2xl">
-            {solution.title}
-          </h3>
 
           <p className="mb-4 font-sans text-xs font-medium leading-relaxed text-blue-bright lg:text-sm">
             {solution.subtitle}
