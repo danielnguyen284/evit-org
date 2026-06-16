@@ -514,10 +514,9 @@ export default function CharityContent() {
             <Reveal className="mx-auto max-w-[1360px]">
               <div className="relative aspect-[1366/647] w-full overflow-hidden rounded-[10px] border border-blue-bright/80 shadow-[0_16px_34px_rgba(0,132,209,0.18)]">
                 <iframe
-                  src="https://player.vimeo.com/video/1201859307?autoplay=1&muted=1&loop=1&autopause=0"
-                  className="h-full w-full border-0"
-                  allow="autoplay; fullscreen; picture-in-picture"
-                  allowFullScreen
+                  src="https://player.vimeo.com/video/1201859307?autoplay=1&muted=1&loop=1&autopause=0&background=1"
+                  className="absolute top-1/2 left-1/2 w-[101%] h-[140%] -translate-x-1/2 -translate-y-1/2 border-0 pointer-events-none"
+                  allow="autoplay; fullscreen"
                   title="One Developer, One Child impact video"
                 />
               </div>
