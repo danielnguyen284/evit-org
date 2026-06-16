@@ -69,7 +69,7 @@ export default function BlogDetailContent({ post, allPosts }: BlogDetailContentP
   // Helper to extract featured image
   const getImageUrl = (p: WPPostRaw): string => {
     const featuredMedia = p._embedded?.["wp:featuredmedia"]?.[0];
-    return featuredMedia?.source_url || "/assets/daa7591f467f07ac34cf81f8dd257db99985d118.jpg";
+    return featuredMedia?.source_url || "/assets/daa7591f467f07ac34cf81f8dd257db99985d118.webp";
   };
 
   const currentCategoryName = getCategoryName(post);
@@ -96,7 +96,7 @@ export default function BlogDetailContent({ post, allPosts }: BlogDetailContentP
             className="absolute inset-0 opacity-90"
             style={{
               backgroundImage:
-                "linear-gradient(90deg, rgba(2, 21, 85, 0.84) 0%, rgba(18, 22, 93, 0.72) 50%, rgba(52, 21, 91, 0.8) 100%), url('/assets/footer-map.jpg')",
+                "linear-gradient(90deg, rgba(2, 21, 85, 0.84) 0%, rgba(18, 22, 93, 0.72) 50%, rgba(52, 21, 91, 0.8) 100%), url('/assets/footer-map.webp')",
               backgroundPosition: 'center top',
               backgroundSize: 'cover',
             }}
@@ -104,7 +104,7 @@ export default function BlogDetailContent({ post, allPosts }: BlogDetailContentP
           <div 
             className="absolute inset-0 opacity-[0.34] pointer-events-none mix-blend-soft-light"
             style={{
-              backgroundImage: "url('/assets/footer-bg.png')",
+              backgroundImage: "url('/assets/footer-bg.webp')",
               backgroundPosition: 'center top',
               backgroundSize: 'cover',
             }}

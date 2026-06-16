@@ -51,7 +51,7 @@ export default function ResourcesClient({ initialPosts }: ResourcesClientProps) 
     if (featuredMedia?.source_url) {
       return featuredMedia.source_url;
     }
-    return "/assets/daa7591f467f07ac34cf81f8dd257db99985d118.jpg";
+    return "/assets/daa7591f467f07ac34cf81f8dd257db99985d118.webp";
   };
 
   const cardsData = [
@@ -88,13 +88,21 @@ export default function ResourcesClient({ initialPosts }: ResourcesClientProps) 
 
       <main className="min-h-screen bg-[#03032D] text-white overflow-x-hidden">
         {/* Hero Section - 100vh */}
-        <section
-          className="relative flex h-screen min-h-screen w-full items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat px-6"
-          style={{
-            backgroundImage:
-              "linear-gradient(180deg, rgba(3, 3, 45, 0.45) 0%, rgba(3, 3, 45, 0.82) 80%, #03032D 100%), url('/assets/f061061994c33d3b378765bc4c76d1d4665cf244.jpg')",
-          }}
-        >
+        <section className="relative flex h-screen min-h-screen w-full items-center justify-center overflow-hidden px-6">
+          {/* Background image container for Next.js Image Optimization */}
+          <div className="absolute inset-0 -z-10 select-none pointer-events-none">
+            <Image
+              src="/assets/f061061994c33d3b378765bc4c76d1d4665cf244.webp"
+              alt="Connect & leverage top quality IT teams in Vietnam"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-center"
+            />
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[rgba(3,3,45,0.45)] via-[rgba(3,3,45,0.82)] to-[#03032D]" />
+          </div>
+
           <div className="absolute inset-0 bg-[#03032D]/15 pointer-events-none" />
 
           <div className="relative z-10 mx-auto flex w-full max-w-[1200px] flex-col items-center text-center">
@@ -179,7 +187,7 @@ export default function ResourcesClient({ initialPosts }: ResourcesClientProps) 
                 <div className="pointer-events-none absolute bottom-[2%] right-[6%] h-[230px] w-[230px] rounded-full bg-[radial-gradient(circle,rgba(0,132,209,0.18)_0%,transparent_68%)] blur-2xl" />
                 <div className="relative h-[280px] sm:h-[360px] md:h-[420px] lg:h-[480px] w-full overflow-hidden rounded-2xl border border-blue-bright/40 shadow-[0_12px_36px_rgba(0,0,0,0.4)]">
                   <Image
-                    src="/assets/4cafdf2644be75bae9c6bd30de93511515d299d1.png"
+                    src="/assets/4cafdf2644be75bae9c6bd30de93511515d299d1.webp"
                     alt="Why Vietnam - HCMC Skyline"
                     fill
                     sizes="(max-width: 1024px) 90vw, 480px"
@@ -253,7 +261,7 @@ export default function ResourcesClient({ initialPosts }: ResourcesClientProps) 
               <div className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(0,132,209,0.15)_0%,transparent_60%)] blur-3xl" />
               <div className="relative w-full overflow-hidden rounded-2xl border border-blue-bright/40 shadow-[0_12px_40px_rgba(0,0,0,0.5)]">
                 <Image
-                  src="/assets/bdff73de3bbae3fd869ca356065758038e2acb85.png"
+                  src="/assets/bdff73de3bbae3fd869ca356065758038e2acb85.webp"
                   alt="Our Practice - Transparency, Speed, Risk"
                   width={1000}
                   height={275}

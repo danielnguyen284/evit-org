@@ -190,7 +190,7 @@ export default function Framework() {
           >
             <div className="pointer-events-none absolute left-1/2 top-1/2 h-[280px] w-[280px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(193,32,210,0.28)_0%,rgba(0,112,255,0.18)_34%,transparent_70%)] blur-xl" />
             <Image
-              src="/assets/bd57a4ce07e80d25e9d190a5adf99ec8e3c675ec.png"
+              src="/assets/bd57a4ce07e80d25e9d190a5adf99ec8e3c675ec.webp"
               alt="EVIT framework system"
               width={560}
               height={560}

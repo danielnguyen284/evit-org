@@ -95,7 +95,7 @@ function GodSalesSystemOverview() {
         >
           <div className="pointer-events-none absolute bottom-[8%] left-[18%] h-[220px] w-[220px] rounded-full bg-[radial-gradient(circle,rgba(193,32,210,0.26)_0%,rgba(0,112,255,0.16)_36%,transparent_70%)] blur-xl" />
           <Image
-            src="/assets/fc7a00f869220fc564cfbabb86ea19ba8d1031e7.png"
+            src="/assets/fc7a00f869220fc564cfbabb86ea19ba8d1031e7.webp"
             alt="G.O.D Sales System trophy"
             width={640}
             height={640}
@@ -254,7 +254,7 @@ function GodSalesSystemOverview() {
         >
           <div className="pointer-events-none absolute bottom-[10%] left-[20%] h-[220px] w-[220px] rounded-full bg-[radial-gradient(circle,rgba(227,0,0,0.18)_0%,transparent_70%)] blur-xl" />
           <Image
-            src="/assets/93399949fe72f74d48c8ac9828123999f81ce7b2.png"
+            src="/assets/93399949fe72f74d48c8ac9828123999f81ce7b2.webp"
             alt="G.O.D Sales System question chart illustration"
             width={450}
             height={450}
@@ -672,7 +672,7 @@ function MarketingServicesOverview() {
         >
           <div className="pointer-events-none absolute bottom-[10%] left-[20%] h-[220px] w-[220px] rounded-full bg-[radial-gradient(circle,rgba(0,104,255,0.18)_0%,transparent_70%)] blur-xl" />
           <Image
-            src="/assets/e29760427ffa2cfb671801b33b6a48176e245b68.png"
+            src="/assets/e29760427ffa2cfb671801b33b6a48176e245b68.webp"
             alt="Golden megaphone revenue engine illustration"
             width={450}
             height={450}
@@ -708,7 +708,7 @@ function MarketingServicesOverview() {
           >
             <div className="pointer-events-none absolute bottom-[10%] left-[20%] h-[220px] w-[220px] rounded-full bg-[radial-gradient(circle,rgba(0,104,255,0.18)_0%,transparent_70%)] blur-xl" />
             <Image
-              src="/assets/44609142e529bd087084e93d0ed255601f3ca35b.png"
+              src="/assets/44609142e529bd087084e93d0ed255601f3ca35b.webp"
               alt="Marketing strategy trophy magnifier illustration"
               width={450}
               height={450}
@@ -832,7 +832,7 @@ function MarketingServicesOverview() {
           >
             <div className="pointer-events-none absolute bottom-[10%] left-[20%] h-[220px] w-[220px] rounded-full bg-[radial-gradient(circle,rgba(0,104,255,0.18)_0%,transparent_70%)] blur-xl" />
             <Image
-              src="/assets/39199ee4dc07c7e7bfc087241dedc0632ee7a38b.png"
+              src="/assets/39199ee4dc07c7e7bfc087241dedc0632ee7a38b.webp"
               alt="Marketing strategy WWW globe illustration"
               width={450}
               height={450}
@@ -871,7 +871,7 @@ function MarketingServicesOverview() {
           >
             <div className="pointer-events-none absolute bottom-[10%] left-[20%] h-[220px] w-[220px] rounded-full bg-[radial-gradient(circle,rgba(0,104,255,0.18)_0%,transparent_70%)] blur-xl" />
             <Image
-              src="/assets/f0d1f5772b5c68ae102fa5275725593a4b532bc6.png"
+              src="/assets/f0d1f5772b5c68ae102fa5275725593a4b532bc6.webp"
               alt="Automation marketing play gear illustration"
               width={450}
               height={450}
@@ -1107,7 +1107,7 @@ function GlobalExpansionOverview() {
         >
           <div className="pointer-events-none absolute bottom-[10%] left-[20%] h-[220px] w-[220px] rounded-full bg-[radial-gradient(circle,rgba(0,112,255,0.2)_0%,transparent_70%)] blur-xl" />
           <Image
-            src="/assets/solution-growth.png"
+            src="/assets/solution-growth.webp"
             alt="Global market growth illustration"
             width={400}
             height={400}
@@ -1165,7 +1165,7 @@ function GlobalExpansionOverview() {
         >
           <div className="pointer-events-none absolute bottom-[10%] left-[20%] h-[220px] w-[220px] rounded-full bg-[radial-gradient(circle,rgba(193,32,210,0.2)_0%,transparent_70%)] blur-xl" />
           <Image
-            src="/assets/c531ed1cc0783f009ddc0a73502b47a855c76d47.png"
+            src="/assets/c531ed1cc0783f009ddc0a73502b47a855c76d47.webp"
             alt="USP Star Trophy"
             width={400}
             height={400}
@@ -1401,14 +1401,24 @@ export default function ServiceDetailContent({ service }: ServiceDetailContentPr
 
       <main className="bg-[#03032D] min-h-screen text-white">
         {/* Dynamic Service Hero Section */}
-        <section
-          className="relative h-screen w-full flex items-center justify-center pb-[40px] overflow-hidden bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `linear-gradient(180deg, rgba(3, 3, 45, 0.5) 0%, rgba(3, 3, 45, 0.9) 100%), url('${service.heroBg || '/assets/services-bg.jpg'}')`,
-          }}
-        >
+        <section className="relative h-screen w-full flex items-center justify-center pb-[40px] overflow-hidden">
+          {/* Background image container for Next.js Image Optimization */}
+          <div className="absolute inset-0 -z-10 select-none pointer-events-none">
+            <Image
+              src={service.heroBg ? service.heroBg.replace(/\.(png|jpg|jpeg)$/i, '.webp') : '/assets/services-bg.webp'}
+              alt={service.heroTitle || service.title}
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-center"
+            />
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[rgba(3,3,45,0.5)] to-[rgba(3,3,45,0.9)]" />
+          </div>
+
           {/* Bottom overlay blend to blend smoothly with content */}
           <div className="absolute bottom-0 left-0 w-full h-[200px] bg-gradient-to-t from-[#03032D] to-transparent pointer-events-none z-[1]" />
+
 
           <div className="relative z-10 flex flex-col items-center text-center max-w-[950px] w-full mx-auto px-6 pt-[80px]">
 

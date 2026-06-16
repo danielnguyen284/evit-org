@@ -30,9 +30,9 @@ const studies: Study[] = [
     ),
     name: 'Mr. Ngô Văn Tấu',
     role: 'Chief Executive Officer (CEO)',
-    avatar: '/assets/clients/client-1.jpg',
+    avatar: '/assets/clients/client-1.webp',
     avatarAlt: 'Client portrait',
-    companyLogo: '/assets/clients/company-1.png',
+    companyLogo: '/assets/clients/company-1.webp',
   },
   {
     id: 2,
@@ -46,7 +46,7 @@ const studies: Study[] = [
     role: 'Sales Representative',
     avatar: '/assets/clients/client-6.png',
     avatarAlt: 'Sales representative portrait',
-    companyLogo: '/assets/clients/company-1.png',
+    companyLogo: '/assets/clients/company-1.webp',
   },
   {
     id: 3,
@@ -127,16 +127,26 @@ export default function CaseStudiesContent() {
       
       <main className="bg-[#03032D] min-h-screen text-white relative overflow-hidden">
         {/* Banner Section - Full Screen Height Hero */}
-        <section 
-          className="relative h-screen w-full flex items-center justify-center pb-[40px] overflow-hidden bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `linear-gradient(180deg, rgba(3, 3, 45, 0.4) 0%, rgba(3, 3, 45, 0.9) 100%), url('/assets/1508aab01b3a4fca97b3b1ccfa52ad0ca9d80acb.png')`,
-          }}
-        >
+        <section className="relative h-screen w-full flex items-center justify-center pb-[40px] overflow-hidden">
+          {/* Background image container for Next.js Image Optimization */}
+          <div className="absolute inset-0 -z-10 select-none pointer-events-none">
+            <Image
+              src="/assets/1508aab01b3a4fca97b3b1ccfa52ad0ca9d80acb.webp"
+              alt="Case Studies Banner"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-center"
+            />
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[rgba(3,3,45,0.4)] to-[rgba(3,3,45,0.9)]" />
+          </div>
+
           {/* Bottom overlay blend */}
           <div className="absolute bottom-0 left-0 w-full h-[200px] bg-gradient-to-t from-[#03032D] to-transparent pointer-events-none z-[1]" />
 
           <div className="relative z-10 text-center px-6 pt-[80px] max-w-[950px] w-full mx-auto">
+
             <motion.h1 
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}

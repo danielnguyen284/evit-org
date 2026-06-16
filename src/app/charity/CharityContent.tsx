@@ -116,13 +116,21 @@ export default function CharityContent() {
 
       <main className="min-h-screen bg-[#03032D] text-white overflow-x-hidden">
         {/* Hero Section - 100vh */}
-        <section
-          className="relative flex h-screen min-h-screen w-full items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat px-6"
-          style={{
-            backgroundImage:
-              "linear-gradient(180deg, rgba(3, 3, 45, 0.42) 0%, rgba(3, 3, 45, 0.58) 68%, rgba(3, 3, 45, 0.74) 100%), url('/assets/15477946316ab69706f2750bd4e6a33415a0ed5b.png')",
-          }}
-        >
+        <section className="relative flex h-screen min-h-screen w-full items-center justify-center overflow-hidden px-6">
+          {/* Background image container for Next.js Image Optimization */}
+          <div className="absolute inset-0 -z-10 select-none pointer-events-none">
+            <Image
+              src="/assets/15477946316ab69706f2750bd4e6a33415a0ed5b.webp"
+              alt="One Developer, One Child"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-center"
+            />
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[rgba(3,3,45,0.42)] via-[rgba(3,3,45,0.58)] to-[rgba(3,3,45,0.74)]" />
+          </div>
+
           <div className="relative z-10 mx-auto flex w-full max-w-[1200px] flex-col items-center text-center">
             <motion.h1
               initial={{ opacity: 0, y: 32 }}
@@ -231,7 +239,7 @@ export default function CharityContent() {
                 className="pointer-events-none relative z-10 mx-auto mt-8 flex h-[320px] w-full max-w-[430px] items-end justify-center lg:absolute lg:bottom-0 lg:right-6 lg:mt-0 lg:h-[calc(100%-14px)] lg:w-[47%] lg:max-w-[520px]"
               >
                 <Image
-                  src="/assets/18fdfbc5d212108609f073256049734bfa6128b2.png"
+                  src="/assets/18fdfbc5d212108609f073256049734bfa6128b2.webp"
                   alt="EVIT founder portrait"
                   width={620}
                   height={760}
@@ -506,7 +514,7 @@ export default function CharityContent() {
             <Reveal className="mx-auto max-w-[1200px]">
               <div className="relative aspect-[1366/647] w-full overflow-hidden rounded-[10px] border border-blue-bright/80 shadow-[0_16px_34px_rgba(0,132,209,0.18)]">
                 <Image
-                  src="/assets/fc96753d4e50d1a5a918994758ba91d5de42b045.png"
+                  src="/assets/fc96753d4e50d1a5a918994758ba91d5de42b045.webp"
                   alt="Adult holding a child's hand"
                   fill
                   sizes="(max-width: 1200px) 92vw, 1120px"
@@ -584,7 +592,7 @@ export default function CharityContent() {
                 <div className="pointer-events-none absolute bottom-[2%] right-[6%] h-[230px] w-[230px] rounded-full bg-[radial-gradient(circle,rgba(0,132,209,0.12)_0%,transparent_68%)] blur-2xl" />
                 <div className="relative h-[280px] sm:h-[360px] w-full overflow-hidden rounded-2xl border border-blue-bright/40 shadow-[0_12px_36px_rgba(0,0,0,0.4)]">
                   <Image
-                    src="/assets/398b87993e53ef2ba25c373bda22ab9cab5441ac.png"
+                    src="/assets/398b87993e53ef2ba25c373bda22ab9cab5441ac.webp"
                     alt="A Quiet Invitation"
                     fill
                     sizes="(max-width: 1024px) 90vw, 480px"

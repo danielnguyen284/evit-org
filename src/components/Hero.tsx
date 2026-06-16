@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useBooking } from './BookingModal';
 
@@ -10,13 +11,25 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat px-6 pb-16 pt-[104px] sm:pt-[112px] lg:pt-[120px] [@media(max-height:760px)]:pb-10 [@media(max-height:760px)]:pt-[96px]"
-      style={{
-        backgroundImage: `linear-gradient(180deg, rgba(3, 3, 45, 0.5) 0%, rgba(3, 3, 45, 0.9) 100%), url('/assets/hero-bg.jpg')`,
-      }}
+      className="relative flex min-h-screen w-full items-center justify-center overflow-hidden px-6 pb-16 pt-[104px] sm:pt-[112px] lg:pt-[120px] [@media(max-height:760px)]:pb-10 [@media(max-height:760px)]:pt-[96px]"
     >
+      {/* Background image container for Next.js Image Optimization */}
+      <div className="absolute inset-0 -z-10 select-none pointer-events-none">
+        <Image
+          src="/assets/hero-bg.webp"
+          alt="Get More Clients With A Proven Sales System"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(3,3,45,0.5)] to-[rgba(3,3,45,0.9)]" />
+      </div>
+
       {/* Bottom overlay blend to blend smoothly with About section background */}
       <div className="absolute bottom-0 left-0 w-full h-[200px] bg-gradient-to-t from-[#03032D] to-transparent pointer-events-none z-1" />
+
 
       <div className="relative z-10 flex w-full max-w-[950px] flex-col items-center text-center">
         <motion.h1

@@ -96,7 +96,7 @@ export const FALLBACK_POSTS: WPPostRaw[] = [
       author: [{ id: 1, name: "EVIT Team" }],
       "wp:featuredmedia": [{
         id: 201,
-        source_url: "/assets/daa7591f467f07ac34cf81f8dd257db99985d118.jpg",
+        source_url: "/assets/daa7591f467f07ac34cf81f8dd257db99985d118.webp",
         alt_text: "4 Trends for IT Companies in 2026"
       }]
     }
@@ -124,7 +124,7 @@ export const FALLBACK_POSTS: WPPostRaw[] = [
       author: [{ id: 1, name: "EVIT Team" }],
       "wp:featuredmedia": [{
         id: 202,
-        source_url: "/assets/540048d82298a1c0a80ba59038a0eef747a8965c.jpg",
+        source_url: "/assets/540048d82298a1c0a80ba59038a0eef747a8965c.webp",
         alt_text: "How IT Companies win"
       }]
     }
@@ -152,7 +152,7 @@ export const FALLBACK_POSTS: WPPostRaw[] = [
       author: [{ id: 1, name: "EVIT Team" }],
       "wp:featuredmedia": [{
         id: 203,
-        source_url: "/assets/2e869bba8104d15adef7f148438a7cd633820ab4.jpg",
+        source_url: "/assets/2e869bba8104d15adef7f148438a7cd633820ab4.webp",
         alt_text: "How to hire high-performing salespeople in IT services"
       }]
     }
@@ -185,7 +185,7 @@ export const FALLBACK_POSTS: WPPostRaw[] = [
       author: [{ id: 1, name: "EVIT Team" }],
       "wp:featuredmedia": [{
         id: 204,
-        source_url: "/assets/74050129a4c3f273bea5483ea83833715a20991b.png",
+        source_url: "/assets/74050129a4c3f273bea5483ea83833715a20991b.webp",
         alt_text: "3 Best and Worst Sales Traits That Close Deals"
       }]
     }
@@ -207,7 +207,7 @@ export const FALLBACK_POSTS: WPPostRaw[] = [
       author: [{ id: 1, name: "EVIT Team" }],
       "wp:featuredmedia": [{
         id: 205,
-        source_url: "/assets/b111d46df729ec4085b067064109d2ae015e59ae.png",
+        source_url: "/assets/b111d46df729ec4085b067064109d2ae015e59ae.webp",
         alt_text: "Expanding Your IT Services"
       }]
     }
@@ -229,7 +229,7 @@ export const FALLBACK_POSTS: WPPostRaw[] = [
       author: [{ id: 1, name: "EVIT Team" }],
       "wp:featuredmedia": [{
         id: 206,
-        source_url: "/assets/bd57a4ce07e80d25e9d190a5adf99ec8e3c675ec.png",
+        source_url: "/assets/bd57a4ce07e80d25e9d190a5adf99ec8e3c675ec.webp",
         alt_text: "How EVIT Help Asian IT Companies"
       }]
     }
@@ -251,7 +251,7 @@ export const FALLBACK_POSTS: WPPostRaw[] = [
       author: [{ id: 1, name: "EVIT Team" }],
       "wp:featuredmedia": [{
         id: 207,
-        source_url: "/assets/bf85fcc2a8dcb5d2cf0089bcccd6e4184b693b15.png",
+        source_url: "/assets/bf85fcc2a8dcb5d2cf0089bcccd6e4184b693b15.webp",
         alt_text: "Cracking the Western Buyer Code"
       }]
     }
@@ -273,7 +273,7 @@ export const FALLBACK_POSTS: WPPostRaw[] = [
       author: [{ id: 1, name: "EVIT Team" }],
       "wp:featuredmedia": [{
         id: 208,
-        source_url: "/assets/fc96753d4e50d1a5a918994758ba91d5de42b045.png",
+        source_url: "/assets/fc96753d4e50d1a5a918994758ba91d5de42b045.webp",
         alt_text: "Outsourcing Global BizDev"
       }]
     }
@@ -295,7 +295,7 @@ export const FALLBACK_POSTS: WPPostRaw[] = [
       author: [{ id: 1, name: "EVIT Team" }],
       "wp:featuredmedia": [{
         id: 209,
-        source_url: "/assets/3fba5de9dc3c6d1da2c7409aac29a148fb465e44.png",
+        source_url: "/assets/3fba5de9dc3c6d1da2c7409aac29a148fb465e44.webp",
         alt_text: "Hybrid IT Delivery Model"
       }]
     }
@@ -317,7 +317,7 @@ export const FALLBACK_POSTS: WPPostRaw[] = [
       author: [{ id: 1, name: "EVIT Team" }],
       "wp:featuredmedia": [{
         id: 210,
-        source_url: "/assets/1508aab01b3a4fca97b3b1ccfa52ad0ca9d80acb.png",
+        source_url: "/assets/1508aab01b3a4fca97b3b1ccfa52ad0ca9d80acb.webp",
         alt_text: "Why Most IT CEOs Fail at Sales"
       }]
     }

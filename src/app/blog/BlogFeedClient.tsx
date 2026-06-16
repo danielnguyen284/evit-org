@@ -80,7 +80,7 @@ export default function BlogFeedClient({ initialPosts }: BlogFeedClientProps) {
     if (featuredMedia?.source_url) {
       return featuredMedia.source_url;
     }
-    return "/assets/daa7591f467f07ac34cf81f8dd257db99985d118.jpg";
+    return "/assets/daa7591f467f07ac34cf81f8dd257db99985d118.webp";
   };
 
   // Filter posts based on active category
@@ -130,13 +130,21 @@ export default function BlogFeedClient({ initialPosts }: BlogFeedClientProps) {
 
       <main className="min-h-screen bg-[#03032D] text-white overflow-x-hidden">
         {/* Hero Section - 100vh */}
-        <section
-          className="relative flex h-screen min-h-screen w-full items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat px-6"
-          style={{
-            backgroundImage:
-              "linear-gradient(180deg, rgba(3, 3, 45, 0.45) 0%, rgba(3, 3, 45, 0.85) 80%, #03032D 100%), url('/assets/9c793d0712ca618d82f52c32ab5819a0e00d73ad.png')",
-          }}
-        >
+        <section className="relative flex h-screen min-h-screen w-full items-center justify-center overflow-hidden px-6">
+          {/* Background image container for Next.js Image Optimization */}
+          <div className="absolute inset-0 -z-10 select-none pointer-events-none">
+            <Image
+              src="/assets/9c793d0712ca618d82f52c32ab5819a0e00d73ad.webp"
+              alt="Blog Page"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-center"
+            />
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[rgba(3,3,45,0.45)] via-[rgba(3,3,45,0.85)] to-[#03032D]" />
+          </div>
+
           <div className="absolute inset-0 bg-[#03032D]/20 pointer-events-none" />
 
           <div className="relative z-10 mx-auto flex w-full max-w-[1200px] flex-col items-center text-center">

@@ -49,13 +49,21 @@ export default function AboutContent() {
       <Header />
 
       <main className="min-h-screen bg-[#03032D] text-white">
-        <section
-          className="relative flex h-screen min-h-screen w-full items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat px-6 pb-[40px] pt-[88px]"
-          style={{
-            backgroundImage:
-              "linear-gradient(180deg, rgba(3, 3, 45, 0.35) 0%, rgba(3, 3, 45, 0.78) 72%, #03032D 100%), url('/assets/7c21ecf1796d40be0fbfd3cd297c2396db71629c.png')",
-          }}
-        >
+        <section className="relative flex h-screen min-h-screen w-full items-center justify-center overflow-hidden px-6 pb-[40px] pt-[88px]">
+          {/* Background image container for Next.js Image Optimization */}
+          <div className="absolute inset-0 -z-10 select-none pointer-events-none">
+            <Image
+              src="/assets/7c21ecf1796d40be0fbfd3cd297c2396db71629c.webp"
+              alt="Welcome To EVIT"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-center"
+            />
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[rgba(3,3,45,0.35)] via-[rgba(3,3,45,0.78)] to-[#03032D]" />
+          </div>
+
           <div className="absolute inset-0 bg-[#03032D]/20" />
           <div className="absolute bottom-0 left-0 h-36 w-full bg-gradient-to-t from-[#03032D] to-transparent" />
 
@@ -158,7 +166,7 @@ export default function AboutContent() {
                 <div className="pointer-events-none absolute bottom-[6%] left-[12%] h-[220px] w-[220px] rounded-full bg-[radial-gradient(circle,rgba(227,0,0,0.26)_0%,transparent_70%)] blur-2xl" />
                 <div className="pointer-events-none absolute bottom-[2%] right-[6%] h-[230px] w-[230px] rounded-full bg-[radial-gradient(circle,rgba(0,132,209,0.24)_0%,transparent_68%)] blur-2xl" />
                 <Image
-                  src="/assets/bf85fcc2a8dcb5d2cf0089bcccd6e4184b693b15.png"
+                  src="/assets/bf85fcc2a8dcb5d2cf0089bcccd6e4184b693b15.webp"
                   alt="Sales problem insight illustration"
                   width={520}
                   height={520}
@@ -174,7 +182,7 @@ export default function AboutContent() {
                 <div className="pointer-events-none absolute bottom-[12%] right-[6%] h-[210px] w-[210px] rounded-full bg-[radial-gradient(circle,rgba(227,0,0,0.24)_0%,transparent_70%)] blur-2xl" />
                 <div className="pointer-events-none absolute bottom-[6%] left-[6%] h-[230px] w-[230px] rounded-full bg-[radial-gradient(circle,rgba(0,132,209,0.2)_0%,transparent_68%)] blur-2xl" />
                 <Image
-                  src="/assets/21887aecb0305956952648bab596e5f9c44c220b.png"
+                  src="/assets/21887aecb0305956952648bab596e5f9c44c220b.webp"
                   alt="Mission target illustration"
                   width={420}
                   height={416}

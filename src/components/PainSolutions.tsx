@@ -45,12 +45,12 @@ const rowsData: RowData[] = [
 
 const rotatingImages = {
   pain: {
-    src: '/assets/pain-founder.png',
+    src: '/assets/pain-founder.webp',
     alt: 'Revenue and founder dependency 3D illustration',
     glow: 'bg-gradient-to-tr from-[#5e2ca4]/60 to-[#e80052]/90',
   },
   solution: {
-    src: '/assets/solution-growth.png',
+    src: '/assets/solution-growth.webp',
     alt: 'Growth and predictable pipeline 3D illustration',
     glow: 'bg-gradient-to-tr from-[#6738b8]/60 to-[#00c6ff]/90',
   },

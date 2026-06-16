@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     .substring(0, 160);
 
   const featuredMedia = post._embedded?.["wp:featuredmedia"]?.[0];
-  const ogImage = featuredMedia?.source_url || "/assets/daa7591f467f07ac34cf81f8dd257db99985d118.jpg";
+  const ogImage = featuredMedia?.source_url || "/assets/daa7591f467f07ac34cf81f8dd257db99985d118.webp";
 
   return {
     title: `${cleanTitle} | EVIT Organization Blog`,

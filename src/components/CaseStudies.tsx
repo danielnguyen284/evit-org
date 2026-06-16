@@ -36,9 +36,9 @@ const studies: Study[] = [
     ),
     name: 'Mr. Ngô Văn Tấu',
     role: 'Chief Executive Officer (CEO)',
-    avatar: '/assets/clients/client-1.jpg',
+    avatar: '/assets/clients/client-1.webp',
     avatarAlt: 'Client portrait',
-    companyLogo: '/assets/clients/company-1.png',
+    companyLogo: '/assets/clients/company-1.webp',
   },
   {
     id: 2,
@@ -52,7 +52,7 @@ const studies: Study[] = [
     role: 'Sales Representative',
     avatar: '/assets/clients/client-6.png',
     avatarAlt: 'Sales representative portrait',
-    companyLogo: '/assets/clients/company-1.png',
+    companyLogo: '/assets/clients/company-1.webp',
   },
   {
     id: 3,

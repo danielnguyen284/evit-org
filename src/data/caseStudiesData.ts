@@ -33,11 +33,11 @@ export const caseStudiesData: CaseStudyData[] = [
   {
     slug: "gmo-runsystem",
     heroTitle: "EXPANSION TO THE APAC MARKET",
-    heroBg: "/assets/1508aab01b3a4fca97b3b1ccfa52ad0ca9d80acb.png",
+    heroBg: "/assets/1508aab01b3a4fca97b3b1ccfa52ad0ca9d80acb.webp",
     title: "Global Market Expansion Consulting",
     subheading: "A real-world case study on global market entry for an IT services company, covering strategy design, sales process development, and international client acquisition.",
     client: {
-      logo: "/assets/clients/company-1.png",
+      logo: "/assets/clients/company-1.webp",
       name: "GMO-Z.com RUNSYSTEM",
       country: "Viet Nam / Japan",
       industry: "Information technology",
@@ -92,7 +92,7 @@ export const caseStudiesData: CaseStudyData[] = [
   {
     slug: "reco-manpower",
     heroTitle: "SETTING UP A NEW BUSINESS MODEL AND EXPANSION TO EU",
-    heroBg: "/assets/74050129a4c3f273bea5483ea83833715a20991b.png",
+    heroBg: "/assets/74050129a4c3f273bea5483ea83833715a20991b.webp",
     title: "European Market Entry Preparation",
     subheading: "Prepared for European market entry by building a structured go-to-market model, enabling the internal team, and aligning services with European client expectations.",
     client: {
@@ -143,7 +143,7 @@ export const caseStudiesData: CaseStudyData[] = [
   {
     slug: "nfq",
     heroTitle: "APAC MARKET ENTRY & SALES DEVELOPMENT",
-    heroBg: "/assets/7c21ecf1796d40be0fbfd3cd297c2396db71629c.png",
+    heroBg: "/assets/7c21ecf1796d40be0fbfd3cd297c2396db71629c.webp",
     title: "APAC Market Entry & Sales Development",
     subheading: "Entered the APAC market by building a dedicated sales team, implementing a structured sales process, and executing a localized market entry strategy.",
     client: {
@@ -203,7 +203,7 @@ export const caseStudiesData: CaseStudyData[] = [
   {
     slug: "hive-tech",
     heroTitle: "EU MARKET ENTRY & BUSINESS MODEL SETUP",
-    heroBg: "/assets/bd57a4ce07e80d25e9d190a5adf99ec8e3c675ec.png",
+    heroBg: "/assets/bd57a4ce07e80d25e9d190a5adf99ec8e3c675ec.webp",
     title: "Sales Team Enablement & Western Market Entry Preparation",
     subheading: "Expanded into Western markets by training a young sales team, designing a global sales strategy, and supporting real client deal execution.",
     client: {
@@ -241,7 +241,7 @@ export const caseStudiesData: CaseStudyData[] = [
     ],
     outcome: [
       {
-        title: "STRATEGIC PARTNERSHIP",
+        title: "STRATEGIC PARTITION",
         bullet: "Acting not only as a service provider but also as a partner to Hivetech."
       },
       {
@@ -257,7 +257,7 @@ export const caseStudiesData: CaseStudyData[] = [
   {
     slug: "solazu",
     heroTitle: "EXPANSION TO THE US MARKET",
-    heroBg: "/assets/bf85fcc2a8dcb5d2cf0089bcccd6e4184b693b15.png",
+    heroBg: "/assets/bf85fcc2a8dcb5d2cf0089bcccd6e4184b693b15.webp",
     title: "Sales & Marketing Team Build-up and Deal Execution for Global Growth",
     subheading: "Built a structured sales and marketing organization with clear roles, defined processes, and execution support to win global client contracts.",
     client: {
@@ -309,7 +309,7 @@ export const caseStudiesData: CaseStudyData[] = [
   {
     slug: "nkk-tech",
     heroTitle: "DEVELOPMENT OF BUSINESS IN THE US MARKET",
-    heroBg: "/assets/ca1bcf1b3b6f612520edaed83e8927ec556a5961.png",
+    heroBg: "/assets/ca1bcf1b3b6f612520edaed83e8927ec556a5961.webp",
     title: "Develop of business in the US market",
     subheading: "Developed the US market by establishing a scalable sales and marketing foundation and executing a structured global market expansion strategy.",
     client: {

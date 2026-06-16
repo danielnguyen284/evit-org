@@ -17,14 +17,24 @@ export default function ServicesContent() {
       
       <main className="bg-[#03032D] min-h-screen text-white">
         {/* Services Hero Section */}
-        <section
-          className="relative h-screen w-full flex items-center justify-center pb-[40px] overflow-hidden bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `linear-gradient(180deg, rgba(3, 3, 45, 0.5) 0%, rgba(3, 3, 45, 0.9) 100%), url('/assets/services-bg.jpg')`,
-          }}
-        >
+        <section className="relative h-screen w-full flex items-center justify-center pb-[40px] overflow-hidden">
+          {/* Background image container for Next.js Image Optimization */}
+          <div className="absolute inset-0 -z-10 select-none pointer-events-none">
+            <Image
+              src="/assets/services-bg.webp"
+              alt="Services Banner"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-center"
+            />
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[rgba(3,3,45,0.5)] to-[rgba(3,3,45,0.9)]" />
+          </div>
+
           {/* Bottom overlay blend to blend smoothly with content */}
           <div className="absolute bottom-0 left-0 w-full h-[200px] bg-gradient-to-t from-[#03032D] to-transparent pointer-events-none z-[1]" />
+
 
           <div className="relative z-10 flex flex-col items-center text-center max-w-[950px] w-full mx-auto px-6 pt-[80px]">
             <motion.h1
