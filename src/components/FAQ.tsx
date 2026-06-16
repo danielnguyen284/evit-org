@@ -26,11 +26,11 @@ const faqs = [
   },
   {
     question: 'Can you train our sales team?',
-    answer: 'Yes — training modules for different seniority levels.',
+    answer: 'Yes - training modules for different seniority levels.',
   },
   {
     question: 'Do you help with proposals and pricing?',
-    answer: 'Yes — templates + scope control + pricing logic.',
+    answer: 'Yes - templates + scope control + pricing logic.',
   },
   {
     question: 'What do you need from our side?',

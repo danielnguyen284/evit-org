@@ -22,7 +22,7 @@ export const servicesData: ServiceItem[] = [
     slug: 'global-expansion-services',
     title: 'GLOBAL EXPANSION SERVICE',
     subtitle: 'Market entry planning + execution support: target markets, channels, lead generation, USP, and risk control.',
-    desc: "Global expansion is more than just entering a new market—it's about developing a sustainable and scalable growth strategy that includes the right sales channels, compliance with international business laws, and effectively managing global teams. At EVIT Organization, our Custom Design Consulting Services are designed to guide businesses through every critical step of this process, ensuring a smooth, efficient, and successful market entry.",
+    desc: "Global expansion is more than just entering a new market - it's about developing a sustainable and scalable growth strategy that includes the right sales channels, compliance with international business laws, and effectively managing global teams. At EVIT Organization, our Custom Design Consulting Services are designed to guide businesses through every critical step of this process, ensuring a smooth, efficient, and successful market entry.",
     image: '/assets/daa7591f467f07ac34cf81f8dd257db99985d118.webp',
     imageAlt: 'Business network and growth dashboard',
     icon: '/assets/service-icon (2).png',

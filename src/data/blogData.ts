@@ -330,7 +330,7 @@ export function decodeHtmlEntities(str: string): string {
   if (!str) return '';
   const entities: { [key: string]: string } = {
     '&#8211;': '–',
-    '&#8212;': '—',
+    '&#8212;': ' - ',
     '&#8216;': '‘',
     '&#8217;': '’',
     '&#8220;': '“',

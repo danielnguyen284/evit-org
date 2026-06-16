@@ -125,7 +125,7 @@ export default function About() {
 
         <div className="max-w-[800px] mx-auto mt-12 mb-8">
           <ScrollWordReveal
-            text="Our Guaranteed Consulting Services guide you through every critical stage—from planning to execution—ensuring an efficient, successful market entry and long-term growth. Partner with EVIT Organization to unlock your global potential."
+            text="Our Guaranteed Consulting Services guide you through every critical stage - from planning to execution - ensuring an efficient, successful market entry and long-term growth. Partner with EVIT Organization to unlock your global potential."
             className="font-sans text-sm text-white/80 leading-relaxed font-semibold"
           />
         </div>

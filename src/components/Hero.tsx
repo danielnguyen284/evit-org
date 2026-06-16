@@ -49,7 +49,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           className="mb-10 max-w-[720px] font-sans text-sm leading-relaxed text-text-secondary opacity-90 sm:text-base [@media(max-height:760px)]:mb-8"
         >
-          EVIT helps IT service providers scale revenue and expand globally. We install a proven IT sales & lead generation system—so founders and small sales teams build a predictable pipeline and get more clients.
+          EVIT helps IT service providers scale revenue and expand globally. We install a proven IT sales & lead generation system - so founders and small sales teams build a predictable pipeline and get more clients.
         </motion.p>
 
         <motion.div

@@ -655,7 +655,7 @@ function MarketingServicesOverview() {
           
           <div className="space-y-6 font-sans text-xs font-medium leading-relaxed text-white/90 sm:text-sm max-w-[560px]">
             <p>
-              The best approach is a focused, scalable strategy — not more tools.
+              The best approach is a focused, scalable strategy - not more tools.
             </p>
             <p>
               We help IT companies understand what to do, what to fix, and how to grow through marketing strategy, website optimization, social media, and automation workflows that convert leads into customers and support IT company global expansion.
@@ -958,7 +958,7 @@ function MarketingServicesOverview() {
             For companies that want to increase organic traffic, improve conversion rates, and turn their website into a consistent inbound lead engine through SEO, content strategy, and funnel optimization.
           </li>
           <li className="font-sans text-xs font-medium leading-relaxed text-white/90 sm:text-sm">
-            For companies looking to streamline marketing processes and improve lead conversion through CRM integration and automated workflows—without increasing manual workload.
+            For companies looking to streamline marketing processes and improve lead conversion through CRM integration and automated workflows - without increasing manual workload.
           </li>
         </ul>
       </motion.div>
@@ -1366,7 +1366,7 @@ const marketingFaqs = [
 const godSalesFaqs = [
   {
     question: 'How is this different from normal sales consulting?',
-    answer: "It’s productized: you get a full setup, execution routines, SOPs, KPIs, and weekly support focused on real conversions—not theory. You follow your own speed, and connect with a consultant once a week to analyze progress.",
+    answer: "It’s productized: you get a full setup, execution routines, SOPs, KPIs, and weekly support focused on real conversions - not theory. You follow your own speed, and connect with a consultant once a week to analyze progress.",
   },
   {
     question: 'Do you run the outreach for us or train our team?',
