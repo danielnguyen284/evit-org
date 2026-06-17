@@ -59,7 +59,7 @@ const rotatingImages = {
 function PainSolutionTextBlock({ row }: { row: RowData }) {
   return (
     <div className="flex w-full flex-col items-start justify-center text-left">
-      <span className="relative mb-4 inline-block font-sans text-sm font-semibold uppercase tracking-[0.15em] text-blue-bright after:mt-1.5 after:block after:h-0.5 after:w-10 after:rounded-full after:bg-blue-bright after:content-['']">
+      <span className="relative mb-4 inline-block font-sans text-sm font-semibold tracking-[0.15em] text-blue-bright after:mt-1.5 after:block after:h-0.5 after:w-10 after:rounded-full after:bg-blue-bright after:content-['']">
         {row.label}
       </span>
       <h2 className="mb-6 font-sans text-2xl font-extrabold uppercase leading-tight tracking-tight text-white sm:text-3xl lg:text-[38px]">

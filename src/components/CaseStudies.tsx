@@ -260,7 +260,7 @@ export default function CaseStudies() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="mb-4 block font-sans text-sm font-bold uppercase tracking-[0.22em] text-blue-bright [@media(max-height:760px)]:mb-2 [@media(max-height:760px)]:text-xs"
+              className="mb-4 block font-sans text-sm font-bold tracking-[0.22em] text-blue-bright [@media(max-height:760px)]:mb-2 [@media(max-height:760px)]:text-xs"
             >
               Case Studies
             </motion.span>

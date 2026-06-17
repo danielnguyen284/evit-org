@@ -152,7 +152,7 @@ export default function CoreSolutions() {
         <motion.div
           className="mb-14 text-center"
         >
-          <span className="font-sans text-sm font-bold uppercase text-blue-bright tracking-[0.22em] mb-4 block">
+          <span className="font-sans text-sm font-bold text-blue-bright tracking-[0.22em] mb-4 block">
             Our Services
           </span>
           <h2 className="font-sans text-3xl sm:text-[34px] font-extrabold text-white tracking-wide uppercase">
