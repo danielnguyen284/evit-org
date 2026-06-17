@@ -160,16 +160,12 @@ export default function Header() {
               return (
                 <li key={item.id} className={`relative ${hasDropdown ? 'group py-2' : ''}`}>
                   <Link
-                    href={hasDropdown ? '#' : item.href}
+                    href={item.href}
                     className={`font-sans text-[13px] font-bold uppercase tracking-wider transition-colors duration-300 py-2 flex items-center gap-1 ${
                       currentActiveLink === item.id ? 'text-red-bright opacity-100' : 'text-white/80 hover:text-white hover:opacity-100'
                     }`}
-                    onClick={(e) => {
-                      if (hasDropdown) {
-                        e.preventDefault();
-                      } else {
-                        handleLinkClick(item.id);
-                      }
+                    onClick={() => {
+                      handleLinkClick(item.id);
                     }}
                   >
                     {item.label}
@@ -237,26 +233,15 @@ export default function Header() {
                   return (
                     <li key={item.id} className="w-full flex flex-col gap-3">
                       <div className="flex items-center justify-between w-full">
-                        {item.id === 'services' ? (
-                          <Link
-                            href={item.href}
-                            className={`font-sans text-sm font-bold uppercase tracking-wider transition-colors duration-300 py-2 ${
-                              currentActiveLink === item.id ? 'text-red-bright' : 'text-white/80 hover:text-white'
-                            }`}
-                            onClick={() => handleLinkClick(item.id)}
-                          >
-                            {item.label}
-                          </Link>
-                        ) : (
-                          <button
-                            onClick={() => toggleExpanded(item.id)}
-                            className={`font-sans text-sm font-bold uppercase tracking-wider transition-colors duration-300 py-2 text-left bg-transparent border-none outline-none ${
-                              currentActiveLink === item.id ? 'text-red-bright opacity-100' : 'text-white/80 hover:text-white hover:opacity-100'
-                            }`}
-                          >
-                            {item.label}
-                          </button>
-                        )}
+                        <Link
+                          href={item.href}
+                          className={`font-sans text-sm font-bold uppercase tracking-wider transition-colors duration-300 py-2 ${
+                            currentActiveLink === item.id ? 'text-red-bright' : 'text-white/80 hover:text-white'
+                          }`}
+                          onClick={() => handleLinkClick(item.id)}
+                        >
+                          {item.label}
+                        </Link>
                         <button
                           onClick={() => toggleExpanded(item.id)}
                           className="w-8 h-8 rounded-full border border-blue-bright/30 flex items-center justify-center text-blue-bright hover:border-blue-bright transition-colors shrink-0"

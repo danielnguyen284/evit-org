@@ -98,6 +98,20 @@ const studies: Study[] = [
   },
   {
     id: 6,
+    slug: 'solazu',
+    quote: (
+      <>
+        Expansion to the US market
+      </>
+    ),
+    name: 'Mr. Luan Truong',
+    role: 'Chief Executive Officer (CEO)',
+    avatar: '/assets/clients/luan-truong-solazu.jpg',
+    avatarAlt: 'Luan Truong portrait',
+    companyLogo: '/assets/clients/solazu_logo.jpg',
+  },
+  {
+    id: 7,
     slug: 'nkk-tech',
     quote: (
       <>
@@ -111,7 +125,7 @@ const studies: Study[] = [
     companyLogo: '/assets/clients/nkktech_logo.jpg',
   },
   {
-    id: 7,
+    id: 8,
     slug: 'nfq',
     quote: (
       <>
@@ -248,7 +262,7 @@ export default function CaseStudies() {
               transition={{ duration: 0.6 }}
               className="mb-4 block font-sans text-sm font-bold uppercase tracking-[0.22em] text-blue-bright [@media(max-height:760px)]:mb-2 [@media(max-height:760px)]:text-xs"
             >
-              CASE STUDIES
+              Case Studies
             </motion.span>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
@@ -314,7 +328,13 @@ function CaseStudyCard({ study }: { study: Study }) {
       </div>
 
       <blockquote className="relative mb-5 border-l-4 border-red-bright pl-5 text-left font-sans text-[13px] leading-relaxed text-white/95 sm:pl-6 sm:text-sm md:text-[15px] [@media(max-height:760px)]:mb-4 [@media(max-height:760px)]:text-[13px] [@media(max-height:760px)]:leading-[1.45]">
-        &quot;{study.quote}&quot;
+        {study.slug === 'solazu' ? (
+          study.quote
+        ) : (
+          <>
+            &ldquo;{study.quote}&rdquo;
+          </>
+        )}
       </blockquote>
 
       <div className="mb-6 mt-auto flex items-center justify-between gap-5 pl-5 sm:pl-6 [@media(max-height:760px)]:mb-4">

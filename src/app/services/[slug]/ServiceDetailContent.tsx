@@ -178,10 +178,10 @@ function GodSalesSystemOverview() {
             whileHover={{ translateY: -4, boxShadow: '0 12px 40px rgba(0, 112, 255, 0.15)', borderColor: 'rgba(0, 112, 255, 0.7)' }}
             className="glow-card flex flex-col justify-start rounded-[15px] p-6 sm:p-8 border border-blue-bright/35 text-left h-full transition-colors duration-300"
           >
-            <h3 className="font-sans text-sm sm:text-base font-extrabold uppercase leading-snug tracking-wide text-white mb-6 min-h-[44px]">
+            <h3 className="font-sans text-sm sm:text-base font-extrabold uppercase leading-snug tracking-wide text-white mb-6 min-h-[48px]">
               {item.title}
             </h3>
-            <div className="flex gap-3 items-start mt-auto">
+            <div className="flex gap-3 items-start">
               <span className="text-text-secondary text-base font-bold shrink-0 mt-0.5">•</span>
               <p className="font-sans text-xs sm:text-[13px] font-medium leading-relaxed text-text-secondary">
                 {item.desc}
@@ -454,16 +454,16 @@ function GodSalesSystemOverview() {
               transition={{ duration: 0.55, delay: idx * 0.06, ease: 'easeOut' }}
               className="flex items-start gap-4 text-left"
             >
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-blue-bright font-sans text-[11px] font-bold text-red-bright">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-blue-bright font-sans text-xs font-bold text-red-bright">
                 {item.number}
               </span>
               <div className="min-w-0">
-                <h3 className="mb-4 font-sans text-[11px] font-bold uppercase leading-snug text-blue-bright">
+                <h3 className="mb-4 font-sans text-[13px] font-extrabold uppercase leading-snug tracking-wider text-blue-bright">
                   {item.title}
                 </h3>
                 <ul className="flex list-disc flex-col gap-1.5 pl-4">
                   {item.items.map((point) => (
-                    <li key={point} className="font-sans text-[11px] font-medium leading-relaxed text-white/90">
+                    <li key={point} className="font-sans text-[10.5px] font-normal leading-relaxed text-white/75">
                       {point}
                     </li>
                   ))}
@@ -1032,7 +1032,7 @@ function GlobalExpansionOverview() {
         <h2 className="mb-4 font-sans text-2xl font-extrabold uppercase leading-tight tracking-wide text-white sm:text-[32px]">
           DEEP COMPANY ANALYSIS & MASTER PLAN
         </h2>
-        <p className="mx-auto w-full font-sans text-xs sm:text-[15px] font-bold leading-relaxed tracking-normal text-blue-bright">
+        <p className="mx-auto max-w-[850px] font-sans text-xs sm:text-[15px] font-bold leading-relaxed tracking-normal text-blue-bright">
           Many companies attempt international expansion without fully understanding their own strengths,
           weaknesses, or readiness, leading to misaligned strategies and execution failures.
         </p>
@@ -1264,7 +1264,7 @@ function GlobalExpansionOverview() {
           WHAT WE OFFER
         </h3>
 
-        <div className="flex flex-col gap-6 max-w-[900px] mx-auto text-center font-sans mb-16">
+        <div className="flex flex-col gap-6 max-w-[1200px] mx-auto text-center font-sans mb-16">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}

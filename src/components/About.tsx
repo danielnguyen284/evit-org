@@ -73,7 +73,7 @@ export default function About() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-10%' }}
           transition={{ duration: 0.6 }}
-          className="font-sans text-sm font-bold uppercase text-blue-bright tracking-[0.15em] mb-4 block"
+          className="font-sans text-sm font-bold text-blue-bright tracking-[0.15em] mb-4 block"
         >
           About Company
         </motion.span>

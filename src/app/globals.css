@@ -3,7 +3,7 @@
 :root {
   --background: #03032D;
   --foreground: #ffffff;
-  --blue-bright: #0184D1;
+  --blue-bright: #38bdf8;
   --red-bright: #E30000;
   --text-primary: #ffffff;
   --text-secondary: #ffffff;
@@ -31,6 +31,7 @@ body {
   overflow: visible !important;
   overflow-x: visible !important;
   overflow-y: visible !important;
+  overflow-wrap: break-word;
 }
 
 body {
@@ -51,9 +52,9 @@ body::before {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  filter: brightness(0) saturate(100%) invert(38%) sepia(98%) saturate(2800%) hue-rotate(255deg) brightness(106%) contrast(104%);
+  filter: brightness(0) saturate(100%) invert(38%) sepia(98%) saturate(2800%) hue-rotate(255deg) brightness(115%) contrast(110%);
   mix-blend-mode: screen;
-  opacity: 0.42;
+  opacity: 0.58;
   pointer-events: none;
 }
 
@@ -68,15 +69,15 @@ body::after {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  filter: brightness(0) saturate(100%) invert(38%) sepia(98%) saturate(2800%) hue-rotate(255deg) brightness(106%) contrast(104%);
+  filter: brightness(0) saturate(100%) invert(38%) sepia(98%) saturate(2800%) hue-rotate(255deg) brightness(115%) contrast(110%);
   mix-blend-mode: screen;
-  opacity: 0.22;
+  opacity: 0.38;
   pointer-events: none;
 }
 
 main[class~="bg-[#03032D]"],
 main [class~="bg-[#03032D]"] {
-  background-color: rgba(3, 3, 45, 0.94) !important;
+  background-color: rgba(3, 3, 45, 0.88) !important;
 }
 
 body > *:not(header) {
@@ -85,35 +86,32 @@ body > *:not(header) {
 }
 
 /* Global content readability */
-main p,
-main li,
-main blockquote {
-  color: #ffffff !important;
-  font-size: 1rem !important;
-  line-height: 1.75 !important;
-}
+@layer base {
+  main p,
+  main li,
+  main blockquote {
+    font-size: 1rem;
+    line-height: 1.75;
+  }
 
-main ul,
-main ol {
-  color: #ffffff !important;
-}
+  main ul,
+  main ol {
+    color: #ffffff;
+  }
 
-main li::marker {
-  color: #ffffff !important;
-}
-
-main p[class*="text-text-secondary"],
-main p[class*="text-white/"],
-main li[class*="text-white/"],
-main blockquote[class*="text-white/"] {
-  color: #ffffff !important;
+  main p[class*="text-text-secondary"],
+  main p[class*="text-white/"],
+  main li[class*="text-white/"],
+  main blockquote[class*="text-white/"] {
+    color: #ffffff;
+  }
 }
 
 @media (min-width: 640px) {
   main p,
   main li,
   main blockquote {
-    font-size: 1.0625rem !important;
+    font-size: 1.0625rem;
   }
 }
 

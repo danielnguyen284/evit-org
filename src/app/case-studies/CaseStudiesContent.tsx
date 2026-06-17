@@ -92,6 +92,20 @@ const studies: Study[] = [
   },
   {
     id: 6,
+    slug: 'solazu',
+    quote: (
+      <>
+        Expansion to the US market
+      </>
+    ),
+    name: 'Mr. Luan Truong',
+    role: 'Chief Executive Officer (CEO)',
+    avatar: '/assets/clients/luan-truong-solazu.jpg',
+    avatarAlt: 'Luan Truong portrait',
+    companyLogo: '/assets/clients/solazu_logo.jpg',
+  },
+  {
+    id: 7,
     slug: 'nkk-tech',
     quote: (
       <>
@@ -105,7 +119,7 @@ const studies: Study[] = [
     companyLogo: '/assets/clients/nkktech_logo.jpg',
   },
   {
-    id: 7,
+    id: 8,
     slug: 'nfq',
     quote: (
       <>
@@ -153,7 +167,7 @@ export default function CaseStudiesContent() {
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="font-sans text-3xl sm:text-[46px] md:text-[56px] font-extrabold uppercase tracking-tight text-white select-none"
             >
-              CASE STUDIES
+              Case Studies
             </motion.h1>
           </div>
         </section>
@@ -204,7 +218,13 @@ export default function CaseStudiesContent() {
                 </div>
 
                 <blockquote className="relative mb-5 border-l-4 border-red-bright pl-4 text-left font-sans text-xs leading-relaxed text-white/95 sm:pl-5 sm:text-[13px] md:text-sm">
-                  &quot;{study.quote}&quot;
+                  {study.slug === 'solazu' ? (
+                    study.quote
+                  ) : (
+                    <>
+                      &ldquo;{study.quote}&rdquo;
+                    </>
+                  )}
                 </blockquote>
 
                 <div className="mb-6 mt-auto flex items-center justify-between gap-5 pl-4 sm:pl-5">
