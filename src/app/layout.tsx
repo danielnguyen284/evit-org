@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { BookingProvider } from "@/components/BookingModal";
 import {
@@ -24,7 +25,11 @@ export const metadata: Metadata = {
     path: "/",
   }),
   icons: {
-    icon: "/assets/logo.png",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png", sizes: "192x192" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" }],
   },
 };
 
@@ -79,6 +84,18 @@ export default function RootLayout({
         <BookingProvider>
           {children}
         </BookingProvider>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-YQ419FL6T2"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-YQ419FL6T2');
+          `}
+        </Script>
       </body>
     </html>
   );

@@ -165,7 +165,7 @@ export default function CaseStudiesContent() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="font-sans text-3xl sm:text-[46px] md:text-[56px] font-extrabold uppercase tracking-tight text-white select-none"
+              className="font-sans text-3xl sm:text-[46px] md:text-[56px] font-extrabold  tracking-tight text-white select-none"
             >
               Case Studies
             </motion.h1>
