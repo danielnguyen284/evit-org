@@ -5,7 +5,7 @@ import { useBooking } from './BookingModal';
 
 
 
-export default function Contact() {
+export default function Contact({ isMainHeading = false }: { isMainHeading?: boolean }) {
   const { openBooking } = useBooking();
   const [formState, setFormState] = useState({
     name: '',
@@ -17,6 +17,14 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', 'generate_lead', {
+        event_category: 'contact',
+        event_label: 'contact_form_submit'
+      });
+    }
+
     // Simulate submission
     setIsSubmitted(true);
     setTimeout(() => {
@@ -39,9 +47,15 @@ export default function Contact() {
           <span className="font-sans text-xs sm:text-sm font-bold uppercase text-blue-bright tracking-[0.22em] mb-2 block">
             Contact Us
           </span>
-          <h2 className="font-sans text-2xl sm:text-3xl md:text-[34px] font-extrabold text-white leading-[1.2] tracking-wide mb-4 uppercase">
-            LOOKING TO EXPAND YOUR MARKET?
-          </h2>
+          {isMainHeading ? (
+            <h1 className="font-sans text-2xl sm:text-3xl md:text-[34px] font-extrabold text-white leading-[1.2] tracking-wide mb-4 uppercase">
+              LOOKING TO EXPAND YOUR MARKET?
+            </h1>
+          ) : (
+            <h2 className="font-sans text-2xl sm:text-3xl md:text-[34px] font-extrabold text-white leading-[1.2] tracking-wide mb-4 uppercase">
+              LOOKING TO EXPAND YOUR MARKET?
+            </h2>
+          )}
           <p className="font-sans text-[13px] sm:text-[14px] leading-relaxed text-white/85 mb-6 max-w-[580px]">
             Get in touch with our consultant to discover how EVIT can support your upcoming revenue growth.
           </p>
@@ -63,45 +77,53 @@ export default function Contact() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
-                <div>
+                <div className="flex flex-col gap-1.5">
+                  <label htmlFor="name" className="font-sans text-[11px] font-bold text-white/80 uppercase tracking-wider">Your Name</label>
                   <input
+                    id="name"
                     type="text"
                     name="name"
                     value={formState.name}
                     onChange={handleChange}
-                    placeholder="Your Name"
+                    placeholder="Enter your name"
                     required
                     className="w-full bg-white border border-white/10 text-[#03032D] text-xs sm:text-sm font-semibold rounded-[8px] px-4 py-3 placeholder-gray-400 focus:ring-2 focus:ring-blue-bright/50 focus:border-blue-bright outline-none transition-all shadow-inner"
                   />
                 </div>
-                <div>
+                <div className="flex flex-col gap-1.5">
+                  <label htmlFor="email" className="font-sans text-[11px] font-bold text-white/80 uppercase tracking-wider">Your Email</label>
                   <input
+                    id="email"
                     type="email"
                     name="email"
                     value={formState.email}
                     onChange={handleChange}
-                    placeholder="Your Email"
+                    placeholder="Enter your email"
                     required
                     className="w-full bg-white border border-white/10 text-[#03032D] text-xs sm:text-sm font-semibold rounded-[8px] px-4 py-3 placeholder-gray-400 focus:ring-2 focus:ring-blue-bright/50 focus:border-blue-bright outline-none transition-all shadow-inner"
                   />
                 </div>
-                <div>
+                <div className="flex flex-col gap-1.5">
+                  <label htmlFor="phone" className="font-sans text-[11px] font-bold text-white/80 uppercase tracking-wider">Your Phone</label>
                   <input
+                    id="phone"
                     type="tel"
                     name="phone"
                     value={formState.phone}
                     onChange={handleChange}
-                    placeholder="Your Phone"
+                    placeholder="Enter your phone number"
                     required
                     className="w-full bg-white border border-white/10 text-[#03032D] text-xs sm:text-sm font-semibold rounded-[8px] px-4 py-3 placeholder-gray-400 focus:ring-2 focus:ring-blue-bright/50 focus:border-blue-bright outline-none transition-all shadow-inner"
                   />
                 </div>
-                <div>
+                <div className="flex flex-col gap-1.5">
+                  <label htmlFor="message" className="font-sans text-[11px] font-bold text-white/80 uppercase tracking-wider">Your Message</label>
                   <textarea
+                    id="message"
                     name="message"
                     value={formState.message}
                     onChange={handleChange}
-                    placeholder="Your Message"
+                    placeholder="How can we help you?"
                     required
                     rows={3}
                     className="w-full bg-white border border-white/10 text-[#03032D] text-xs sm:text-sm font-semibold rounded-[8px] px-4 py-3 placeholder-gray-400 focus:ring-2 focus:ring-blue-bright/50 focus:border-blue-bright outline-none transition-all shadow-inner resize-none"

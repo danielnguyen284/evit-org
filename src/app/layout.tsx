@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   ...createPageMetadata({
     title: "EVIT Organization | Get More Clients With A Proven Sales System",
     description:
-      "EVIT helps IT service providers scale revenue and expand globally. We install a proven IT sales & lead generation system so founders and small sales teams build a predictable pipeline.",
+      "Scale your IT service revenue globally. EVIT installs a proven sales & lead generation system to help founders build a predictable pipeline.",
     path: "/",
   }),
   icons: {
@@ -85,7 +85,7 @@ export default function RootLayout({
           {children}
         </BookingProvider>
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-YQ419FL6T2"
+          src="https://www.googletagmanager.com/gtag/js?id=G-GNW68LYXHR"
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">
@@ -93,7 +93,7 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-YQ419FL6T2');
+            gtag('config', 'G-GNW68LYXHR');
           `}
         </Script>
       </body>

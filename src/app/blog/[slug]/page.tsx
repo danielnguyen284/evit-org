@@ -60,7 +60,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       ...metadata.openGraph,
       type: "article",
       publishedTime: post.date,
-      authors: [SITE_NAME],
+      authors: ["EVIT Expert"],
     },
   };
 }
@@ -107,8 +107,8 @@ export default async function BlogDetailPage({ params }: PageProps) {
     datePublished: post.date,
     dateModified: post.date,
     author: {
-      "@type": "Organization",
-      name: SITE_NAME,
+      "@type": "Person",
+      name: "EVIT Expert",
       url: SITE_URL,
     },
     publisher: {

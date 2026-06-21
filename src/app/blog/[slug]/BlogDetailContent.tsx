@@ -110,9 +110,9 @@ export default function BlogDetailContent({ post, allPosts }: BlogDetailContentP
             }}
           />
           <div className="relative z-10 text-center">
-            <h1 className="font-sans text-3xl sm:text-4xl font-extrabold uppercase tracking-[0.05em] text-white">
+            <h2 className="font-sans text-3xl sm:text-4xl font-extrabold uppercase tracking-[0.05em] text-white">
               BLOG PAGE
-            </h1>
+            </h2>
           </div>
         </section>
 

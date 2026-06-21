@@ -54,8 +54,25 @@ export default function FAQ({ items }: { items?: { question: string; answer: str
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": displayFaqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  };
+
   return (
     <section className="relative bg-transparent pb-24 sm:pb-32 overflow-hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       {/* Background Radial Glow */}
       <div className="absolute top-[14%] left-1/2 -translate-x-1/2 w-[760px] h-[520px] bg-gradient-to-tr from-blue-bright/10 to-purple-800/10 blur-[90px] rounded-full pointer-events-none -z-1" />
 
@@ -111,18 +128,15 @@ export default function FAQ({ items }: { items?: { question: string; answer: str
 
                 <div className="overflow-hidden">
                   <AnimatePresence initial={false}>
-                    {isOpen && (
                       <motion.div
-                        initial={{ height: 0, opacity: 0, marginTop: 0 }}
-                        animate={{ height: 'auto', opacity: 1, marginTop: 14 }}
-                        exit={{ height: 0, opacity: 0, marginTop: 0 }}
+                        initial={false}
+                        animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0, marginTop: isOpen ? 14 : 0 }}
                         transition={{ duration: 0.3, ease: 'easeInOut' }}
                       >
                         <p className="font-sans text-xs sm:text-sm font-semibold text-white/90 leading-relaxed text-left border-t border-blue-bright/10 pt-4">
                           {faq.answer}
                         </p>
                       </motion.div>
-                    )}
                   </AnimatePresence>
                 </div>
               </motion.article>

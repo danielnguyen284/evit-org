@@ -20,7 +20,8 @@ export default function Hero() {
           alt="Get More Clients With A Proven Sales System"
           fill
           priority
-          sizes="100vw"
+          sizes="(max-width: 640px) 640px, (max-width: 768px) 768px, 100vw"
+          quality={75}
           className="object-cover object-center"
         />
         {/* Gradient overlay */}
@@ -32,16 +33,13 @@ export default function Hero() {
 
 
       <div className="relative z-10 flex w-full max-w-[950px] flex-col items-center text-center">
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-6 font-sans text-3xl font-extrabold uppercase leading-[1.25] tracking-tight text-white sm:text-[40px] md:text-[52px] [@media(max-height:760px)]:mb-4 [@media(max-height:760px)]:md:text-[46px]"
+        <h1
+          className="mb-6 font-sans text-3xl font-extrabold uppercase leading-[1.25] tracking-tight text-white sm:text-[40px] md:text-[52px] [@media(max-height:760px)]:mb-4 [@media(max-height:760px)]:md:text-[46px] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
         >
           Get More Clients
-          <span className="block text-red-bright mt-1">With A Proven Sales System</span>
-          <span className="block text-red-bright mt-1">For IT Service Providers</span>
-        </motion.h1>
+          <span className="block text-red-bright mt-1 drop-shadow-[0_0_8px_rgba(255,50,50,0.5)]">With A Proven Sales System</span>
+          <span className="block text-red-bright mt-1 drop-shadow-[0_0_8px_rgba(255,50,50,0.5)]">For IT Service Providers</span>
+        </h1>
 
         <motion.p
           initial={{ opacity: 0, y: 30 }}

@@ -64,10 +64,10 @@ export default function Footer() {
               <LocationIcon />
               <span>145 Tran Sam, Son Tra, Da Nang, Vietnam</span>
             </li>
-            {/* <li>
+            <li>
               <MailIcon />
-              <span>info@evitconsulting.com</span>
-            </li> */}
+              <span>info@evit-org.com</span>
+            </li>
             <li>
               <PhoneIcon />
               <span>+84705737170</span>

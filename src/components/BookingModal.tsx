@@ -17,6 +17,12 @@ export function BookingProvider({ children }: { children: React.ReactNode }) {
   const [bookingSession, setBookingSession] = useState(0);
 
   const openBooking = () => {
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', 'generate_lead', {
+        event_category: 'booking',
+        event_label: 'open_booking_modal'
+      });
+    }
     setBookingSession((session) => session + 1);
     setIsOpen(true);
     document.body.style.overflow = 'hidden';

@@ -35,7 +35,7 @@ export const caseStudiesData: CaseStudyData[] = [
     heroTitle: "EXPANSION TO THE APAC MARKET",
     heroBg: "/assets/1508aab01b3a4fca97b3b1ccfa52ad0ca9d80acb.webp",
     title: "Global Market Expansion Consulting",
-    subheading: "A real-world case study on global market entry for an IT services company, covering strategy design, sales process development, and international client acquisition.",
+    subheading: "A real-world case study on global market entry for an IT services company, covering strategy design, sales process, and client acquisition.",
     client: {
       logo: "/assets/clients/company-1.webp",
       name: "GMO-Z.com RUNSYSTEM",

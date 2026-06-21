@@ -18,9 +18,8 @@ export default function ContactPage() {
       <Header />
       
       <main className="bg-[#03032D] min-h-screen text-white flex flex-col justify-between pt-[88px] relative overflow-hidden">
-        {/* Reusable Contact Form Section */}
         <div className="flex-1 flex items-center justify-center w-full py-4 sm:py-6">
-          <Contact />
+          <Contact isMainHeading={true} />
         </div>
 
         <Footer />
