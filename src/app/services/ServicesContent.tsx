@@ -8,6 +8,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingCalendar from "@/components/FloatingCalendar";
 import CaseStudies from "@/components/CaseStudies";
+import ResponsiveHeroImage from "@/components/ResponsiveHeroImage";
 import { servicesData } from "@/data/servicesData";
 
 export default function ServicesContent() {
@@ -20,12 +21,10 @@ export default function ServicesContent() {
         <section className="relative h-screen w-full flex items-center justify-center pb-[40px] overflow-hidden">
           {/* Background image container for Next.js Image Optimization */}
           <div className="absolute inset-0 -z-10 select-none pointer-events-none">
-            <Image
-              src="/assets/services-bg.webp"
+            <ResponsiveHeroImage
+              desktopSrc="/assets/services-bg.webp"
+              mobileSrc="/assets/services-bg-mobile.webp"
               alt="Services Banner"
-              fill
-              priority
-              sizes="100vw"
               className="object-cover object-center"
             />
             {/* Gradient overlay */}
@@ -51,7 +50,7 @@ export default function ServicesContent() {
 
         {/* Detailed Services list */}
         <div className="relative z-10 max-w-[1200px] mx-auto px-6 pb-24 pt-24 sm:pt-32 flex flex-col gap-24 sm:gap-32">
-          {servicesData.map((service, index) => (
+          {servicesData.map((service) => (
             <motion.section
               key={service.id}
               id={service.id}
@@ -71,7 +70,6 @@ export default function ServicesContent() {
                     fill
                     sizes="(max-width: 768px) 100vw, 450px"
                     className="object-cover"
-                    priority={index === 0}
                   />
                 </div>
 

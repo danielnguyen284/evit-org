@@ -75,6 +75,13 @@ body::after {
   pointer-events: none;
 }
 
+@media (max-width: 767px) {
+  body::before,
+  body::after {
+    display: none;
+  }
+}
+
 main[class~="bg-[#03032D]"],
 main [class~="bg-[#03032D]"] {
   background-color: rgba(3, 3, 45, 0.88) !important;

@@ -82,7 +82,7 @@ export default function Header() {
     setIsMenuOpen(false);
   };
 
-  const handleLinkClick = (id?: string) => {
+  const handleLinkClick = () => {
     closeMenu();
   };
 
@@ -134,7 +134,7 @@ export default function Header() {
     >
       <div className="max-w-[1200px] w-full mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 cursor-pointer" onClick={() => handleLinkClick('home')}>
+        <Link href="/" className="flex items-center gap-3 cursor-pointer" onClick={handleLinkClick}>
           <motion.div
             animate={{ height: isSticky ? 40 : 52 }}
             transition={{ duration: 0.3 }}
@@ -147,7 +147,6 @@ export default function Header() {
               height={52}
               style={{ height: '100%', width: 'auto' }}
               className="object-contain"
-              priority
             />
           </motion.div>
         </Link>
@@ -165,7 +164,7 @@ export default function Header() {
                       currentActiveLink === item.id ? 'text-red-bright opacity-100' : 'text-white/80 hover:text-white hover:opacity-100'
                     }`}
                     onClick={() => {
-                      handleLinkClick(item.id);
+                      handleLinkClick();
                     }}
                   >
                     {item.label}
@@ -238,7 +237,7 @@ export default function Header() {
                           className={`font-sans text-sm font-bold uppercase tracking-wider transition-colors duration-300 py-2 ${
                             currentActiveLink === item.id ? 'text-red-bright' : 'text-white/80 hover:text-white'
                           }`}
-                          onClick={() => handleLinkClick(item.id)}
+                          onClick={handleLinkClick}
                         >
                           {item.label}
                         </Link>
@@ -299,7 +298,7 @@ export default function Header() {
                       className={`font-sans text-sm font-bold uppercase tracking-wider transition-colors duration-300 py-2 block w-full ${
                         currentActiveLink === item.id ? 'text-red-bright' : 'text-white/80 hover:text-white'
                       }`}
-                      onClick={() => handleLinkClick(item.id)}
+                      onClick={handleLinkClick}
                     >
                       {item.label}
                     </Link>

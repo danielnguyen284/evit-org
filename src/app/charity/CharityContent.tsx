@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingCalendar from "@/components/FloatingCalendar";
+import ResponsiveHeroImage from "@/components/ResponsiveHeroImage";
 
 const revealViewport = {
   once: true,
@@ -144,12 +145,10 @@ export default function CharityContent() {
         <section className="relative flex h-screen min-h-screen w-full items-center justify-center overflow-hidden px-6">
           {/* Background image container for Next.js Image Optimization */}
           <div className="absolute inset-0 -z-10 select-none pointer-events-none">
-            <Image
-              src="/assets/15477946316ab69706f2750bd4e6a33415a0ed5b.webp"
+            <ResponsiveHeroImage
+              desktopSrc="/assets/15477946316ab69706f2750bd4e6a33415a0ed5b.webp"
+              mobileSrc="/assets/15477946316ab69706f2750bd4e6a33415a0ed5b-mobile.webp"
               alt="One Developer, One Child"
-              fill
-              priority
-              sizes="100vw"
               className="object-cover object-center"
             />
             {/* Gradient overlay */}
@@ -270,7 +269,6 @@ export default function CharityContent() {
                   height={760}
                   sizes="(max-width: 1024px) 78vw, 520px"
                   className="h-full w-auto object-contain object-bottom drop-shadow-[0_22px_34px_rgba(0,0,0,0.45)]"
-                  priority={false}
                 />
               </motion.div>
             </Reveal>

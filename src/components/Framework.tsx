@@ -60,7 +60,6 @@ function FrameworkIcon({ type }: { type: FrameworkStep['icon'] }) {
         fill
         sizes="138px"
         className="object-contain"
-        priority
       />
     </div>
   );
@@ -196,7 +195,6 @@ export default function Framework() {
               height={560}
               sizes="(max-width: 1024px) 80vw, 520px"
               className="relative z-[1] h-auto w-full object-contain"
-              priority
             />
           </motion.div>
         </div>

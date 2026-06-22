@@ -12,6 +12,7 @@ import CaseStudies from "@/components/CaseStudies";
 import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
 import { useBooking } from "@/components/BookingModal";
+import ResponsiveHeroImage, { getMobileHeroSrc, normalizeHeroSrc } from "@/components/ResponsiveHeroImage";
 
 interface ServiceItem {
   id: string;
@@ -1113,7 +1114,6 @@ function GlobalExpansionOverview() {
             height={400}
             sizes="(max-width: 1024px) 80vw, 380px"
             className="relative z-[1] h-auto w-full object-contain"
-            priority
           />
         </motion.div>
       </div>
@@ -1395,6 +1395,8 @@ const godSalesFaqs = [
 ];
 
 export default function ServiceDetailContent({ service }: ServiceDetailContentProps) {
+  const heroSrc = normalizeHeroSrc(service.heroBg || '/assets/services-bg.webp');
+
   return (
     <>
       <Header />
@@ -1404,12 +1406,10 @@ export default function ServiceDetailContent({ service }: ServiceDetailContentPr
         <section className="relative h-screen w-full flex items-center justify-center pb-[40px] overflow-hidden">
           {/* Background image container for Next.js Image Optimization */}
           <div className="absolute inset-0 -z-10 select-none pointer-events-none">
-            <Image
-              src={service.heroBg ? service.heroBg.replace(/\.(png|jpg|jpeg)$/i, '.webp') : '/assets/services-bg.webp'}
+            <ResponsiveHeroImage
+              desktopSrc={heroSrc}
+              mobileSrc={getMobileHeroSrc(heroSrc)}
               alt={service.heroTitle || service.title}
-              fill
-              priority
-              sizes="100vw"
               className="object-cover object-center"
             />
             {/* Gradient overlay */}
@@ -1455,7 +1455,6 @@ export default function ServiceDetailContent({ service }: ServiceDetailContentPr
                 fill
                 sizes="(max-width: 768px) 100vw, 450px"
                 className="object-cover"
-                priority
               />
             </div>
 

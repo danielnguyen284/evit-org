@@ -8,6 +8,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingCalendar from "@/components/FloatingCalendar";
 import { useBooking } from "@/components/BookingModal";
+import ResponsiveHeroImage from "@/components/ResponsiveHeroImage";
 import { WPPostRaw, decodeHtmlEntities } from "@/data/blogData";
 
 // Fade up animation variants for scroll reveal
@@ -91,12 +92,10 @@ export default function ResourcesClient({ initialPosts }: ResourcesClientProps) 
         <section className="relative flex h-screen min-h-screen w-full items-center justify-center overflow-hidden px-6">
           {/* Background image container for Next.js Image Optimization */}
           <div className="absolute inset-0 -z-10 select-none pointer-events-none">
-            <Image
-              src="/assets/f061061994c33d3b378765bc4c76d1d4665cf244.webp"
+            <ResponsiveHeroImage
+              desktopSrc="/assets/f061061994c33d3b378765bc4c76d1d4665cf244.webp"
+              mobileSrc="/assets/f061061994c33d3b378765bc4c76d1d4665cf244-mobile.webp"
               alt="Connect & leverage top quality IT teams in Vietnam"
-              fill
-              priority
-              sizes="100vw"
               className="object-cover object-center"
             />
             {/* Gradient overlay */}
@@ -156,7 +155,6 @@ export default function ResourcesClient({ initialPosts }: ResourcesClientProps) 
                       width={70}
                       height={70}
                       className="object-contain w-[70px] h-[70px] transition-transform duration-300 group-hover:scale-105"
-                      priority={index < 2}
                     />
                   </div>
                   <h3 className="font-sans text-xs sm:text-[13px] font-extrabold text-white tracking-wider leading-relaxed uppercase text-center w-full max-w-[380px]">
@@ -266,7 +264,6 @@ export default function ResourcesClient({ initialPosts }: ResourcesClientProps) 
                   width={1000}
                   height={275}
                   className="w-full h-auto object-contain"
-                  priority={true}
                 />
               </div>
             </Reveal>

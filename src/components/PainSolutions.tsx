@@ -160,7 +160,7 @@ export default function PainSolutions() {
                     height={380}
                     style={{ height: 'auto' }}
                     className="w-[86%] max-w-full object-contain drop-shadow-[0_18px_30px_rgba(0,0,0,0.52)]"
-                    priority={activeIndex === 0}
+                    preload={activeIndex === 0}
                   />
                 </motion.div>
               </div>

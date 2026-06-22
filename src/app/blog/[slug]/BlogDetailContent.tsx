@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -128,7 +128,7 @@ export default function BlogDetailContent({ post, allPosts }: BlogDetailContentP
                 src={getImageUrl(post)}
                 alt={decodeHtmlEntities(post.title.rendered)}
                 fill
-                priority
+                sizes="(max-width: 768px) 100vw, 900px"
                 className="object-cover"
               />
             </div>

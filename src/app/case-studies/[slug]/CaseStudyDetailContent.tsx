@@ -8,6 +8,7 @@ import Footer from '@/components/Footer';
 import FloatingCalendar from '@/components/FloatingCalendar';
 import Contact from '@/components/Contact';
 import CaseStudies from '@/components/CaseStudies';
+import ResponsiveHeroImage, { getMobileHeroSrc, normalizeHeroSrc } from '@/components/ResponsiveHeroImage';
 import { CaseStudyData } from '@/data/caseStudiesData';
 
 interface CaseStudyDetailContentProps {
@@ -35,6 +36,8 @@ function SectionReveal({
 }
 
 export default function CaseStudyDetailContent({ caseStudy }: CaseStudyDetailContentProps) {
+  const heroSrc = normalizeHeroSrc(caseStudy.heroBg || '/assets/1508aab01b3a4fca97b3b1ccfa52ad0ca9d80acb.webp');
+
   return (
     <>
       <Header />
@@ -44,12 +47,10 @@ export default function CaseStudyDetailContent({ caseStudy }: CaseStudyDetailCon
         <section className="relative h-screen w-full flex items-center justify-center pb-[40px] overflow-hidden">
           {/* Background image container for Next.js Image Optimization */}
           <div className="absolute inset-0 -z-10 select-none pointer-events-none">
-            <Image
-              src={caseStudy.heroBg ? caseStudy.heroBg.replace(/\.(png|jpg|jpeg)$/i, '.webp') : '/assets/1508aab01b3a4fca97b3b1ccfa52ad0ca9d80acb.webp'}
+            <ResponsiveHeroImage
+              desktopSrc={heroSrc}
+              mobileSrc={getMobileHeroSrc(heroSrc)}
               alt={caseStudy.heroTitle}
-              fill
-              priority
-              sizes="100vw"
               className="object-cover object-center"
             />
             {/* Gradient overlay */}
@@ -99,7 +100,6 @@ export default function CaseStudyDetailContent({ caseStudy }: CaseStudyDetailCon
                       fill
                       className="object-contain"
                       sizes="256px"
-                      priority
                     />
                   </div>
                   

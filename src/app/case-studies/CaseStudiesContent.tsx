@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingCalendar from "@/components/FloatingCalendar";
+import ResponsiveHeroImage from "@/components/ResponsiveHeroImage";
 import Link from 'next/link';
 
 interface Study {
@@ -144,12 +145,10 @@ export default function CaseStudiesContent() {
         <section className="relative h-screen w-full flex items-center justify-center pb-[40px] overflow-hidden">
           {/* Background image container for Next.js Image Optimization */}
           <div className="absolute inset-0 -z-10 select-none pointer-events-none">
-            <Image
-              src="/assets/1508aab01b3a4fca97b3b1ccfa52ad0ca9d80acb.webp"
+            <ResponsiveHeroImage
+              desktopSrc="/assets/1508aab01b3a4fca97b3b1ccfa52ad0ca9d80acb.webp"
+              mobileSrc="/assets/1508aab01b3a4fca97b3b1ccfa52ad0ca9d80acb-mobile.webp"
               alt="Case Studies Banner"
-              fill
-              priority
-              sizes="100vw"
               className="object-cover object-center"
             />
             {/* Gradient overlay */}

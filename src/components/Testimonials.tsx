@@ -1,7 +1,4 @@
-'use client';
-
 import React from 'react';
-import { motion } from 'framer-motion';
 
 const testimonials = [
   {
@@ -103,33 +100,21 @@ export default function Testimonials() {
       <div className="mx-auto w-full max-w-[1200px] px-6">
         <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-14">
           <div className="text-left lg:sticky lg:top-[120px] lg:col-span-4">
-            <motion.span
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+            <span
               className="mb-4 block font-sans text-lg font-bold uppercase tracking-[0.18em] text-blue-bright"
             >
               Testimonials
-            </motion.span>
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
+            </span>
+            <h2
               className="mb-8 font-sans text-3xl font-extrabold uppercase leading-tight text-white sm:text-[40px]"
             >
               WHAT PEOPLE SAY ABOUT EVIT
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+            </h2>
+            <p
               className="font-sans text-sm leading-relaxed text-white/90 sm:text-base"
             >
               Real feedback from professionals who have experienced the EVIT method firsthand. Discover how our tailored approach leads to greater success and sustainable business growth.
-            </motion.p>
+            </p>
           </div>
 
           <div className="testimonials-marquee lg:col-span-8">
@@ -146,7 +131,6 @@ export default function Testimonials() {
                         <TestimonialCard
                           key={`${columnIndex}-${idx}`}
                           testimonial={testimonial}
-                          delay={(idx % column.length) * 0.05}
                         />
                       ))}
                     </div>
@@ -163,23 +147,18 @@ export default function Testimonials() {
 
 function TestimonialCard({
   testimonial,
-  delay,
 }: {
   testimonial: (typeof testimonials)[number];
-  delay: number;
 }) {
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-50px' }}
-      transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
+    <article
       className="glow-card group flex min-h-[300px] cursor-pointer flex-col overflow-hidden p-7 sm:min-h-[330px] sm:p-8"
       tabIndex={0}
     >
-      <div className="mb-5 flex gap-1.5 text-lg text-[#ffd400] select-none" aria-label="5 star rating">
+      <span className="sr-only">5 star rating</span>
+      <div className="mb-5 flex gap-1.5 text-lg text-[#ffd400] select-none" aria-hidden="true">
         {Array.from({ length: 5 }).map((_, index) => (
-          <span key={index} aria-hidden="true">
+          <span key={index}>
             {'\u2605'}
           </span>
         ))}
@@ -195,6 +174,6 @@ function TestimonialCard({
           {testimonial.role}
         </span>
       </div>
-    </motion.article>
+    </article>
   );
 }

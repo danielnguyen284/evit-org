@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useBooking } from './BookingModal';
+import ResponsiveHeroImage from './ResponsiveHeroImage';
 
 export default function Hero() {
   const { openBooking } = useBooking();
@@ -15,13 +15,10 @@ export default function Hero() {
     >
       {/* Background image container for Next.js Image Optimization */}
       <div className="absolute inset-0 -z-10 select-none pointer-events-none">
-        <Image
-          src="/assets/hero-bg.webp"
+        <ResponsiveHeroImage
+          desktopSrc="/assets/hero-bg.webp"
+          mobileSrc="/assets/hero-bg-mobile.webp"
           alt="Get More Clients With A Proven Sales System"
-          fill
-          priority
-          sizes="(max-width: 640px) 640px, (max-width: 768px) 768px, 100vw"
-          quality={75}
           className="object-cover object-center"
         />
         {/* Gradient overlay */}

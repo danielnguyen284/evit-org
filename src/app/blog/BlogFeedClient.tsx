@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingCalendar from "@/components/FloatingCalendar";
+import ResponsiveHeroImage from "@/components/ResponsiveHeroImage";
 import { 
   WPPostRaw, 
   FALLBACK_CATEGORIES,
@@ -133,12 +134,10 @@ export default function BlogFeedClient({ initialPosts }: BlogFeedClientProps) {
         <section className="relative flex h-screen min-h-screen w-full items-center justify-center overflow-hidden px-6">
           {/* Background image container for Next.js Image Optimization */}
           <div className="absolute inset-0 -z-10 select-none pointer-events-none">
-            <Image
-              src="/assets/9c793d0712ca618d82f52c32ab5819a0e00d73ad.webp"
+            <ResponsiveHeroImage
+              desktopSrc="/assets/9c793d0712ca618d82f52c32ab5819a0e00d73ad.webp"
+              mobileSrc="/assets/9c793d0712ca618d82f52c32ab5819a0e00d73ad-mobile.webp"
               alt="Blog Page"
-              fill
-              priority
-              sizes="100vw"
               className="object-cover object-center"
             />
             {/* Gradient overlay */}

@@ -7,6 +7,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingCalendar from "@/components/FloatingCalendar";
 import CaseStudies from "@/components/CaseStudies";
+import ResponsiveHeroImage from "@/components/ResponsiveHeroImage";
 
 const problemBullets = [
   'Do not enjoy sales, usually are introverts',
@@ -52,12 +53,10 @@ export default function AboutContent() {
         <section className="relative flex h-screen min-h-screen w-full items-center justify-center overflow-hidden px-6 pb-[40px] pt-[88px]">
           {/* Background image container for Next.js Image Optimization */}
           <div className="absolute inset-0 -z-10 select-none pointer-events-none">
-            <Image
-              src="/assets/7c21ecf1796d40be0fbfd3cd297c2396db71629c.webp"
+            <ResponsiveHeroImage
+              desktopSrc="/assets/7c21ecf1796d40be0fbfd3cd297c2396db71629c.webp"
+              mobileSrc="/assets/7c21ecf1796d40be0fbfd3cd297c2396db71629c-mobile.webp"
               alt="Welcome To EVIT"
-              fill
-              priority
-              sizes="100vw"
               className="object-cover object-center"
             />
             {/* Gradient overlay */}
@@ -172,7 +171,6 @@ export default function AboutContent() {
                   height={520}
                   sizes="(max-width: 1024px) 80vw, 460px"
                   className="relative z-10 h-auto w-full object-contain"
-                  priority={false}
                 />
               </Reveal>
             </div>
