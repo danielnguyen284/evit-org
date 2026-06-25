@@ -54,6 +54,12 @@ export interface BlogTag {
   slug: string;
 }
 
+const CURRENT_SITE_URL = "https://www.evitconsulting.com";
+const LEGACY_SITE_URL_PATTERN = /^https?:\/\/(?:www\.)?evit-org\.com/i;
+const LEGACY_SITE_ORIGIN_PATTERN = /https?:\/\/(?:www\.)?evit-org\.com/gi;
+
+export const BLOG_POSTS_PER_PAGE = 6;
+
 export const FALLBACK_CATEGORIES: BlogCategory[] = [
   { id: 1, name: "All News", slug: "all" },
   { id: 2, name: "Business", slug: "business" },
@@ -349,4 +355,57 @@ export function decodeHtmlEntities(str: string): string {
     '&#62;': '>'
   };
   return str.replace(/&#?\w+;/g, match => entities[match] || match);
+}
+
+export function stripHtmlToText(html: string): string {
+  if (!html) return '';
+
+  const textWithSpacing = html
+    .replace(/<br\s*\/?>/gi, ' ')
+    .replace(/<\/(p|div|li|h[1-6]|blockquote|figcaption)>/gi, ' ')
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/&nbsp;/gi, ' ');
+
+  return decodeHtmlEntities(textWithSpacing).replace(/\s+/g, ' ').trim();
+}
+
+export function normalizeLegacyPostLink(url: string): string {
+  if (!LEGACY_SITE_URL_PATTERN.test(url)) {
+    return url;
+  }
+
+  try {
+    const parsed = new URL(url);
+    const normalizedPath = parsed.pathname.replace(/\/+$/, '');
+    const suffix = `${parsed.search}${parsed.hash}`;
+
+    if (!normalizedPath || normalizedPath === '/') {
+      return `${CURRENT_SITE_URL}/${suffix}`;
+    }
+
+    if (normalizedPath === '/blog' || normalizedPath.startsWith('/blog/')) {
+      return `${normalizedPath}${suffix}`;
+    }
+
+    if (normalizedPath.startsWith('/category') || normalizedPath.startsWith('/tag')) {
+      return `/blog${suffix}`;
+    }
+
+    if (normalizedPath.startsWith('/wp-content') || normalizedPath.startsWith('/wp-json')) {
+      return `${CURRENT_SITE_URL}${parsed.pathname}${suffix}`;
+    }
+
+    return `/blog${normalizedPath}${suffix}`;
+  } catch {
+    return url.replace(LEGACY_SITE_ORIGIN_PATTERN, CURRENT_SITE_URL);
+  }
+}
+
+export function normalizeLegacyPostLinks(html: string): string {
+  if (!html) return '';
+
+  return html.replace(
+    /\bhref=(["'])(https?:\/\/(?:www\.)?evit-org\.com[^"']*)\1/gi,
+    (_match, quote: string, url: string) => `href=${quote}${normalizeLegacyPostLink(url)}${quote}`
+  );
 }

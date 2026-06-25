@@ -2,10 +2,22 @@ import { MetadataRoute } from 'next';
 import { servicesData } from '@/data/servicesData';
 import { caseStudiesData } from '@/data/caseStudiesData';
 import { fetchWordPressPosts } from '@/data/blogFetch';
+import { BLOG_POSTS_PER_PAGE } from '@/data/blogData';
 import { SITE_URL } from '@/lib/seo';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = SITE_URL;
+
+  const getPostDate = (date?: string) => {
+    if (date) {
+      const parsed = new Date(date);
+      if (!isNaN(parsed.getTime())) {
+        return parsed;
+      }
+    }
+
+    return new Date();
+  };
 
   // 1. Static pages
   const staticPaths = [
@@ -44,16 +56,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // 4. WordPress blog post dynamic pages
   let blogEntries: MetadataRoute.Sitemap = [];
+  let blogPaginationEntries: MetadataRoute.Sitemap = [];
   try {
     const posts = await fetchWordPressPosts();
     blogEntries = posts.map((post) => {
-      let postDate = new Date();
-      if (post.date) {
-        const parsed = new Date(post.date);
-        if (!isNaN(parsed.getTime())) {
-          postDate = parsed;
-        }
-      }
+      const postDate = getPostDate(post.date);
       return {
         url: `${baseUrl}/blog/${post.slug}`,
         lastModified: postDate,
@@ -61,9 +68,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.6,
       };
     });
+
+    const totalBlogPages = Math.ceil(posts.length / BLOG_POSTS_PER_PAGE);
+    blogPaginationEntries = Array.from({ length: Math.max(totalBlogPages - 1, 0) }, (_, index) => {
+      const page = index + 2;
+      const postsOnPage = posts.slice((page - 1) * BLOG_POSTS_PER_PAGE, page * BLOG_POSTS_PER_PAGE);
+      const lastModified = postsOnPage
+        .map((post) => getPostDate(post.date))
+        .sort((a, b) => b.getTime() - a.getTime())[0] || new Date();
+
+      return {
+        url: `${baseUrl}/blog/page/${page}`,
+        lastModified,
+        changeFrequency: 'weekly' as const,
+        priority: 0.5,
+      };
+    });
   } catch (error) {
     console.error('Failed to generate sitemap entries for blog posts:', error);
   }
 
-  return [...staticEntries, ...serviceEntries, ...caseStudyEntries, ...blogEntries];
+  return [...staticEntries, ...serviceEntries, ...caseStudyEntries, ...blogEntries, ...blogPaginationEntries];
 }

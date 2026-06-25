@@ -4,14 +4,17 @@ import React, { useState, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { Search, X } from 'lucide-react';
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingCalendar from "@/components/FloatingCalendar";
 import ResponsiveHeroImage from "@/components/ResponsiveHeroImage";
 import { 
+  BLOG_POSTS_PER_PAGE,
   WPPostRaw, 
   FALLBACK_CATEGORIES,
-  decodeHtmlEntities 
+  decodeHtmlEntities,
+  stripHtmlToText
 } from "@/data/blogData";
 
 const fadeUp = {
@@ -44,15 +47,41 @@ function Reveal({
 
 interface BlogFeedClientProps {
   initialPosts: WPPostRaw[];
+  currentPage?: number;
 }
 
-export default function BlogFeedClient({ initialPosts }: BlogFeedClientProps) {
+type PaginationItem = number | 'start-ellipsis' | 'end-ellipsis';
+
+function createPaginationItems(totalPages: number, currentPage: number): PaginationItem[] {
+  if (totalPages <= 7) {
+    return Array.from({ length: totalPages }, (_, index) => index + 1);
+  }
+
+  const siblingCount = 2;
+  const range = (start: number, end: number) =>
+    Array.from({ length: end - start + 1 }, (_, index) => start + index);
+  const startPage = Math.max(2, currentPage - siblingCount);
+  const endPage = Math.min(totalPages - 1, currentPage + siblingCount);
+  const showStartEllipsis = startPage > 2;
+  const showEndEllipsis = endPage < totalPages - 1;
+
+  if (!showStartEllipsis) {
+    return [1, ...range(2, Math.min(5, totalPages - 1)), 'end-ellipsis', totalPages];
+  }
+
+  if (!showEndEllipsis) {
+    return [1, 'start-ellipsis', ...range(Math.max(2, totalPages - 4), totalPages)];
+  }
+
+  return [1, 'start-ellipsis', ...range(startPage, endPage), 'end-ellipsis', totalPages];
+}
+
+export default function BlogFeedClient({ initialPosts, currentPage = 1 }: BlogFeedClientProps) {
   const [posts] = useState<WPPostRaw[]>(initialPosts);
   const [activeCategory, setActiveCategory] = useState('all');
-  const [currentPage, setCurrentPage] = useState(1);
+  const [localPage, setLocalPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState('');
   const feedRef = useRef<HTMLDivElement>(null);
-
-  const postsPerPage = 6;
 
   // Helper to extract category name
   const getCategoryName = (post: WPPostRaw): string => {
@@ -85,7 +114,7 @@ export default function BlogFeedClient({ initialPosts }: BlogFeedClientProps) {
   };
 
   // Filter posts based on active category
-  const getFilteredPosts = () => {
+  const getCategoryFilteredPosts = () => {
     if (activeCategory === 'all') return posts;
     
     const activeCatObj = FALLBACK_CATEGORIES.find(c => c.slug === activeCategory);
@@ -99,27 +128,62 @@ export default function BlogFeedClient({ initialPosts }: BlogFeedClientProps) {
     });
   };
 
-  const filteredPosts = getFilteredPosts();
-  const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+  const normalizedSearchQuery = searchQuery.trim().toLowerCase();
+  const categoryFilteredPosts = getCategoryFilteredPosts();
+  const filteredPosts = normalizedSearchQuery
+    ? categoryFilteredPosts.filter((post) => {
+        const searchableText = [
+          decodeHtmlEntities(post.title.rendered),
+          stripHtmlToText(post.excerpt.rendered),
+          stripHtmlToText(post.content.rendered).slice(0, 1500),
+          getCategoryName(post),
+        ].join(' ').toLowerCase();
+
+        return searchableText.includes(normalizedSearchQuery);
+      })
+    : categoryFilteredPosts;
+  const usesUrlPagination = activeCategory === 'all' && !normalizedSearchQuery;
+  const effectivePage = usesUrlPagination ? currentPage : localPage;
+  const totalPages = Math.ceil(filteredPosts.length / BLOG_POSTS_PER_PAGE);
+  const safeCurrentPage = Math.min(Math.max(effectivePage, 1), totalPages || 1);
+  const paginationItems = createPaginationItems(totalPages, safeCurrentPage);
   
   // Get posts for current page
-  const startIndex = (currentPage - 1) * postsPerPage;
-  const displayedPosts = filteredPosts.slice(startIndex, startIndex + postsPerPage);
+  const startIndex = (safeCurrentPage - 1) * BLOG_POSTS_PER_PAGE;
+  const displayedPosts = filteredPosts.slice(startIndex, startIndex + BLOG_POSTS_PER_PAGE);
 
   const handleCategoryChange = (slug: string) => {
     setActiveCategory(slug);
-    setCurrentPage(1);
+    setLocalPage(1);
     setTimeout(() => {
       feedRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 100);
   };
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value);
+    setLocalPage(1);
+  };
+
+  const handleClearSearch = () => {
+    setSearchQuery('');
+    setLocalPage(1);
+  };
+
+  const handleLocalPageChange = (page: number) => {
+    setLocalPage(page);
     feedRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
+  const getPageHref = (page: number) => {
+    return page === 1 ? '/blog#blog-feed' : `/blog/page/${page}#blog-feed`;
+  };
+
   const getCategoryTitle = () => {
+    if (normalizedSearchQuery) {
+      return 'Search Results';
+    }
+
     const cat = FALLBACK_CATEGORIES.find(c => c.slug === activeCategory);
     if (!cat || cat.slug === 'all') return "All News";
     return `${cat.name} News`;
@@ -163,6 +227,7 @@ export default function BlogFeedClient({ initialPosts }: BlogFeedClientProps) {
 
         {/* Blog Feed Section */}
         <section
+          id="blog-feed"
           ref={feedRef}
           className="relative py-20 sm:py-28 overflow-hidden border-b border-blue-bright/10 scroll-mt-[70px]"
         >
@@ -193,6 +258,41 @@ export default function BlogFeedClient({ initialPosts }: BlogFeedClientProps) {
               </div>
             </Reveal>
 
+            {/* Search Bar */}
+            <Reveal className="mb-12">
+              <div className="mx-auto max-w-[760px]">
+                <label htmlFor="blog-search" className="sr-only">
+                  Search blog posts
+                </label>
+                <div className="group relative flex items-center rounded-full border border-blue-bright/35 bg-[#080832]/70 px-5 py-3.5 shadow-[0_0_24px_rgba(0,104,255,0.12)] backdrop-blur-md transition-colors focus-within:border-blue-bright/80">
+                  <Search className="mr-3 h-5 w-5 flex-shrink-0 text-white/45 transition-colors group-focus-within:text-blue-bright" aria-hidden="true" />
+                  <input
+                    id="blog-search"
+                    type="search"
+                    value={searchQuery}
+                    onChange={handleSearchChange}
+                    placeholder="Search articles..."
+                    className="w-full bg-transparent font-sans text-sm font-semibold text-white placeholder:text-white/35 focus:outline-none"
+                  />
+                  {searchQuery && (
+                    <button
+                      type="button"
+                      onClick={handleClearSearch}
+                      aria-label="Clear search"
+                      className="ml-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-white/10 text-white/50 transition-colors hover:border-white/30 hover:text-white"
+                    >
+                      <X className="h-4 w-4" aria-hidden="true" />
+                    </button>
+                  )}
+                </div>
+                {normalizedSearchQuery && (
+                  <p className="mt-3 text-center font-sans text-xs font-semibold uppercase tracking-widest text-white/45">
+                    {filteredPosts.length} {filteredPosts.length === 1 ? 'result' : 'results'} for <span className="text-white/65">{searchQuery.trim()}</span>
+                  </p>
+                )}
+              </div>
+            </Reveal>
+
             {/* Dynamic Category Title */}
             <Reveal className="mb-12 text-center">
               <h2 className="font-sans text-2xl sm:text-3xl font-extrabold uppercase tracking-widest text-white">
@@ -204,56 +304,63 @@ export default function BlogFeedClient({ initialPosts }: BlogFeedClientProps) {
             {/* Posts Grid Layout */}
             {displayedPosts.length === 0 ? (
               <div className="text-center py-20 text-white/50 font-semibold">
-                No posts found in this category.
+                {normalizedSearchQuery ? 'No posts match your search.' : 'No posts found in this category.'}
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {displayedPosts.map((post, index) => {
                   const imageUrl = getFeaturedImageUrl(post);
+                  const postTitle = decodeHtmlEntities(post.title.rendered);
+                  const postHref = `/blog/${post.slug}`;
+                  const postExcerpt = stripHtmlToText(post.excerpt.rendered);
 
                   return (
                     <Reveal key={post.id} delay={index * 0.1}>
-                      <Link 
-                        href={`/blog/${post.slug}`}
+                      <article
                         className="group flex flex-col h-full bg-[#080832]/60 border border-blue-bright/35 hover:border-blue-bright/80 rounded-2xl overflow-hidden backdrop-blur-md transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,104,255,0.25)] hover:-translate-y-1"
                       >
                         {/* Featured Image */}
-                        <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-900">
+                        <Link
+                          href={postHref}
+                          aria-label={postTitle}
+                          className="relative block aspect-[16/10] w-full overflow-hidden bg-slate-900"
+                        >
                           <Image
                             src={imageUrl}
-                            alt={decodeHtmlEntities(post.title.rendered)}
+                            alt={postTitle}
                             fill
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                             className="object-cover transition-transform duration-500 group-hover:scale-105"
                           />
-                        </div>
+                        </Link>
 
                         {/* Title & Body Block */}
                         <div className="flex flex-col flex-grow p-6 border-t border-white/5">
                           {/* Date */}
-                          <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-2">
+                          <time dateTime={post.date} className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-3">
                             {new Date(post.date).toLocaleDateString('en-GB', {
                               day: '2-digit',
                               month: '2-digit',
                               year: 'numeric'
                             })}
-                          </span>
+                          </time>
 
                           {/* Title with Red vertical accent line */}
                           <div className="flex items-start gap-3 mb-3">
                             <div className="w-[3px] bg-[#E92228] rounded-full self-stretch flex-shrink-0 transition-all duration-300 group-hover:bg-blue-bright" />
                             <h3 className="font-sans text-base sm:text-lg font-bold text-white leading-snug group-hover:text-blue-bright transition-colors line-clamp-2">
-                              {decodeHtmlEntities(post.title.rendered)}
+                              <Link href={postHref}>
+                                {postTitle}
+                              </Link>
                             </h3>
                           </div>
 
                           {/* Excerpt */}
-                          <p 
-                            className="font-sans text-xs sm:text-[13px] text-white/65 leading-relaxed line-clamp-3"
-                            dangerouslySetInnerHTML={{ __html: decodeHtmlEntities(post.excerpt.rendered) }}
-                          />
+                          <p className="font-sans text-xs sm:text-[13px] text-white/65 leading-relaxed line-clamp-3">
+                            {postExcerpt}
+                          </p>
                         </div>
-                      </Link>
+                      </article>
                     </Reveal>
                   );
                 })}
@@ -264,26 +371,63 @@ export default function BlogFeedClient({ initialPosts }: BlogFeedClientProps) {
             {totalPages > 1 && (
               <Reveal className="mt-16 flex justify-center items-center gap-2">
                 {/* Prev Button */}
-                <button
-                  onClick={() => handlePageChange(currentPage - 1)}
-                  disabled={currentPage === 1}
-                  className="px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg border border-white/10 hover:border-white/30 text-white/80 hover:text-white disabled:opacity-30 disabled:pointer-events-none transition-colors"
-                >
-                  Prev
-                </button>
+                {safeCurrentPage === 1 ? (
+                  <span className="px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg border border-white/10 text-white/30">
+                    Prev
+                  </span>
+                ) : usesUrlPagination ? (
+                  <Link
+                    href={getPageHref(safeCurrentPage - 1)}
+                    className="px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg border border-white/10 hover:border-white/30 text-white/80 hover:text-white transition-colors"
+                  >
+                    Prev
+                  </Link>
+                ) : (
+                  <button
+                    onClick={() => handleLocalPageChange(safeCurrentPage - 1)}
+                    className="px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg border border-white/10 hover:border-white/30 text-white/80 hover:text-white transition-colors"
+                  >
+                    Prev
+                  </button>
+                )}
 
                 {/* Page Numbers */}
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
-                  const isActive = page === currentPage;
-                  return (
+                {paginationItems.map((item) => {
+                  if (typeof item !== 'number') {
+                    return (
+                      <span
+                        key={item}
+                        aria-hidden="true"
+                        className="w-6 h-9 flex items-center justify-center text-xs font-bold text-white/45"
+                      >
+                        ...
+                      </span>
+                    );
+                  }
+
+                  const page = item;
+                  const isActive = page === safeCurrentPage;
+                  const pageClassName = `w-9 h-9 flex items-center justify-center text-xs font-bold rounded-lg transition-all ${
+                    isActive
+                      ? "bg-blue-bright text-white shadow-[0_0_10px_rgba(0,104,255,0.3)]"
+                      : "border border-white/10 hover:border-white/30 text-white/70 hover:text-white"
+                  }`;
+
+                  return usesUrlPagination ? (
+                    <Link
+                      key={page}
+                      href={getPageHref(page)}
+                      aria-current={isActive ? 'page' : undefined}
+                      className={pageClassName}
+                    >
+                      {page}
+                    </Link>
+                  ) : (
                     <button
                       key={page}
-                      onClick={() => handlePageChange(page)}
-                      className={`w-9 h-9 flex items-center justify-center text-xs font-bold rounded-lg transition-all ${
-                        isActive
-                          ? "bg-blue-bright text-white shadow-[0_0_10px_rgba(0,104,255,0.3)]"
-                          : "border border-white/10 hover:border-white/30 text-white/70 hover:text-white"
-                      }`}
+                      onClick={() => handleLocalPageChange(page)}
+                      aria-current={isActive ? 'page' : undefined}
+                      className={pageClassName}
                     >
                       {page}
                     </button>
@@ -291,13 +435,25 @@ export default function BlogFeedClient({ initialPosts }: BlogFeedClientProps) {
                 })}
 
                 {/* Next Button */}
-                <button
-                  onClick={() => handlePageChange(currentPage + 1)}
-                  disabled={currentPage === totalPages}
-                  className="px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg border border-white/10 hover:border-white/30 text-white/80 hover:text-white disabled:opacity-30 disabled:pointer-events-none transition-colors"
-                >
-                  Next
-                </button>
+                {safeCurrentPage === totalPages ? (
+                  <span className="px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg border border-white/10 text-white/30">
+                    Next
+                  </span>
+                ) : usesUrlPagination ? (
+                  <Link
+                    href={getPageHref(safeCurrentPage + 1)}
+                    className="px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg border border-white/10 hover:border-white/30 text-white/80 hover:text-white transition-colors"
+                  >
+                    Next
+                  </Link>
+                ) : (
+                  <button
+                    onClick={() => handleLocalPageChange(safeCurrentPage + 1)}
+                    className="px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg border border-white/10 hover:border-white/30 text-white/80 hover:text-white transition-colors"
+                  >
+                    Next
+                  </button>
+                )}
               </Reveal>
             )}
 

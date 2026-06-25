@@ -7,7 +7,14 @@ import { motion } from 'framer-motion';
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingCalendar from "@/components/FloatingCalendar";
-import { WPPostRaw, FALLBACK_POSTS, FALLBACK_CATEGORIES, decodeHtmlEntities } from "@/data/blogData";
+import {
+  WPPostRaw,
+  FALLBACK_POSTS,
+  FALLBACK_CATEGORIES,
+  decodeHtmlEntities,
+  normalizeLegacyPostLinks,
+  stripHtmlToText,
+} from "@/data/blogData";
 
 function preprocessHtml(html: string): string {
   if (!html) return '';
@@ -83,39 +90,13 @@ export default function BlogDetailContent({ post, allPosts }: BlogDetailContentP
   }
   related = related.slice(0, 3);
 
+  const normalizedPostContent = preprocessHtml(normalizeLegacyPostLinks(post.content.rendered));
+
   return (
     <>
       <Header />
 
       <main className="min-h-screen bg-[#03032D] text-white overflow-x-hidden pt-[88px]">
-        {/* Banner Section - styled exactly like the footer */}
-        <section className="relative w-full h-[176px] sm:h-[180px] flex items-center justify-center overflow-hidden border-t-[1.5px] border-b-[1.5px] border-blue-bright">
-          <div className="absolute inset-0 bg-[#03032D]" />
-          {/* Footer background styling recreation */}
-          <div 
-            className="absolute inset-0 opacity-90"
-            style={{
-              backgroundImage:
-                "linear-gradient(90deg, rgba(2, 21, 85, 0.84) 0%, rgba(18, 22, 93, 0.72) 50%, rgba(52, 21, 91, 0.8) 100%), url('/assets/footer-map.webp')",
-              backgroundPosition: 'center top',
-              backgroundSize: 'cover',
-            }}
-          />
-          <div 
-            className="absolute inset-0 opacity-[0.34] pointer-events-none mix-blend-soft-light"
-            style={{
-              backgroundImage: "url('/assets/footer-bg.webp')",
-              backgroundPosition: 'center top',
-              backgroundSize: 'cover',
-            }}
-          />
-          <div className="relative z-10 text-center">
-            <h2 className="font-sans text-3xl sm:text-4xl font-extrabold uppercase tracking-[0.05em] text-white">
-              BLOG PAGE
-            </h2>
-          </div>
-        </section>
-
         {/* Post Content Area - Single Column */}
         <section className="py-16 md:py-24 px-6 relative">
           {/* Background decoration */}
@@ -166,7 +147,7 @@ export default function BlogDetailContent({ post, allPosts }: BlogDetailContentP
               {/* Custom prose styles mapping */}
               <div 
                 className="blog-content-html"
-                dangerouslySetInnerHTML={{ __html: preprocessHtml(post.content.rendered) }}
+                dangerouslySetInnerHTML={{ __html: normalizedPostContent }}
               />
             </motion.article>
           </div>
@@ -183,50 +164,57 @@ export default function BlogDetailContent({ post, allPosts }: BlogDetailContentP
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
               {related.map((rp) => {
                 const rpImageUrl = getImageUrl(rp);
+                const rpTitle = decodeHtmlEntities(rp.title.rendered);
+                const rpHref = `/blog/${rp.slug}`;
+                const rpExcerpt = stripHtmlToText(rp.excerpt.rendered);
 
                 return (
-                  <Link 
+                  <article
                     key={rp.id} 
-                    href={`/blog/${rp.slug}`}
                     className="group flex flex-col h-full bg-[#080832]/60 border border-blue-bright/35 hover:border-blue-bright/80 rounded-2xl overflow-hidden backdrop-blur-md transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,104,255,0.25)] hover:-translate-y-1"
                   >
                     {/* Featured Image */}
-                    <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-900">
+                    <Link
+                      href={rpHref}
+                      aria-label={rpTitle}
+                      className="relative block aspect-[16/10] w-full overflow-hidden bg-slate-900"
+                    >
                       <Image
                         src={rpImageUrl}
-                        alt={decodeHtmlEntities(rp.title.rendered)}
+                        alt={rpTitle}
                         fill
                         sizes="(max-width: 768px) 100vw, 33vw"
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
                       />
-                    </div>
+                    </Link>
 
                     {/* Title & Excerpt Body Block */}
                     <div className="flex flex-col flex-grow p-6 border-t border-white/5">
                       {/* Date */}
-                      <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-2">
+                      <time dateTime={rp.date} className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-3">
                         {new Date(rp.date).toLocaleDateString('en-GB', {
                           day: '2-digit',
                           month: '2-digit',
                           year: 'numeric'
                         })}
-                      </span>
+                      </time>
 
                       {/* Title with Red vertical accent line */}
                       <div className="flex items-start gap-3 mb-3">
                         <div className="w-[3px] bg-[#E92228] rounded-full self-stretch flex-shrink-0 transition-all duration-300 group-hover:bg-blue-bright" />
                         <h3 className="font-sans text-sm sm:text-base font-bold text-white leading-snug group-hover:text-blue-bright transition-colors line-clamp-2">
-                          {decodeHtmlEntities(rp.title.rendered)}
+                          <Link href={rpHref}>
+                            {rpTitle}
+                          </Link>
                         </h3>
                       </div>
 
                       {/* Excerpt */}
-                      <p 
-                        className="font-sans text-xs text-white/65 leading-relaxed line-clamp-3"
-                        dangerouslySetInnerHTML={{ __html: decodeHtmlEntities(rp.excerpt.rendered) }}
-                      />
+                      <p className="font-sans text-xs text-white/65 leading-relaxed line-clamp-3">
+                        {rpExcerpt}
+                      </p>
                     </div>
-                  </Link>
+                  </article>
                 );
               })}
             </div>
