@@ -648,7 +648,7 @@ export default function CharityContent() {
                     Impact should be chosen, not pushed.
                   </p>
                   <p className="text-white/60 text-xs sm:text-sm">
-                    For more information: <a href="mailto:admin@evit-org.com" className="font-bold text-blue-bright hover:underline">admin@evit-org.com</a>
+                    For more information: <a href="mailto:info@evit-org.com" className="font-bold text-blue-bright hover:underline">info@evit-org.com</a>
                   </p>
                 </div>
 

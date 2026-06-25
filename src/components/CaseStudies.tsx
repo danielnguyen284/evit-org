@@ -34,7 +34,7 @@ const studies: Study[] = [
         EVIT gave us a <span className="text-blue-bright font-bold">clear sales roadmap</span> and <span className="text-blue-bright font-bold">practical guidance </span> on &quot;how to do&quot;. As a result, our sales team has improved week by week and is now much more confident working independently with clients.
       </>
     ),
-    name: 'Mr. Ngô Văn Tấu',
+    name: 'Mr. Ngô Văn Tẩu',
     role: 'Chief Executive Officer (CEO)',
     avatar: '/assets/clients/client-1.webp',
     avatarAlt: 'Client portrait',
