@@ -158,9 +158,11 @@ export default function PainSolutions() {
                     alt={activeImage.alt}
                     width={450}
                     height={380}
+                    quality={65}
                     style={{ height: 'auto' }}
                     className="w-[86%] max-w-full object-contain drop-shadow-[0_18px_30px_rgba(0,0,0,0.52)]"
-                    preload={activeIndex === 0}
+                    sizes="(max-width: 768px) 80vw, (max-width: 1024px) 40vw, 450px"
+                    priority={activeIndex === 0}
                   />
                 </motion.div>
               </div>
@@ -207,8 +209,10 @@ export default function PainSolutions() {
                   alt={image.alt}
                   width={450}
                   height={380}
+                  quality={65}
                   style={{ height: 'auto' }}
                   className="relative max-w-[82%] object-contain drop-shadow-[0_18px_30px_rgba(0,0,0,0.52)]"
+                  sizes="(max-width: 768px) 80vw, 450px"
                 />
               </div>
               <PainSolutionTextBlock row={row} />
