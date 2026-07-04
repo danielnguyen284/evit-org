@@ -94,3 +94,27 @@ function getFilesystemCacheFallback(cacheFilePath: string): WPPostRaw[] | null {
   }
   return null;
 }
+
+export async function fetchWordPressPostBySlug(slug: string): Promise<WPPostRaw | null> {
+  try {
+    const res = await fetch(`https://evit-org.com/wp-json/wp/v2/posts?slug=${encodeURIComponent(slug)}&_embed=1`, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'application/json'
+      },
+      next: { revalidate: 60 } // Cache this single post query for 1 minute
+    });
+    if (!res.ok) {
+      throw new Error(`API error: ${res.status}`);
+    }
+    const data = await res.json();
+    if (Array.isArray(data) && data.length > 0) {
+      return data[0];
+    }
+    return null;
+  } catch (error) {
+    console.warn(`Failed to fetch WP post by slug (${slug}):`, error);
+    return null;
+  }
+}
+

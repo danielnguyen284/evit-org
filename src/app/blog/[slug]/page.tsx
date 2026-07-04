@@ -3,8 +3,17 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import BlogDetailContent from './BlogDetailContent';
 import { WPPostRaw, FALLBACK_POSTS, decodeHtmlEntities } from "@/data/blogData";
-import { fetchWordPressPosts } from "@/data/blogFetch";
+import { fetchWordPressPosts, fetchWordPressPostBySlug } from "@/data/blogFetch";
 import { absoluteUrl, createPageMetadata, jsonLdScript, SITE_NAME, SITE_URL } from '@/lib/seo';
+
+const matchSlug = (wpSlug: string, paramSlug: string) => {
+  if (wpSlug === paramSlug) return true;
+  try {
+    return decodeURIComponent(wpSlug) === decodeURIComponent(paramSlug);
+  } catch {
+    return false;
+  }
+};
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -23,13 +32,24 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   let post: WPPostRaw | undefined;
   try {
     const posts = await fetchWordPressPosts();
-    post = posts.find(p => p.slug === slug);
+    post = posts.find(p => matchSlug(p.slug, slug));
   } catch (e) {
     console.warn("Metadata fetch error:", e);
   }
 
   if (!post) {
-    post = FALLBACK_POSTS.find(p => p.slug === slug);
+    try {
+      const singlePost = await fetchWordPressPostBySlug(slug);
+      if (singlePost) {
+        post = singlePost;
+      }
+    } catch (e) {
+      console.warn("Metadata fetch by slug error:", e);
+    }
+  }
+
+  if (!post) {
+    post = FALLBACK_POSTS.find(p => matchSlug(p.slug, slug));
   }
 
   if (!post) {
@@ -71,13 +91,24 @@ export default async function BlogDetailPage({ params }: PageProps) {
   let post: WPPostRaw | undefined;
   try {
     const posts = await fetchWordPressPosts();
-    post = posts.find(p => p.slug === slug);
+    post = posts.find(p => matchSlug(p.slug, slug));
   } catch (error) {
     console.warn("Failed to fetch post in page server component:", error);
   }
 
   if (!post) {
-    post = FALLBACK_POSTS.find(p => p.slug === slug);
+    try {
+      const singlePost = await fetchWordPressPostBySlug(slug);
+      if (singlePost) {
+        post = singlePost;
+      }
+    } catch (error) {
+      console.warn("Failed to fetch post by slug in page server component:", error);
+    }
+  }
+
+  if (!post) {
+    post = FALLBACK_POSTS.find(p => matchSlug(p.slug, slug));
   }
 
   if (!post) {
