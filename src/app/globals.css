@@ -340,6 +340,16 @@ body > *:not(header) {
   color: #ffffff;
   font-weight: 700;
 }
+.blog-content-html a {
+  color: var(--blue-bright);
+  text-decoration: underline;
+  font-weight: 600;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+.blog-content-html a:hover {
+  color: #60a5fa; /* slightly lighter blue on hover */
+  text-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
+}
 
 @media (min-width: 640px) {
   .blog-content-html p,
