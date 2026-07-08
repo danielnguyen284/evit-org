@@ -11,6 +11,8 @@ export const metadata: Metadata = createPageMetadata({
   path: "/it-vendor-introduction",
 });
 
+export const revalidate = 600;
+
 export default async function ResourcesPage() {
   let initialPosts: WPPostRaw[] = [];
   try {

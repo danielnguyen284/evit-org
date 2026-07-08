@@ -9,7 +9,18 @@ import { absoluteUrl, createPageMetadata, jsonLdScript, SITE_NAME, SITE_URL } fr
 const matchSlug = (wpSlug: string, paramSlug: string) => {
   if (wpSlug === paramSlug) return true;
   try {
-    return decodeURIComponent(wpSlug) === decodeURIComponent(paramSlug);
+    const decodedWp = decodeURIComponent(wpSlug);
+    const decodedParam = decodeURIComponent(paramSlug);
+    if (decodedWp === decodedParam) return true;
+
+    // Normalize special characters like arrows, double-hyphens, and extra dashes
+    const normalize = (s: string) => 
+      s.toLowerCase()
+       .replace(/→|%e2%86%92|-->|->/g, '-')
+       .replace(/-+/g, '-')
+       .replace(/\/+$/, '');
+
+    return normalize(decodedWp) === normalize(decodedParam);
   } catch {
     return false;
   }

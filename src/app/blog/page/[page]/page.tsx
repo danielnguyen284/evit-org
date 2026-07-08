@@ -36,6 +36,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   });
 }
 
+export const revalidate = 600;
+
 export default async function BlogPaginatedPage({ params }: PageProps) {
   const { page } = await params;
   const pageNumber = parsePageNumber(page);

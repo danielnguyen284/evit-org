@@ -1,0 +1,169 @@
+# BEGIN GzipWpFastestCache
+<IfModule mod_deflate.c>
+AddType x-font/woff .woff
+AddType x-font/ttf .ttf
+AddOutputFilterByType DEFLATE image/svg+xml
+AddOutputFilterByType DEFLATE text/plain
+AddOutputFilterByType DEFLATE text/html
+AddOutputFilterByType DEFLATE text/xml
+AddOutputFilterByType DEFLATE text/css
+AddOutputFilterByType DEFLATE text/javascript
+AddOutputFilterByType DEFLATE application/xml
+AddOutputFilterByType DEFLATE application/xhtml+xml
+AddOutputFilterByType DEFLATE application/rss+xml
+AddOutputFilterByType DEFLATE application/javascript
+AddOutputFilterByType DEFLATE application/x-javascript
+AddOutputFilterByType DEFLATE application/x-font-ttf
+AddOutputFilterByType DEFLATE x-font/ttf
+AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
+AddOutputFilterByType DEFLATE font/opentype font/ttf font/eot font/otf
+</IfModule>
+# END GzipWpFastestCache
+
+# BEGIN LBCWpFastestCache
+<FilesMatch "\.(webm|ogg|mp4|ico|pdf|flv|avif|jpg|jpeg|png|gif|webp|js|css|swf|x-html|xml|woff|woff2|otf|ttf|svg|eot)(\.gz)?$">
+<IfModule mod_expires.c>
+AddType application/font-woff2 .woff2
+AddType application/x-font-opentype .otf
+ExpiresActive On
+ExpiresDefault A0
+ExpiresByType video/webm A10368000
+ExpiresByType video/ogg A10368000
+ExpiresByType video/mp4 A10368000
+ExpiresByType image/avif A10368000
+ExpiresByType image/webp A10368000
+ExpiresByType image/gif A10368000
+ExpiresByType image/png A10368000
+ExpiresByType image/jpg A10368000
+ExpiresByType image/jpeg A10368000
+ExpiresByType image/ico A10368000
+ExpiresByType image/svg+xml A10368000
+ExpiresByType text/css A10368000
+ExpiresByType text/javascript A10368000
+ExpiresByType application/javascript A10368000
+ExpiresByType application/x-javascript A10368000
+ExpiresByType application/font-woff2 A10368000
+ExpiresByType application/x-font-opentype A10368000
+ExpiresByType application/x-font-truetype A10368000
+</IfModule>
+<IfModule mod_headers.c>
+Header set Expires "max-age=A10368000, public"
+Header unset ETag
+Header set Connection keep-alive
+FileETag None
+</IfModule>
+</FilesMatch>
+# END LBCWpFastestCache
+
+# Block PHP execution in uploads
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{REQUEST_URI} ^/wp-content/uploads/.*\.php$
+RewriteRule .* - [F,L]
+</IfModule>
+
+# BEGIN EVIT domain migration redirects
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# 1. Skip migration redirects for WordPress previews, drafts, and Elementor editor sessions
+# and let the local WordPress rewrite rules handle them.
+RewriteCond %{QUERY_STRING} (^|&)preview= [NC,OR]
+RewriteCond %{QUERY_STRING} (^|&)preview_id= [NC,OR]
+RewriteCond %{QUERY_STRING} (^|&)elementor-preview= [NC,OR]
+RewriteCond %{QUERY_STRING} (^|&)action=elementor [NC,OR]
+RewriteCond %{QUERY_STRING} (^|&)p= [NC,OR]
+RewriteCond %{QUERY_STRING} (^|&)page_id= [NC]
+RewriteRule ^index\.php$ - [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{QUERY_STRING} (^|&)preview= [NC,OR]
+RewriteCond %{QUERY_STRING} (^|&)preview_id= [NC,OR]
+RewriteCond %{QUERY_STRING} (^|&)elementor-preview= [NC,OR]
+RewriteCond %{QUERY_STRING} (^|&)action=elementor [NC,OR]
+RewriteCond %{QUERY_STRING} (^|&)p= [NC,OR]
+RewriteCond %{QUERY_STRING} (^|&)page_id= [NC]
+RewriteRule ^(.*)$ /index.php [L]
+
+# Sitemap files -> new canonical sitemap
+RewriteRule ^sitemap\.xml$ https://www.evitconsulting.com/sitemap.xml? [R=301,L]
+RewriteRule ^post-sitemap\.xml$ https://www.evitconsulting.com/sitemap.xml? [R=301,L]
+RewriteRule ^page-sitemap\.xml$ https://www.evitconsulting.com/sitemap.xml? [R=301,L]
+RewriteRule ^category-sitemap\.xml$ https://www.evitconsulting.com/sitemap.xml? [R=301,L]
+RewriteRule ^post_tag-sitemap\.xml$ https://www.evitconsulting.com/sitemap.xml? [R=301,L]
+RewriteRule ^default-sitemap\.xsl$ https://www.evitconsulting.com/sitemap.xml? [R=301,L]
+
+# Core pages
+RewriteRule ^$ https://www.evitconsulting.com/ [R=301,L]
+RewriteRule ^home/?$ https://www.evitconsulting.com/ [R=301,L]
+RewriteRule ^blog/?$ https://www.evitconsulting.com/blog [R=301,L]
+RewriteRule ^contact-us/?$ https://www.evitconsulting.com/contact-us [R=301,L]
+RewriteRule ^case-studies/?$ https://www.evitconsulting.com/case-studies [R=301,L]
+RewriteRule ^about(/.*)?$ https://www.evitconsulting.com/about [R=301,L]
+
+# Services / old landing pages
+RewriteRule ^services/?$ https://www.evitconsulting.com/services [R=301,L]
+RewriteRule ^services/global-expansion-services/?$ https://www.evitconsulting.com/services/global-expansion-services [R=301,L]
+RewriteRule ^global-expansion-services/?$ https://www.evitconsulting.com/services/global-expansion-services [R=301,L]
+RewriteRule ^global-business-expansion/?$ https://www.evitconsulting.com/services/global-expansion-services [R=301,L]
+
+RewriteRule ^services/sales-growth-system/?$ https://www.evitconsulting.com/services/sales-growth-system [R=301,L]
+RewriteRule ^sales-growth-system/?$ https://www.evitconsulting.com/services/sales-growth-system [R=301,L]
+RewriteRule ^sales-training-service-for-it-companies/?$ https://www.evitconsulting.com/services/sales-growth-system [R=301,L]
+RewriteRule ^online-courses/?$ https://www.evitconsulting.com/services/sales-growth-system [R=301,L]
+RewriteRule ^khoa-hoc/?$ https://www.evitconsulting.com/services/sales-growth-system [R=301,L]
+RewriteRule ^coaching-trainings/?$ https://www.evitconsulting.com/services/sales-growth-system [R=301,L]
+
+RewriteRule ^services/ad-hoc-consulting/?$ https://www.evitconsulting.com/services/global-expansion-services [R=301,L]
+RewriteRule ^ad-hoc-consulting/?$ https://www.evitconsulting.com/services/global-expansion-services [R=301,L]
+RewriteRule ^ad-hoc-consulting-service/?$ https://www.evitconsulting.com/services/global-expansion-services [R=301,L]
+
+RewriteRule ^marketing-service/?$ https://www.evitconsulting.com/services/marketing-service [R=301,L]
+RewriteRule ^globally/?$ https://www.evitconsulting.com/it-vendor-introduction [R=301,L]
+
+# Taxonomy/archive pages
+RewriteRule ^category(/.*)?$ https://www.evitconsulting.com/blog [R=301,L]
+RewriteRule ^tag(/.*)?$ https://www.evitconsulting.com/blog [R=301,L]
+RewriteRule ^author(/.*)?$ https://www.evitconsulting.com/about [R=301,L]
+
+# Old WordPress posts at root -> new blog path
+RewriteCond %{REQUEST_URI} !^/(wp-json|wp-content|wp-admin|wp-login\.php|wp-includes|xmlrpc\.php|eo-login)(/|\?|$) [NC]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^/]+)/?$ https://www.evitconsulting.com/blog/$1 [R=301,L]
+
+</IfModule>
+# END EVIT domain migration redirects
+
+# BEGIN WordPress
+# The directives (lines) between "BEGIN WordPress" and "END WordPress" are
+# dynamically generated, and should only be modified via WordPress filters.
+# Any changes to the directives between these markers will be overwritten.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+# END WordPress
+
+# Wordfence WAF
+<IfModule LiteSpeed>
+php_value auto_prepend_file '/home/jotdjcenhosting/public_html/wordfence-waf.php'
+</IfModule>
+<IfModule lsapi_module>
+php_value auto_prepend_file '/home/jotdjcenhosting/public_html/wordfence-waf.php'
+</IfModule>
+<Files ".user.ini">
+<IfModule mod_authz_core.c>
+Require all denied
+</IfModule>
+<IfModule !mod_authz_core.c>
+Order deny,allow
+Deny from all
+</IfModule>
+</Files>
+# END Wordfence WAF

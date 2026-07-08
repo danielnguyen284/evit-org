@@ -11,6 +11,8 @@ export const metadata: Metadata = createPageMetadata({
   path: "/blog",
 });
 
+export const revalidate = 600;
+
 export default async function BlogPage() {
   let initialPosts: WPPostRaw[] = [];
   try {

@@ -16,25 +16,7 @@ export async function fetchWordPressPosts(): Promise<WPPostRaw[]> {
 
   const cacheFilePath = path.join(process.cwd(), 'src', 'data', 'wordpress-cache.json');
 
-  // 2. Try filesystem cache if valid
-  try {
-    if (fs.existsSync(cacheFilePath)) {
-      const stats = fs.statSync(cacheFilePath);
-      if (now - stats.mtimeMs < CACHE_TTL) {
-        const fileContent = fs.readFileSync(cacheFilePath, 'utf-8');
-        const parsed = JSON.parse(fileContent);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          cachedPosts = parsed;
-          lastFetchTime = stats.mtimeMs;
-          return parsed;
-        }
-      }
-    }
-  } catch (err) {
-    console.warn("Failed to read WordPress filesystem cache:", err);
-  }
-
-  // 3. Fetch from API
+  // 2. Fetch from API
   try {
     const res = await fetch("https://evit-org.com/wp-json/wp/v2/posts?per_page=100&_embed=1", {
       headers: {
@@ -51,7 +33,7 @@ export async function fetchWordPressPosts(): Promise<WPPostRaw[]> {
       cachedPosts = data;
       lastFetchTime = now;
 
-      // Write to filesystem cache
+      // Write to filesystem cache for future fallback if API fails
       try {
         fs.writeFileSync(cacheFilePath, JSON.stringify(data, null, 2), 'utf-8');
       } catch (err) {
@@ -72,7 +54,7 @@ export async function fetchWordPressPosts(): Promise<WPPostRaw[]> {
     // Fallback to filesystem cache
     const fallbackData = getFilesystemCacheFallback(cacheFilePath);
     if (fallbackData) return fallbackData;
-
+    
     if (cachedPosts) {
       return cachedPosts;
     }
