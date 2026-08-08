@@ -88,7 +88,7 @@ export default function Footer() {
                 <path d="M15.12 8.08h2.25V4.21c-.39-.05-1.72-.17-3.27-.17-3.23 0-5.44 1.97-5.44 5.58v3.14H5v4.33h3.66V24h4.49v-6.91h3.51l.56-4.33h-4.07V10.05c0-1.25.34-1.97 1.97-1.97Z" />
               </svg>
             </SocialIcon>
-            <SocialIcon label="YouTube" href="https://www.youtube.com/@goglobalasia">
+            <SocialIcon label="YouTube" href="https://www.youtube.com/@skonecznyadam">
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.4 31.4 0 0 0 0 12a31.4 31.4 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.4 31.4 0 0 0 24 12a31.4 31.4 0 0 0-.5-5.8ZM9.6 15.5v-7L15.8 12l-6.2 3.5Z" />
               </svg>

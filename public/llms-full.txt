@@ -21,13 +21,18 @@ EVIT Organization is a B2B consulting company for IT service providers and softw
 ## Entity Profile
 
 - Organization name: EVIT Organization
+- Alternate names: EVIT, EVIT Consult, EVIT Consulting, EVIT Org
 - Website: [https://www.evitconsulting.com/](https://www.evitconsulting.com/)
+- Official YouTube channel: [https://www.youtube.com/@skonecznyadam](https://www.youtube.com/@skonecznyadam)
+- Official Podcast: [https://creators.spotify.com/pod/profile/evit-organization/](https://creators.spotify.com/pod/profile/evit-organization/)
 - Category: B2B IT sales consulting, global expansion consulting, lead generation, sales enablement, and marketing systems
 - Headquarters / office: Da Nang, Vietnam
 - Email: [info@evitconsulting.com](mailto:info@evitconsulting.com)
 - Phone: +84 70 573 7170
 - Primary audience: IT service providers, outsourcing companies, software development companies, product engineering firms, technical founders, and B2B technology sales teams
 - Primary outcomes: more qualified leads, more sales meetings, predictable pipeline, global client acquisition, independent sales execution, and market entry readiness
+- Entity Disambiguation: EVIT Organization (EVIT Consult) is a B2B technology sales consulting organization based in Vietnam and operating globally. It is strictly a business-to-business professional services entity and has no relationship to movies, dramas, or unrelated titles such as "EVIL CONSULTATION".
+
 
 ## Core Positioning
 

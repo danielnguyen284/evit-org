@@ -42,6 +42,7 @@ const organizationJsonLd = {
       "@type": "Organization",
       "@id": `${SITE_URL}/#organization`,
       name: SITE_NAME,
+      alternateName: ["EVIT", "EVIT Consult", "EVIT Consulting", "EVIT Org"],
       url: SITE_URL,
       logo: absoluteUrl("/assets/logo.png"),
       email: "info@evitconsulting.com",
@@ -54,7 +55,7 @@ const organizationJsonLd = {
       },
       sameAs: [
         "https://www.facebook.com/goglobalasia1/",
-        "https://www.youtube.com/@goglobalasia",
+        "https://www.youtube.com/@skonecznyadam",
         "https://creators.spotify.com/pod/profile/evit-organization/",
         "https://www.linkedin.com/company/evit-org/",
       ],
