@@ -46,11 +46,11 @@ const organizationJsonLd = {
       url: SITE_URL,
       logo: absoluteUrl("/assets/logo.png"),
       email: "info@evitconsulting.com",
-      telephone: "+84705737170",
       address: {
         "@type": "PostalAddress",
-        streetAddress: "145 Tran Sam, Son Tra",
-        addressLocality: "Da Nang",
+        streetAddress: "82 Tu Hoa Cong Chua Street",
+        addressLocality: "Hanoi City",
+        addressRegion: "Hong Ha Ward",
         addressCountry: "VN",
       },
       sameAs: [

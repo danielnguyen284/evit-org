@@ -28,14 +28,6 @@ function MailIcon() {
   );
 }
 
-function PhoneIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M5 5c4 8 6 10 14 14l2-5-5-2-2 2c-2.4-1.2-3.8-2.6-5-5l2-2-2-5Z" />
-    </svg>
-  );
-}
-
 function SocialIcon({ label, children, href }: { label: string; children: React.ReactNode; href: string }) {
   return (
     <a href={href} aria-label={label} className={styles.socialLink} target="_blank" rel="noopener noreferrer">
@@ -60,15 +52,11 @@ export default function Footer() {
           <ul className={styles.contactList}>
             <li>
               <LocationIcon />
-              <span>145 Tran Sam, Son Tra, Da Nang, Vietnam</span>
+              <span>82 Tu Hoa Cong Chua Street, Hong Ha Ward, Hanoi City, Vietnam</span>
             </li>
             <li>
               <MailIcon />
               <span>info@evit-org.com</span>
-            </li>
-            <li>
-              <PhoneIcon />
-              <span>+84705737170</span>
             </li>
           </ul>
         </div>
@@ -110,7 +98,7 @@ export default function Footer() {
           <div className={styles.mapPreview}>
             <iframe
               title="EVIT location on Google Maps"
-              src="https://maps.google.com/maps?q=145%20Tran%20Sam,%20Son%20Tra,%20Da%20Nang,%20Vietnam&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              src="https://maps.google.com/maps?q=82%20Tu%20Hoa%20Cong%20Chua%20Street,%20Hong%20Ha%20Ward,%20Hanoi%20City,%20Vietnam&t=&z=15&ie=UTF8&iwloc=&output=embed"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               allowFullScreen
