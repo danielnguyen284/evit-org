@@ -72,6 +72,27 @@
   color: #ffffff;
 }
 
+.contactList .officeLocation {
+  align-items: flex-start;
+}
+
+.officeDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.officeDetails strong {
+  font-weight: 600;
+}
+
+.officeDetails address {
+  font-style: normal;
+  color: rgba(255, 255, 255, 0.85);
+}
+
 .contactList svg {
   flex: 0 0 auto;
   width: 22px;

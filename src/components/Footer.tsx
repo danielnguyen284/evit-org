@@ -50,9 +50,19 @@ export default function Footer() {
           />
 
           <ul className={styles.contactList}>
-            <li>
+            <li className={styles.officeLocation}>
               <LocationIcon />
-              <span>82 Tu Hoa Cong Chua Street, Hong Ha Ward, Hanoi City, Vietnam</span>
+              <div className={styles.officeDetails}>
+                <strong>Headquarters</strong>
+                <address>82 Tu Hoa Cong Chua Street, Hong Ha Ward, Hanoi City, Vietnam</address>
+              </div>
+            </li>
+            <li className={styles.officeLocation}>
+              <LocationIcon />
+              <div className={styles.officeDetails}>
+                <strong>Da Nang Branch</strong>
+                <address>145 Tran Sam, Son Tra Ward, Danang City, Vietnam</address>
+              </div>
             </li>
             <li>
               <MailIcon />
@@ -97,8 +107,8 @@ export default function Footer() {
 
           <div className={styles.mapPreview}>
             <iframe
-              title="EVIT location on Google Maps"
-              src="https://maps.google.com/maps?q=82%20Tu%20Hoa%20Cong%20Chua%20Street,%20Hong%20Ha%20Ward,%20Hanoi%20City,%20Vietnam&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              title="EVIT Da Nang Branch on Google Maps"
+              src="https://maps.google.com/maps?q=145%20Tran%20Sam,%20Son%20Tra%20Ward,%20Danang%20City,%20Vietnam&t=&z=15&ie=UTF8&iwloc=&output=embed"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               allowFullScreen
